@@ -103,6 +103,44 @@
             margin: 0 auto;
         }
 
+        .user-welcome {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00ffff;
+        }
+
+        .user-email {
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff0000);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        }
+
         .referral-card {
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
             border-radius: 20px;
@@ -469,6 +507,45 @@
             fill: #fff;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            display: none;
+            animation: slideIn 0.3s ease;
+            max-width: 350px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #ff6b6b, #ff0000);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #6bcf7f, #00ff88);
+        }
+
+        .notification.show {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -476,10 +553,17 @@
             .task-preview {
                 grid-template-columns: 1fr;
             }
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="notification" class="notification"></div>
+
     <div class="header">
         <div class="header-left">
             <div class="logo-small">L</div>
@@ -506,6 +590,12 @@
     </div>
 
     <div class="container">
+        <div class="user-welcome" id="userWelcome">
+            <div class="welcome-text">Welcome back!</div>
+            <div class="user-email" id="userEmail"></div>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+
         <div class="referral-card">
             <div class="referral-title">My Invitation Code</div>
             <div class="invite-code-display">
@@ -713,24 +803,110 @@
         </div>
     </div>
 
-    <script>
-        function openPage(page) {
-            window.location.href = page;
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtx-D3nbl1lKOhCzEixDZRgRDM4NbtOBE",
+            authDomain: "swiftauth-5fcb5.firebaseapp.com",
+            projectId: "swiftauth-5fcb5",
+            storageBucket: "swiftauth-5fcb5.firebasestorage.app",
+            messagingSenderId: "990160652137",
+            appId: "1:990160652137:web:abac238567edfdb5671ff8",
+            measurementId: "G-5C1DS28B5S"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
 
-        function copyCode() {
+        window.showNotification = showNotification;
+
+        function checkSession() {
+            const userData = JSON.parse(localStorage.getItem('luxeEarnUser') || 'null');
+            
+            if (!userData || !userData.isLoggedIn) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            
+            const loginTime = new Date(userData.loginTime);
+            const now = new Date();
+            const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+            
+            if (hoursDiff >= 24) {
+                localStorage.removeItem('luxeEarnUser');
+                showNotification('Your session has expired. Please login again.', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+                return false;
+            }
+            
+            document.getElementById('userEmail').textContent = userData.email;
+            
+            return true;
+        }
+
+        setInterval(checkSession, 60000);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                const userData = JSON.parse(localStorage.getItem('luxeEarnUser') || 'null');
+                if (!userData || !userData.isLoggedIn) {
+                    window.location.href = 'login.html';
+                }
+            }
+        });
+
+        checkSession();
+
+        window.handleLogout = async function() {
+            try {
+                await signOut(auth);
+                localStorage.removeItem('luxeEarnUser');
+                localStorage.removeItem('rememberMe');
+                showNotification('Logged out successfully!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            } catch (error) {
+                console.error('Logout error:', error);
+                showNotification('Logout failed. Please try again.', 'error');
+            }
+        };
+
+        window.openPage = function(page) {
+            window.location.href = page;
+        };
+
+        window.copyCode = function() {
             const code = document.getElementById('inviteCode').textContent;
             navigator.clipboard.writeText(code);
-            showToast('Code copied!');
-        }
+            showNotification('Code copied!', 'success');
+        };
 
-        function copyLink() {
+        window.copyLink = function() {
             const link = document.getElementById('inviteLink').textContent;
             navigator.clipboard.writeText(link);
-            showToast('Link copied!');
-        }
+            showNotification('Link copied!', 'success');
+        };
 
-        function shareOn(platform) {
+        window.shareOn = function(platform) {
             const code = document.getElementById('inviteCode').textContent;
             const link = document.getElementById('inviteLink').textContent;
             const text = `Join me on LuxeEarn! Use my code: ${code} or link: ${link}`;
@@ -747,25 +923,10 @@
             if (urls[platform]) {
                 window.open(urls[platform], '_blank');
             }
-        }
+        };
 
-        function openSupport() {
-            alert('Customer support chat will open here');
-        }
-
-        function showToast(message) {
-            const toast = document.createElement('div');
-            toast.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 255, 255, 0.9); color: #1a0033; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 1000;';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
-        }
-
-        window.onload = function() {
-            const user = JSON.parse(localStorage.getItem('luxeEarnUser') || '{}');
-            if (!user.isLoggedIn) {
-                window.location.href = 'login.html';
-            }
+        window.openSupport = function() {
+            showNotification('Customer support chat will open here', 'success');
         };
     </script>
 </body>
