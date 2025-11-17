@@ -172,16 +172,24 @@
             animation: slide 12s infinite ease-in-out;
         }
 
-.carousel-slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: none !important;
-}
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-size: 24px;
+            font-weight: 700;
+        }
 
+        .carousel-slide:nth-child(2) {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        }
+
+        .carousel-slide:nth-child(3) {
+            background: linear-gradient(135deg, #f2709c 0%, #ff9472 100%);
+        }
 
         @keyframes slide {
             0%, 30% { transform: translateX(0); }
@@ -1178,8 +1186,7 @@
 
     <div class="container">
         <div class="image-carousel">
-            <div class="carousel-wrapper">
-                 <div class="carousel-slide">
+             <div class="carousel-slide">
     <img src="Photo1.png" alt="Slide 1" style="width:100%; height:100%; object-fit:cover;">
 </div>
 <div class="carousel-slide">
@@ -1188,6 +1195,7 @@
 <div class="carousel-slide">
     <img src="Photo3.png" alt="Slide 3" style="width:100%; height:100%; object-fit:cover;">
 </div>
+            </div>
         </div>
 
         <div class="nav-grid">
