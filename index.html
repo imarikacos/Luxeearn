@@ -228,56 +228,86 @@
             font-weight: 500;
         }
 
-        .price-ticker {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px 0;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .ticker-wrapper {
+        /* Top Coin Ticker */
+        .top-ticker {
             display: flex;
-            animation: tickerScroll 30s linear infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow-x: auto;
         }
 
         .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 40px;
-            padding: 0 20px;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
         }
 
         .ticker-pair {
-            font-weight: 700;
-            font-size: 13px;
-            color: #fff;
-            margin-right: 10px;
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 5px;
         }
 
         .ticker-price {
             font-size: 14px;
-            color: #fff;
-            margin-right: 10px;
+            font-weight: 700;
+            margin-bottom: 3px;
         }
 
         .ticker-change {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
+        }
+
+        .ticker-change.negative {
+            color: #ef4444;
         }
 
         .ticker-change.positive {
             color: #22c55e;
         }
 
-        .ticker-change.negative {
-            color: #ef4444;
+        /* Exchange Tabs */
+        .exchange-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .exchange-tab {
+            font-size: 13px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .exchange-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .exchange-tab.active {
+            color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        /* Crypto Table Headers */
+        .crypto-table-header {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1.5fr;
+            padding: 10px 12px;
+            font-size: 11px;
+            color: #888;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .crypto-prices {
@@ -293,61 +323,6 @@
             font-weight: 700;
             color: #00ffff;
             margin-bottom: 15px;
-        }
-
-        .exchange-tabs {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .exchange-tab {
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #888;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            border: none;
-            background: none;
-        }
-
-        .exchange-tab.active {
-            color: #22c55e;
-        }
-
-        .exchange-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #22c55e;
-        }
-
-        .table-headers {
-            display: grid;
-            grid-template-columns: 2fr 2fr 2fr;
-            padding: 10px 12px;
-            margin-bottom: 10px;
-            font-size: 12px;
-            color: #888;
-            font-weight: 600;
-        }
-
-        .header-cell {
-            text-align: center;
-        }
-
-        .header-cell:first-child {
-            text-align: left;
-        }
-
-        .header-cell:last-child {
-            text-align: right;
         }
 
         .crypto-item {
@@ -368,19 +343,10 @@
         }
 
         .crypto-icon {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .crypto-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         .crypto-name {
@@ -390,11 +356,11 @@
 
         .crypto-symbol {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .crypto-pair {
-            font-size: 11px;
+            font-size: 10px;
             color: #888;
         }
 
@@ -406,15 +372,15 @@
 
         .crypto-price {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .crypto-change {
             padding: 6px 12px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 13px;
-            min-width: 70px;
+            font-size: 12px;
+            min-width: 65px;
             text-align: center;
             transition: all 0.5s ease;
         }
@@ -435,7 +401,7 @@
             padding: 20px;
             margin-bottom: 25px;
             border: 1px solid rgba(0, 255, 255, 0.1);
-            max-height: 300px;
+            max-height: 350px;
             overflow: hidden;
             position: relative;
         }
@@ -458,19 +424,19 @@
             border-left: 3px solid #22c55e;
             opacity: 0;
             transform: translateY(-20px);
-            animation: smoothSlideIn 0.8s ease-out forwards;
+            animation: smoothFadeInOut 8s ease-in-out forwards;
         }
 
-        @keyframes smoothSlideIn {
+        @keyframes smoothFadeInOut {
             0% {
                 opacity: 0;
                 transform: translateY(-20px);
             }
-            20% {
+            10% {
                 opacity: 1;
                 transform: translateY(0);
             }
-            80% {
+            90% {
                 opacity: 1;
                 transform: translateY(0);
             }
@@ -887,12 +853,11 @@
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5);
             z-index: 99;
-            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255, 0, 255, 0.7); }
+        .floating-support:hover {
+            transform: scale(1.1);
         }
 
         .floating-support svg {
@@ -901,166 +866,103 @@
             fill: #fff;
         }
 
+        /* Floating Bonus Button */
         .floating-bonus {
             position: fixed;
             left: 20px;
             bottom: 90px;
             width: 60px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
             z-index: 99;
-            animation: float 3s ease-in-out infinite;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             text-decoration: none;
+            color: #fff;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .floating-bonus:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
         }
 
-        .floating-bonus-icon {
-            font-size: 24px;
-            margin-bottom: 2px;
+        .floating-bonus img {
+            width: 30px;
+            height: 30px;
             filter: grayscale(100%);
         }
 
         .bonus-countdown {
-            font-size: 8px;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 9px;
             font-weight: 700;
+            margin-top: 2px;
+            color: #00ffff;
         }
 
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.95), rgba(0, 150, 255, 0.95));
-            color: #fff;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
-            z-index: 1000;
-            max-width: 350px;
-            transform: translateX(400px);
-            opacity: 0;
-        }
-
-        .notification.show {
-            animation: slideIn 0.5s ease-out forwards, slideOut 0.5s ease-in 6.5s forwards;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
-        .notification-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .notification-message {
-            font-size: 13px;
-            line-height: 1.4;
-        }
-
-        .popup-announcement {
+        /* Popup Announcement */
+        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
+            z-index: 1000;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
 
-        .popup-announcement.show {
+        .popup-overlay.show {
             opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-announcement.hide {
-            animation: fadeOutPopup 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeOutPopup {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
+            pointer-events: all;
         }
 
         .popup-content {
-            background: linear-gradient(135deg, #1a0033, #330066);
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
             border: 2px solid #00ffff;
             border-radius: 20px;
             padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
             transform: scale(0.7);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: transform 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
         }
 
-        .popup-announcement.show .popup-content {
+        .popup-overlay.show .popup-content {
             transform: scale(1);
         }
 
-        .popup-header {
+        .popup-title {
             font-size: 24px;
             font-weight: 700;
             color: #00ffff;
             margin-bottom: 15px;
-            text-align: center;
         }
 
         .popup-message {
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 16px;
             color: #fff;
-            text-align: center;
+            line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .popup-close-btn {
-            width: 100%;
-            padding: 12px;
+        .popup-close {
             background: linear-gradient(135deg, #00ffff, #0099ff);
             border: none;
+            padding: 12px 30px;
             border-radius: 10px;
             color: #fff;
             font-size: 14px;
@@ -1069,20 +971,43 @@
             transition: all 0.3s ease;
         }
 
-        .popup-close-btn:hover {
+        .popup-close:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+            z-index: 1001;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
 
         .sidebar-overlay {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
+            z-index: 998;
+            display: none;
         }
 
         .sidebar {
@@ -1090,25 +1015,24 @@
             top: 0;
             left: -300px;
             width: 280px;
-            height: 100vh;
+            height: 100%;
             background: rgba(26, 0, 51, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 999;
             transition: left 0.3s ease;
             overflow-y: auto;
             border-right: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .sidebar.active {
+        .sidebar.open {
             left: 0;
         }
 
         .sidebar-header {
             padding: 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .sidebar-logo {
@@ -1132,20 +1056,12 @@
         .sidebar-close {
             width: 30px;
             height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-close:hover {
-            transform: scale(1.1);
         }
 
         .sidebar-close svg {
-            width: 20px;
-            height: 20px;
+            width: 100%;
+            height: 100%;
             fill: #00ffff;
         }
 
@@ -1161,17 +1077,15 @@
             color: #fff;
             text-decoration: none;
             transition: all 0.3s ease;
-            border-left: 3px solid transparent;
         }
 
         .sidebar-menu-item:hover {
             background: rgba(0, 255, 255, 0.1);
-            border-left-color: #00ffff;
         }
 
         .sidebar-menu-item svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: #00ffff;
         }
 
@@ -1187,13 +1101,13 @@
 
         .sidebar-footer-text {
             font-size: 12px;
-            color: #00ffff;
-            margin-bottom: 5px;
+            color: #888;
         }
 
         .sidebar-footer-copyright {
             font-size: 10px;
-            color: #888;
+            color: #666;
+            margin-top: 5px;
         }
 
         .main-footer {
@@ -1265,30 +1179,27 @@
                 gap: 12px;
                 padding: 15px;
             }
-            .popup-content {
-                width: 85%;
-                padding: 25px;
-            }
         }
     </style>
 </head>
 <body>
     <div id="notification" class="notification"></div>
 
-    <div class="popup-announcement" id="popupAnnouncement">
+    <!-- Popup Announcement -->
+    <div class="popup-overlay" id="popupAnnouncement">
         <div class="popup-content">
-            <div class="popup-header">🎉 Welcome to LuxeEarn!</div>
+            <div class="popup-title">🎉 Welcome to LuxeEarn!</div>
             <div class="popup-message">
-                Start earning today with our advanced quantitative trading platform! 
-                Complete tasks, build your team, and unlock VIP rewards. 
-                Your journey to financial freedom begins here!
+                Start earning passive income today! Complete tasks, refer friends, and unlock exclusive VIP rewards. Your journey to financial freedom begins here!
             </div>
-            <button class="popup-close-btn" onclick="closePopup()">Get Started</button>
+            <button class="popup-close" onclick="closePopup()">Get Started</button>
         </div>
     </div>
 
+    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
+    <!-- Sidebar Menu -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
@@ -1414,17 +1325,6 @@
         </div>
     </div>
 
-    <a href="spin.html" class="floating-bonus">
-        <div class="floating-bonus-icon">🎁</div>
-        <div class="bonus-countdown" id="bonusCountdown">00:00</div>
-    </a>
-
-    <div class="floating-support" onclick="openPage('https://tinyurl.com/Swift-support')">
-        <svg viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM13 14h-2v-2h2v2zm0-4h-2V6h2v4z"/>
-        </svg>
-    </div>
-
     <div class="container">
         <div class="image-carousel">
             <div class="carousel-wrapper">
@@ -1437,6 +1337,25 @@
                 <div class="carousel-slide">
                     <img src="Photo3.png" alt="Slide 3" style="width:100%; height:100%; object-fit:cover;">
                 </div>
+            </div>
+        </div>
+
+        <!-- Top Ticker -->
+        <div class="top-ticker">
+            <div class="ticker-item">
+                <div class="ticker-pair">BTC/USDT</div>
+                <div class="ticker-price" id="tickerBTC">95640.4</div>
+                <div class="ticker-change negative" id="tickerBTCChange">-0.94%</div>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-pair">TRX/USDT</div>
+                <div class="ticker-price" id="tickerTRX">0.29317</div>
+                <div class="ticker-change negative" id="tickerTRXChange">-1.89%</div>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-pair">ETH/USDT</div>
+                <div class="ticker-price" id="tickerETH">3196.06</div>
+                <div class="ticker-change negative" id="tickerETHChange">-1.37%</div>
             </div>
         </div>
 
@@ -1514,24 +1433,22 @@
             </a>
         </div>
 
-        <div class="price-ticker">
-            <div class="ticker-wrapper" id="tickerWrapper"></div>
-        </div>
-
         <div class="crypto-prices">
             <div class="crypto-header">Live Market Prices</div>
             
+            <!-- Exchange Tabs -->
             <div class="exchange-tabs">
-                <button class="exchange-tab" data-exchange="binance" onclick="switchExchange('binance')">BINANCE</button>
-                <button class="exchange-tab active" data-exchange="okx" onclick="switchExchange('okx')">OKX</button>
-                <button class="exchange-tab" data-exchange="huobi" onclick="switchExchange('huobi')">HUOBI</button>
-                <button class="exchange-tab" data-exchange="coinbase" onclick="switchExchange('coinbase')">COINBASE</button>
+                <div class="exchange-tab" onclick="switchExchange('BINANCE')">BINANCE</div>
+                <div class="exchange-tab active" onclick="switchExchange('OKX')">OKX</div>
+                <div class="exchange-tab" onclick="switchExchange('HUOBI')">HUOBI</div>
+                <div class="exchange-tab" onclick="switchExchange('COINBASE')">COINBASE</div>
             </div>
 
-            <div class="table-headers">
-                <div class="header-cell">Currency</div>
-                <div class="header-cell">Latest Price($)</div>
-                <div class="header-cell">24h Rise & Down</div>
+            <!-- Table Headers -->
+            <div class="crypto-table-header">
+                <div>Currency</div>
+                <div style="text-align: center;">Latest Price($)</div>
+                <div style="text-align: center;">24h Rise & Down</div>
             </div>
 
             <div id="cryptoList"></div>
@@ -1667,7 +1584,7 @@
                 <div class="level-stats">
                     <div class="level-stat-row">
                         <span>Commission per task</span>
-                        <span>$15.00</span>
+                        <span>$12.00</span>
                     </div>
                     <div class="level-stat-row">
                         <span>Upgrade requirement</span>
@@ -1681,6 +1598,36 @@
                 <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
             </div>
         </div>
+
+        <div class="main-footer">
+            <div class="footer-logo">
+                <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'">
+            </div>
+            <div class="footer-text">
+                LuxeEarn - Your trusted quantitative trading platform. Earn passive income through intelligent trading and team building.
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">About Us</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 LuxeEarn. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Bonus Button -->
+    <a href="spin.html" class="floating-bonus">
+        <img src="bonus.gif" alt="Bonus">
+        <div class="bonus-countdown" id="bonusCountdown">00:00</div>
+    </a>
+
+    <div class="floating-support" onclick="openPage('contact.html')">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+        </svg>
     </div>
 
     <div class="bottom-nav">
@@ -1711,254 +1658,313 @@
     </div>
 
     <script>
+        // Crypto Data with Real Logo URLs
         const cryptoData = [
-            { symbol: 'BTC', name: 'Bitcoin', pair: 'BTC/USDT', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', basePrice: 96500, volatility: 0.02 },
-            { symbol: 'ETH', name: 'Ethereum', pair: 'ETH/USDT', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png', basePrice: 3420, volatility: 0.025 },
-            { symbol: 'BNB', name: 'Binance Coin', pair: 'BNB/USDT', logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.png', basePrice: 635, volatility: 0.03 },
-            { symbol: 'SOL', name: 'Solana', pair: 'SOL/USDT', logo: 'https://cryptologos.cc/logos/solana-sol-logo.png', basePrice: 245, volatility: 0.04 },
-            { symbol: 'XRP', name: 'Ripple', pair: 'XRP/USDT', logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png', basePrice: 1.45, volatility: 0.035 },
-            { symbol: 'ADA', name: 'Cardano', pair: 'ADA/USDT', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png', basePrice: 1.05, volatility: 0.038 },
-            { symbol: 'DOGE', name: 'Dogecoin', pair: 'DOGE/USDT', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png', basePrice: 0.38, volatility: 0.05 }
+            { 
+                symbol: 'BTC', 
+                pair: 'BTC/USDT', 
+                price: 95640.40, 
+                basePrice: 95640.40,
+                logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png'
+            },
+            { 
+                symbol: 'ETH', 
+                pair: 'ETH/USDT', 
+                price: 3196.06, 
+                basePrice: 3196.06,
+                logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png'
+            },
+            { 
+                symbol: 'BNB', 
+                pair: 'BNB/USDT', 
+                price: 612.30, 
+                basePrice: 612.30,
+                logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.png'
+            },
+            { 
+                symbol: 'XRP', 
+                pair: 'XRP/USDT', 
+                price: 1.14, 
+                basePrice: 1.14,
+                logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png'
+            },
+            { 
+                symbol: 'SOL', 
+                pair: 'SOL/USDT', 
+                price: 238.92, 
+                basePrice: 238.92,
+                logo: 'https://cryptologos.cc/logos/solana-sol-logo.png'
+            },
+            { 
+                symbol: 'ADA', 
+                pair: 'ADA/USDT', 
+                price: 1.08, 
+                basePrice: 1.08,
+                logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png'
+            },
+            { 
+                symbol: 'DOGE', 
+                pair: 'DOGE/USDT', 
+                price: 0.38, 
+                basePrice: 0.38,
+                logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png'
+            },
+            { 
+                symbol: 'TRX', 
+                pair: 'TRX/USDT', 
+                price: 0.29317, 
+                basePrice: 0.29317,
+                logo: 'https://cryptologos.cc/logos/tron-trx-logo.png'
+            },
+            { 
+                symbol: 'AVAX', 
+                pair: 'AVAX/USDT', 
+                price: 41.25, 
+                basePrice: 41.25,
+                logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png'
+            },
+            { 
+                symbol: 'MATIC', 
+                pair: 'MATIC/USDT', 
+                price: 0.54, 
+                basePrice: 0.54,
+                logo: 'https://cryptologos.cc/logos/polygon-matic-logo.png'
+            }
         ];
 
+        // Withdrawal Names
         const withdrawalNames = [
-            'user***123', 'investor***89', 'trader***45', 'crypto***67', 'earn***234',
-            'vip***901', 'member***567', 'profit***890', 'elite***345', 'lucky***678',
-            'star***234', 'winner***789', 'smart***456', 'rich***123', 'boss***890'
+            'User***123', 'John***456', 'Sarah***789', 'Mike***234', 'Emma***567',
+            'David***890', 'Lisa***345', 'Tom***678', 'Anna***901', 'Chris***432',
+            'Maria***765', 'James***098', 'Lucy***321', 'Peter***654', 'Nina***987'
         ];
 
-        let currentExchange = 'okx';
+        // Current Exchange
+        let currentExchange = 'OKX';
 
-        function updateTicker() {
-            const tickerWrapper = document.getElementById('tickerWrapper');
-            let tickerHTML = '';
-            
-            cryptoData.forEach(coin => {
-                const change = (coin.basePrice / coin.originalPrice - 1) * 100;
-                const changeClass = change >= 0 ? 'positive' : 'negative';
-                const changeSymbol = change >= 0 ? '+' : '';
-                
-                tickerHTML += `
-                    <div class="ticker-item">
-                        <span class="ticker-pair">${coin.pair}</span>
-                        <span class="ticker-price">$${coin.basePrice.toFixed(coin.basePrice < 10 ? 3 : 2)}</span>
-                        <span class="ticker-change ${changeClass}">${changeSymbol}${change.toFixed(2)}%</span>
-                    </div>
-                `;
-            });
-            
-            tickerWrapper.innerHTML = tickerHTML + tickerHTML;
-        }
-
+        // Switch Exchange
         function switchExchange(exchange) {
             currentExchange = exchange;
             const tabs = document.querySelectorAll('.exchange-tab');
             tabs.forEach(tab => {
-                if (tab.dataset.exchange === exchange) {
+                tab.classList.remove('active');
+                if (tab.textContent === exchange) {
                     tab.classList.add('active');
-                } else {
-                    tab.classList.remove('active');
                 }
             });
         }
 
-        function updateCryptoPrices() {
-            if (!cryptoData[0].originalPrice) {
-                cryptoData.forEach(coin => {
-                    coin.originalPrice = coin.basePrice;
-                });
-            }
+        // Update Crypto List
+        function updateCryptoList() {
             const cryptoList = document.getElementById('cryptoList');
             cryptoList.innerHTML = '';
 
-            cryptoData.forEach(coin => {
-                const change = (Math.random() - 0.48) * coin.volatility * 100;
-                const currentPrice = coin.basePrice * (1 + change / 100);
-                const changeClass = change >= 0 ? 'positive' : 'negative';
-                const changeSymbol = change >= 0 ? '+' : '';
-                
-                const cryptoItem = document.createElement('div');
-                cryptoItem.className = 'crypto-item';
-                cryptoItem.innerHTML = `
+            cryptoData.forEach(crypto => {
+                // Random price fluctuation (-2% to +2%)
+                const fluctuation = (Math.random() - 0.5) * 0.04;
+                crypto.price = crypto.basePrice * (1 + fluctuation);
+                const change = (fluctuation * 100).toFixed(2);
+                const changeClass = fluctuation >= 0 ? 'positive' : 'negative';
+                const changeSign = fluctuation >= 0 ? '+' : '';
+
+                const item = document.createElement('div');
+                item.className = 'crypto-item';
+                item.innerHTML = `
                     <div class="crypto-left">
-                        <div class="crypto-icon">
-                            <img src="${coin.logo}" alt="${coin.symbol}" onerror="this.parentElement.innerHTML='${coin.symbol}'">
-                        </div>
+                        <img src="${crypto.logo}" alt="${crypto.symbol}" class="crypto-icon" onerror="this.style.display='none'">
                         <div class="crypto-name">
-                            <div class="crypto-symbol">${coin.symbol}</div>
-                            <div class="crypto-pair">${coin.pair}</div>
+                            <div class="crypto-symbol">${crypto.symbol}</div>
+                            <div class="crypto-pair">${crypto.pair}</div>
                         </div>
                     </div>
                     <div class="crypto-right">
-                        <div class="crypto-price">$${currentPrice.toFixed(coin.basePrice < 10 ? 3 : 2)}</div>
-                        <div class="crypto-change ${changeClass}">${changeSymbol}${change.toFixed(2)}%</div>
+                        <div class="crypto-price">$${crypto.price.toFixed(crypto.price < 1 ? 5 : 2)}</div>
+                        <div class="crypto-change ${changeClass}">${changeSign}${change}%</div>
                     </div>
                 `;
-                cryptoList.appendChild(cryptoItem);
-
-                coin.basePrice = currentPrice;
+                cryptoList.appendChild(item);
             });
         }
 
-        function addWithdrawal() {
+        // Update Top Ticker
+        function updateTopTicker() {
+            const btcData = cryptoData.find(c => c.symbol === 'BTC');
+            const ethData = cryptoData.find(c => c.symbol === 'ETH');
+            const trxData = cryptoData.find(c => c.symbol === 'TRX');
+
+            if (btcData) {
+                const btcChange = ((btcData.price - btcData.basePrice) / btcData.basePrice * 100).toFixed(2);
+                document.getElementById('tickerBTC').textContent = btcData.price.toFixed(2);
+                const btcChangeEl = document.getElementById('tickerBTCChange');
+                btcChangeEl.textContent = (btcChange >= 0 ? '+' : '') + btcChange + '%';
+                btcChangeEl.className = 'ticker-change ' + (btcChange >= 0 ? 'positive' : 'negative');
+            }
+
+            if (ethData) {
+                const ethChange = ((ethData.price - ethData.basePrice) / ethData.basePrice * 100).toFixed(2);
+                document.getElementById('tickerETH').textContent = ethData.price.toFixed(2);
+                const ethChangeEl = document.getElementById('tickerETHChange');
+                ethChangeEl.textContent = (ethChange >= 0 ? '+' : '') + ethChange + '%';
+                ethChangeEl.className = 'ticker-change ' + (ethChange >= 0 ? 'positive' : 'negative');
+            }
+
+            if (trxData) {
+                const trxChange = ((trxData.price - trxData.basePrice) / trxData.basePrice * 100).toFixed(2);
+                document.getElementById('tickerTRX').textContent = trxData.price.toFixed(5);
+                const trxChangeEl = document.getElementById('tickerTRXChange');
+                trxChangeEl.textContent = (trxChange >= 0 ? '+' : '') + trxChange + '%';
+                trxChangeEl.className = 'ticker-change ' + (trxChange >= 0 ? 'positive' : 'negative');
+            }
+        }
+
+        // Add Withdrawal Item
+        function addWithdrawalItem() {
             const withdrawalList = document.getElementById('withdrawalList');
-            const randomName = withdrawalNames[Math.floor(Math.random() * withdrawalNames.length)];
-            const randomAmount = (Math.random() * 500 + 50).toFixed(2);
-            
-            const withdrawalItem = document.createElement('div');
-            withdrawalItem.className = 'withdrawal-item';
-            withdrawalItem.innerHTML = `
-                <div class="withdrawal-user">${randomName}</div>
-                <div class="withdrawal-amount">$${randomAmount}</div>
+            const name = withdrawalNames[Math.floor(Math.random() * withdrawalNames.length)];
+            const amount = (Math.random() * 900 + 100).toFixed(2);
+
+            const item = document.createElement('div');
+            item.className = 'withdrawal-item';
+            item.innerHTML = `
+                <div class="withdrawal-user">${name}</div>
+                <div class="withdrawal-amount">$${amount}</div>
             `;
             
             if (withdrawalList.firstChild) {
-                withdrawalList.insertBefore(withdrawalItem, withdrawalList.firstChild);
+                withdrawalList.insertBefore(item, withdrawalList.firstChild);
             } else {
-                withdrawalList.appendChild(withdrawalItem);
+                withdrawalList.appendChild(item);
             }
 
-            if (withdrawalList.children.length > 5) {
+            // Remove old items (keep max 5)
+            while (withdrawalList.children.length > 5) {
                 withdrawalList.removeChild(withdrawalList.lastChild);
             }
-
-            setTimeout(() => {
-                withdrawalItem.remove();
-            }, 8000);
         }
 
+        // Bonus Countdown
+        let bonusTime = 3600; // 60 minutes in seconds
         function updateBonusCountdown() {
-            const now = new Date();
-            const nextHour = new Date(now);
-            nextHour.setHours(now.getHours() + 1, 0, 0, 0);
-            const diff = nextHour - now;
-            
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            const countdownEl = document.getElementById('bonusCountdown');
-            if (countdownEl) {
-                countdownEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }
+            const minutes = Math.floor(bonusTime / 60);
+            const seconds = bonusTime % 60;
+            document.getElementById('bonusCountdown').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            bonusTime--;
+            if (bonusTime < 0) bonusTime = 3600;
         }
 
-        function showPopupAnnouncement() {
-            const hasSeenPopup = localStorage.getItem('luxeearn_popup_seen');
-            if (!hasSeenPopup) {
+        // Show Popup
+        function showPopup() {
+            const hasVisited = localStorage.getItem('hasVisitedLuxeEarn');
+            if (!hasVisited) {
                 setTimeout(() => {
-                    const popup = document.getElementById('popupAnnouncement');
-                    popup.classList.add('show');
-                    
+                    document.getElementById('popupAnnouncement').classList.add('show');
                     setTimeout(() => {
-                        popup.classList.remove('show');
-                        popup.classList.add('hide');
-                        setTimeout(() => {
-                            popup.style.visibility = 'hidden';
-                        }, 500);
+                        closePopup();
                     }, 7000);
                 }, 500);
+                localStorage.setItem('hasVisitedLuxeEarn', 'true');
             }
         }
 
         function closePopup() {
-            const popup = document.getElementById('popupAnnouncement');
-            popup.classList.remove('show');
-            popup.classList.add('hide');
-            localStorage.setItem('luxeearn_popup_seen', 'true');
-            setTimeout(() => {
-                popup.style.visibility = 'hidden';
-            }, 500);
+            document.getElementById('popupAnnouncement').classList.remove('show');
         }
 
+        // Sidebar Toggle
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('active');
-            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+            sidebar.classList.toggle('open');
+            overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
         }
 
         function closeSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.remove('active');
-            overlay.style.display = 'none';
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').style.display = 'none';
         }
 
+        // Utility Functions
         function openPage(url) {
             window.location.href = url;
         }
 
         function copyCode() {
             const code = document.getElementById('inviteCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                showNotification('Invite code copied!');
-            });
+            navigator.clipboard.writeText(code);
+            showNotification('Invite code copied!');
         }
 
         function copyLink() {
             const link = document.getElementById('inviteLink').textContent;
-            navigator.clipboard.writeText(link).then(() => {
-                showNotification('Invite link copied!');
-            });
+            navigator.clipboard.writeText(link);
+            showNotification('Invite link copied!');
         }
 
         function showNotification(message) {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.classList.add('show');
+            notification.style.display = 'block';
             setTimeout(() => {
-                notification.classList.remove('show');
+                notification.style.display = 'none';
             }, 3000);
         }
 
         function shareOn(platform) {
-            const code = document.getElementById('inviteCode').textContent;
             const link = document.getElementById('inviteLink').textContent;
-            const text = `Join LuxeEarn and start earning! Use my code: ${code}`;
+            const text = 'Join LuxeEarn and start earning! Use my invite code: ' + document.getElementById('inviteCode').textContent;
             
-            const urls = {
-                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`,
-                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`,
-                telegram: `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`,
-                whatsapp: `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`,
-                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`,
-                instagram: link
-            };
-            
-            if (urls[platform]) {
-                window.open(urls[platform], '_blank');
+            let url = '';
+            switch(platform) {
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
+                    break;
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+                    break;
+                case 'telegram':
+                    url = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'whatsapp':
+                    url = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
+                    break;
+                case 'linkedin':
+                    url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`;
+                    break;
             }
+            if (url) window.open(url, '_blank');
         }
 
         function handleLogout() {
-            localStorage.removeItem('user');
-            window.location.href = 'login.html';
-        }
-
-        updateTicker();
-        updateCryptoPrices();
-        setInterval(() => {
-            updateTicker();
-            updateCryptoPrices();
-        }, 3000);
-
-        addWithdrawal();
-        setInterval(addWithdrawal, 8000);
-
-        updateBonusCountdown();
-        setInterval(updateBonusCountdown, 1000);
-
-        showPopupAnnouncement();
-
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        if (user.email) {
-            document.getElementById('userEmail').textContent = user.email;
-            if (user.inviteCode) {
-                document.getElementById('inviteCode').textContent = user.inviteCode;
-                const baseLink = document.getElementById('inviteLink').textContent.split('=')[0];
-                document.getElementById('inviteLink').textContent = baseLink + '=' + user.inviteCode;
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'login.html';
             }
         }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCryptoList();
+            updateTopTicker();
+            addWithdrawalItem();
+            showPopup();
+            
+            // Update crypto prices every 3 seconds
+            setInterval(() => {
+                updateCryptoList();
+                updateTopTicker();
+            }, 3000);
+            
+            // Add withdrawal every 6 seconds (random timing)
+            setInterval(() => {
+                if (Math.random() > 0.5) {
+                    addWithdrawalItem();
+                }
+            }, 6000);
+            
+            // Update bonus countdown every second
+            setInterval(updateBonusCountdown, 1000);
+            updateBonusCountdown();
+        });
     </script>
 </body>
 </html>
