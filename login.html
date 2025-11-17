@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LuxeEarn - Premium Referral Investment Platform">
+    <title>LuxeEarn - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            top: 30%;
+            left: 60%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.3);
+        }
+
+        .logo-text {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .app-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .app-subtitle {
+            color: #00ffff;
+            font-size: 14px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-switcher {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            color: #00ffff;
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35, #ff00ff);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ccff00, #00ff88);
+            color: #1a0033;
+            box-shadow: 0 4px 15px rgba(204, 255, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(204, 255, 0, 0.6);
+        }
+
+        .link {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 13px;
+            display: block;
+            text-align: center;
+            margin: 15px 0;
+            transition: color 0.3s ease;
+        }
+
+        .link:hover {
+            color: #ff00ff;
+        }
+
+        .language-selector {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        select {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .password-strength {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak { background: #ff6b6b; width: 33%; }
+        .strength-medium { background: #ffd93d; width: 66%; }
+        .strength-strong { background: #6bcf7f; width: 100%; }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <svg class="shape" width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="#00ffff"/>
+        </svg>
+        <svg class="shape" width="120" height="120" viewBox="0 0 100 100">
+            <rect x="10" y="10" width="80" height="80" fill="#ff00ff"/>
+        </svg>
+        <svg class="shape" width="90" height="90" viewBox="0 0 100 100">
+            <polygon points="50,10 90,90 10,90" fill="#ccff00"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-text">L</span>
+            </div>
+            <h1 class="app-name">LuxeEarn</h1>
+            <p class="app-subtitle">Premium Investment Platform</p>
+        </div>
+
+        <div class="form-container">
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <div id="login-section" class="form-section active">
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label class="input-label">Email / Username</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <input type="text" id="login-email" placeholder="Enter email or username" required>
+                        </div>
+                        <span class="error-message" id="login-email-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                            <input type="password" id="login-password" placeholder="Enter password" required>
+                            <svg class="toggle-password" viewBox="0 0 24 24" onclick="togglePassword('login-password')">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </div>
+                        <span class="error-message" id="login-password-error"></span>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember-me">
+                        <label class="checkbox-label" for="remember-me">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="#" class="link" onclick="switchTab('forgot'); return false;">Forgot Password?</a>
+                </form>
+            </div>
+
+            <div id="register-section" class="form-section">
+                <form id="register-form" onsubmit="handleRegister(event)">
+                    <div class="input-group">
+                        <label class="input-label">Email</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                        </div>
+                        <span class="error-message" id="register-email-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Username</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <input type="text" id="register-username" placeholder="Choose username" required>
+                        </div>
+                        <span class="error-message" id="register-username-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                            <input type="password" id="register-password" placeholder="Create password" required oninput="checkPasswordStrength(this.value)">
+                            <svg class="toggle-password" viewBox="0 0 24 24" onclick="togglePassword('register-password')">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="strength-bar"></div>
+                        </div>
+                        <span class="error-message" id="register-password-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                            <input type="password" id="register-confirm-password" placeholder="Confirm password" required>
+                        </div>
+                        <span class="error-message" id="register-confirm-error"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Invitation Code (Optional)</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
+                            </svg>
+                            <input type="text" id="invite-code" placeholder="Enter invitation code">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Phone Number</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <input type="tel" id="register-phone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label class="checkbox-label" for="terms">I agree to Terms & Conditions</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" required>
+                        <label class="checkbox-label" for="privacy">I agree to Privacy Policy</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Register Now</button>
+                    <a href="#" class="link" onclick="switchTab('login'); return false;">Already have an account? Login</a>
+                </form>
+            </div>
+
+            <div id="forgot-section" class="form-section">
+                <form id="forgot-form" onsubmit="handleForgotPassword(event)">
+                    <div class="input-group">
+                        <label class="input-label">Email</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <input type="email" id="forgot-email" placeholder="Enter your email" required>
+                        </div>
+                        <span class="error-message" id="forgot-email-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Reset Password</button>
+                    <a href="#" class="link" onclick="switchTab('login'); return false;">Back to Login</a>
+                </form>
+            </div>
+
+            <div class="language-selector">
+                <select id="language-select" onchange="changeLanguage(this.value)">
+                    <option value="en">🌐 English</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="pt">🇵🇹 Português</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fa">🇮🇷 فارسی</option>
+                    <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    <option value="el">🇬🇷 Ελληνικά</option>
+                    <option value="ar">🇸🇦 عربي</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const sections = document.querySelectorAll('.form-section');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('login-section').classList.add('active');
+            } else if (tab === 'register') {
+                tabs[1].classList.add('active');
+                document.getElementById('register-section').classList.add('active');
+                const urlParams = new URLSearchParams(window.location.search);
+                const inviteCode = urlParams.get('code');
+                if (inviteCode) {
+                    document.getElementById('invite-code').value = inviteCode;
+                }
+            } else if (tab === 'forgot') {
+                document.getElementById('forgot-section').classList.add('active');
+            }
+        }
+
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strength-bar');
+            strengthBar.className = 'password-strength-bar';
+            
+            if (password.length < 6) {
+                strengthBar.classList.add('strength-weak');
+            } else if (password.length < 10) {
+                strengthBar.classList.add('strength-medium');
+            } else {
+                strengthBar.classList.add('strength-strong');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const remember = document.getElementById('remember-me').checked;
+
+            if (email && password) {
+                const userData = {
+                    email: email,
+                    isLoggedIn: true,
+                    loginTime: new Date().toISOString()
+                };
+                
+                localStorage.setItem('luxeEarnUser', JSON.stringify(userData));
+                if (remember) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
+                
+                window.location.href = 'index.html';
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            const inviteCode = document.getElementById('invite-code').value;
+            const phone = document.getElementById('register-phone').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('register-confirm-error').textContent = 'Passwords do not match';
+                document.getElementById('register-confirm-error').classList.add('show');
+                return;
+            }
+
+            const userData = {
+                email: email,
+                username: username,
+                phone: phone,
+                inviteCode: inviteCode,
+                registrationDate: new Date().toISOString(),
+                vipLevel: 0,
+                balance: 0,
+                isLoggedIn: true
+            };
+
+            localStorage.setItem('luxeEarnUser', JSON.stringify(userData));
+            alert('Registration successful! Please verify your email.');
+            window.location.href = 'index.html';
+        }
+
+        function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            alert(`Password reset link sent to ${email}`);
+            switchTab('login');
+        }
+
+        function changeLanguage(lang) {
+            localStorage.setItem('luxeEarnLanguage', lang);
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('luxeEarnLanguage');
+            if (savedLang) {
+                document.getElementById('language-select').value = savedLang;
+            }
+            
+            const rememberMe = localStorage.getItem('rememberMe');
+            const user = localStorage.getItem('luxeEarnUser');
+            if (rememberMe && user) {
+                window.location.href = 'index.html';
+            }
+        };
+    </script>
+</body>
+</html>

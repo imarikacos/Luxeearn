@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - VIP Packages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .upgrade-log {
+            color: #ff00ff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vip-package {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .vip-package:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .vip-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1a0033;
+            margin-bottom: 15px;
+        }
+
+        .crown-icon {
+            width: 20px;
+            height: 20px;
+            fill: #1a0033;
+        }
+
+        .package-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .detail-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #00ffff;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .profit-highlight {
+            background: linear-gradient(135deg, rgba(204, 255, 0, 0.2), rgba(0, 255, 136, 0.2));
+            border: 1px solid rgba(204, 255, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .profit-label {
+            font-size: 14px;
+            color: #ccff00;
+            margin-bottom: 8px;
+        }
+
+        .profit-amount {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ccff00;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a0033;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            color: #1a0033;
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+        <div class="header-title">VIP Packages</div>
+        <div class="upgrade-log" onclick="viewUpgradeLog()">History</div>
+    </div>
+
+    <div class="container">
+        <div class="vip-package">
+            <div class="vip-badge">
+                <svg class="crown-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                </svg>
+                VIP 1
+            </div>
+            <div class="package-details">
+                <div class="detail-item">
+                    <div class="detail-label">Daily Tasks</div>
+                    <div class="detail-value">10</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simple Interest</div>
+                    <div class="detail-value">0.50%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Daily Profit</div>
+                    <div class="detail-value">5.00 USDT</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Profit</div>
+                    <div class="detail-value">150 USDT</div>
+                </div>
+            </div>
+            <div class="profit-highlight">
+                <div class="profit-label">Unlock Price</div>
+                <div class="profit-amount">9.00 USDT</div>
+            </div>
+            <button class="unlock-btn" onclick="unlockVIP(1, 9.00)">Unlock Now</button>
+        </div>
+
+        <div class="vip-package">
+            <div class="vip-badge">
+                <svg class="crown-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                </svg>
+                VIP 2
+            </div>
+            <div class="package-details">
+                <div class="detail-item">
+                    <div class="detail-label">Daily Tasks</div>
+                    <div class="detail-value">10</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simple Interest</div>
+                    <div class="detail-value">2.80%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Daily Profit</div>
+                    <div class="detail-value">28.00 USDT</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Profit</div>
+                    <div class="detail-value">840 USDT</div>
+                </div>
+            </div>
+            <div class="profit-highlight">
+                <div class="profit-label">Unlock Price</div>
+                <div class="profit-amount">55.00 USDT</div>
+            </div>
+            <button class="unlock-btn" onclick="unlockVIP(2, 55.00)">Unlock Now</button>
+        </div>
+
+        <div class="vip-package">
+            <div class="vip-badge">
+                <svg class="crown-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                </svg>
+                VIP 3
+            </div>
+            <div class="package-details">
+                <div class="detail-item">
+                    <div class="detail-label">Daily Tasks</div>
+                    <div class="detail-value">10</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simple Interest</div>
+                    <div class="detail-value">9.00%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Daily Profit</div>
+                    <div class="detail-value">90.00 USDT</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Profit</div>
+                    <div class="detail-value">2700 USDT</div>
+                </div>
+            </div>
+            <div class="profit-highlight">
+                <div class="profit-label">Unlock Price</div>
+                <div class="profit-amount">180.00 USDT</div>
+            </div>
+            <button class="unlock-btn" onclick="unlockVIP(3, 180.00)">Unlock Now</button>
+        </div>
+
+        <div class="vip-package">
+            <div class="vip-badge">
+                <svg class="crown-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                </svg>
+                VIP 4
+            </div>
+            <div class="package-details">
+                <div class="detail-item">
+                    <div class="detail-label">Daily Tasks</div>
+                    <div class="detail-value">15</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simple Interest</div>
+                    <div class="detail-value">12.00%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Daily Profit</div>
+                    <div class="detail-value">180.00 USDT</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Profit</div>
+                    <div class="detail-value">5400 USDT</div>
+                </div>
+            </div>
+            <div class="profit-highlight">
+                <div class="profit-label">Unlock Price</div>
+                <div class="profit-amount">350.00 USDT</div>
+            </div>
+            <button class="unlock-btn" onclick="unlockVIP(4, 350.00)">Unlock Now</button>
+        </div>
+
+        <div class="vip-package">
+            <div class="vip-badge">
+                <svg class="crown-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                </svg>
+                VIP 5
+            </div>
+            <div class="package-details">
+                <div class="detail-item">
+                    <div class="detail-label">Daily Tasks</div>
+                    <div class="detail-value">20</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Simple Interest</div>
+                    <div class="detail-value">15.00%</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Daily Profit</div>
+                    <div class="detail-value">300.00 USDT</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Total Profit</div>
+                    <div class="detail-value">9000 USDT</div>
+                </div>
+            </div>
+            <div class="profit-highlight">
+                <div class="profit-label">Unlock Price</div>
+                <div class="profit-amount">600.00 USDT</div>
+            </div>
+            <button class="unlock-btn" onclick="unlockVIP(5, 600.00)">Unlock Now</button>
+        </div>
+    </div>
+
+    <div class="modal" id="unlockModal">
+        <div class="modal-content">
+            <div class="modal-title">Confirm Purchase</div>
+            <p style="color: #fff; margin-bottom: 20px;" id="modalText">Are you sure you want to unlock VIP 1 for 9.00 USDT?</p>
+            <button class="modal-btn btn-confirm" onclick="confirmPurchase()">Confirm</button>
+            <button class="modal-btn btn-cancel" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item active" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+
+    <script>
+        let currentVIP = null;
+        let currentPrice = null;
+
+        function unlockVIP(level, price) {
+            currentVIP = level;
+            currentPrice = price;
+            document.getElementById('modalText').textContent = `Are you sure you want to unlock VIP ${level} for ${price} USDT?`;
+            document.getElementById('unlockModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('unlockModal').classList.remove('show');
+        }
+
+        function confirmPurchase() {
+            const user = JSON.parse(localStorage.getItem('luxeEarnUser') || '{}');
+            if (user.balance >= currentPrice) {
+                user.balance -= currentPrice;
+                user.vipLevel = currentVIP;
+                localStorage.setItem('luxeEarnUser', JSON.stringify(user));
+                alert(`Successfully unlocked VIP ${currentVIP}!`);
+                closeModal();
+            } else {
+                alert('Insufficient balance. Please recharge first.');
+                closeModal();
+                window.location.href = 'recharge.html';
+            }
+        }
+
+        function viewUpgradeLog() {
+            alert('Upgrade history will be displayed here');
+        }
+    </script>
+</body>
+</html>

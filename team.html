@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - My Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .invitation-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .invitation-title {
+            font-size: 16px;
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .code-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ccff00;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .twitter { background: #1DA1F2; }
+        .facebook { background: #4267B2; }
+        .telegram { background: #0088cc; }
+        .whatsapp { background: #25D366; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #00ffff;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .level-cards {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .level-card {
+            min-width: 280px;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .level-card.level-1 {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+        }
+
+        .level-card.level-2 {
+            background: linear-gradient(135deg, #ff00ff, #cc00ff);
+        }
+
+        .level-card.level-3 {
+            background: linear-gradient(135deg, #ff6b35, #ff0066);
+        }
+
+        .level-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .level-stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .details-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">My Team</div>
+    </div>
+
+    <div class="container">
+        <div class="invitation-card">
+            <div class="invitation-title">Invitation Details</div>
+            <div class="code-display">
+                <span class="code-text">LXE2025</span>
+                <button class="copy-btn" onclick="copyCode()">Copy</button>
+            </div>
+            <div class="code-display">
+                <span style="font-size: 12px; color: #00ffff;">https://luxeearn.com/#/register?code=LXE2025</span>
+                <button class="copy-btn" onclick="copyLink()">Copy</button>
+            </div>
+            <div class="social-share">
+                <div class="social-btn twitter">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="social-btn facebook">
+                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <div class="social-btn telegram">
+                    <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </div>
+                <div class="social-btn whatsapp">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Team Size</div>
+                <div class="stat-value">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Team Recharge</div>
+                <div class="stat-value">0.00 USDT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Team Withdrawal</div>
+                <div class="stat-value">0.00 USDT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">New Members</div>
+                <div class="stat-value">0</div>
+            </div>
+        </div>
+
+        <div class="level-cards">
+            <div class="level-card level-1">
+                <div class="level-header">LEVEL 1</div>
+                <div class="level-stat-row">
+                    <span>Register/Valid:</span>
+                    <span>0/0</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Commission:</span>
+                    <span>12%</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Total Income:</span>
+                    <span>0 USDT</span>
+                </div>
+                <button class="details-btn">View Details</button>
+            </div>
+
+            <div class="level-card level-2">
+                <div class="level-header">LEVEL 2</div>
+                <div class="level-stat-row">
+                    <span>Register/Valid:</span>
+                    <span>0/0</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Commission:</span>
+                    <span>8%</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Total Income:</span>
+                    <span>0 USDT</span>
+                </div>
+                <button class="details-btn">View Details</button>
+            </div>
+
+            <div class="level-card level-3">
+                <div class="level-header">LEVEL 3</div>
+                <div class="level-stat-row">
+                    <span>Register/Valid:</span>
+                    <span>0/0</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Commission:</span>
+                    <span>5%</span>
+                </div>
+                <div class="level-stat-row">
+                    <span>Total Income:</span>
+                    <span>0 USDT</span>
+                </div>
+                <button class="details-btn">View Details</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item active" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            navigator.clipboard.writeText('LXE2025');
+            showToast('Code copied!');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText('https://luxeearn.com/#/register?code=LXE2025');
+            showToast('Link copied!');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 255, 255, 0.9); color: #1a0033; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 1000;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+    </script>
+</body>
+</html>

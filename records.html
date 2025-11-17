@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - Financial Records</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 5px;
+            padding: 15px 20px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+        }
+
+        .container {
+            padding: 0 20px 20px;
+        }
+
+        .record-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .record-type {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .type-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .type-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .type-icon.recharge {
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+        }
+
+        .type-icon.withdraw {
+            background: linear-gradient(135deg, #ff6b35, #ff0066);
+        }
+
+        .type-icon.commission {
+            background: linear-gradient(135deg, #ccff00, #00ff88);
+        }
+
+        .type-label {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .record-amount {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .amount-positive {
+            color: #00ff88;
+        }
+
+        .amount-negative {
+            color: #ff6666;
+        }
+
+        .record-details {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .record-date {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-completed {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .status-pending {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+        }
+
+        .status-failed {
+            background: rgba(255, 102, 102, 0.2);
+            color: #ff6666;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            opacity: 0.3;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+        <div class="header-title">Financial Records</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="filterRecords('all')">All</button>
+        <button class="tab-btn" onclick="filterRecords('recharge')">Recharge</button>
+        <button class="tab-btn" onclick="filterRecords('withdraw')">Withdraw</button>
+        <button class="tab-btn" onclick="filterRecords('commission')">Commission</button>
+        <button class="tab-btn" onclick="filterRecords('rewards')">Rewards</button>
+        <button class="tab-btn" onclick="filterRecords('tasks')">Tasks</button>
+    </div>
+
+    <div class="container" id="recordsContainer">
+        <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="#fff">
+                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            <div class="empty-text">No transaction records</div>
+        </div>
+    </div>
+
+    <script>
+        function filterRecords(type) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - Withdraw</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 70px;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .balance-display {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 255, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .balance-amount {
+            font-size: 40px;
+            font-weight: 800;
+            color: #ccff00;
+        }
+
+        .method-selector {
+            margin-bottom: 25px;
+        }
+
+        .selector-label {
+            font-size: 14px;
+            color: #00ffff;
+            margin-bottom: 12px;
+        }
+
+        .method-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .method-btn {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .method-btn.active {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            font-size: 13px;
+            color: #00ffff;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quick-btn {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(204, 255, 0, 0.2);
+            border-radius: 8px;
+            color: #ccff00;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .fee-info {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .fee-label {
+            color: #888;
+        }
+
+        .fee-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            border-radius: 12px;
+            color: #1a0033;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
+        }
+
+        .notice {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 12px;
+            color: #ffaa66;
+            margin-top: 20px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+        <div class="header-title">Withdraw</div>
+    </div>
+
+    <div class="container">
+        <div class="balance-display">
+            <div class="balance-label">Available Balance</div>
+            <div class="balance-amount">0.00 USDT</div>
+        </div>
+
+        <div class="method-selector">
+            <div class="selector-label">Withdrawal Method</div>
+            <div class="method-buttons">
+                <button class="method-btn active">TRX</button>
+                <button class="method-btn">BEP20-USDT</button>
+                <button class="method-btn">TRC20-USDT</button>
+                <button class="method-btn">POLYGON-USDC</button>
+            </div>
+        </div>
+
+        <form onsubmit="handleWithdraw(event)">
+            <div class="input-group">
+                <label class="input-label">Withdrawal Address</label>
+                <input type="text" id="withdrawAddress" placeholder="Enter your wallet address" required>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Withdrawal Amount</label>
+                <input type="number" id="withdrawAmount" placeholder="Enter amount" step="0.01" min="15" required>
+                <div class="quick-amounts">
+                    <button type="button" class="quick-btn" onclick="setAmount(100)">100</button>
+                    <button type="button" class="quick-btn" onclick="setAmount(500)">500</button>
+                    <button type="button" class="quick-btn" onclick="setAmount(1000)">1000</button>
+                    <button type="button" class="quick-btn" onclick="setAll()">All</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <input type="password" id="withdrawPassword" placeholder="Enter your password" required>
+            </div>
+
+            <div class="fee-info">
+                <div class="fee-row">
+                    <span class="fee-label">Quota Range:</span>
+                    <span class="fee-value">15.000 - 1,000,000 USDT</span>
+                </div>
+                <div class="fee-row">
+                    <span class="fee-label">Fees:</span>
+                    <span class="fee-value">0 TRX</span>
+                </div>
+                <div class="fee-row">
+                    <span class="fee-label">Fee-free Times:</span>
+                    <span class="fee-value">999</span>
+                </div>
+                <div class="fee-row">
+                    <span class="fee-label">Actually Received:</span>
+                    <span class="fee-value" id="actuallyReceived">0.00 USDT</span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Confirm Withdrawal</button>
+        </form>
+
+        <div class="notice">
+            <strong>Withdrawal Notice:</strong><br>
+            • Processing time: Up to 24 hours<br>
+            • Minimum withdrawal: 15 USDT<br>
+            • Maximum withdrawal: 1,000,000 USDT per transaction<br>
+            • Please ensure the address is correct
+        </div>
+    </div>
+
+    <script>
+        function setAmount(amount) {
+            document.getElementById('withdrawAmount').value = amount;
+            updateReceived();
+        }
+
+        function setAll() {
+            document.getElementById('withdrawAmount').value = 0;
+            updateReceived();
+        }
+
+        function updateReceived() {
+            const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+            document.getElementById('actuallyReceived').textContent = amount.toFixed(2) + ' USDT';
+        }
+
+        document.getElementById('withdrawAmount').addEventListener('input', updateReceived);
+
+        function handleWithdraw(e) {
+            e.preventDefault();
+            const address = document.getElementById('withdrawAddress').value;
+            const amount = document.getElementById('withdrawAmount').value;
+            
+            if (confirm(`Confirm withdrawal of ${amount} USDT to ${address}?`)) {
+                alert('Withdrawal request submitted successfully! Processing time: up to 24 hours.');
+                window.location.href = 'records.html';
+            }
+        }
+
+        const methodButtons = document.querySelectorAll('.method-btn');
+        methodButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                methodButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+</body>
+</html>

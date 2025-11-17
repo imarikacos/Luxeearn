@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - Task Hall</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            padding-bottom: 70px;
+            color: #fff;
+            padding-bottom: 20px;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .toggle-btn.active {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+        }
+
+        .toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: #888;
+        }
+
+        .toggle-btn.active svg {
+            fill: #00ffff;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-chip.active {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border-color: #00ffff;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .task-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .task-card.locked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+        }
+
+        .lock-icon {
+            width: 50px;
+            height: 50px;
+            fill: #ff00ff;
+            margin-bottom: 10px;
+        }
+
+        .unlock-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff00ff;
+        }
+
+        .task-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #330066, #660099);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .task-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #1a0033;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .task-content {
+            padding: 18px;
+        }
+
+        .task-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .task-description {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .task-commission {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ccff00;
+            margin-bottom: 10px;
+        }
+
+        .task-requirement {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .requirement-icon {
+            width: 16px;
+            height: 16px;
+            fill: #00ffff;
+        }
+
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-duration {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .arrow-btn {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #00ffff;
+        }
+
+        .task-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .task-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ffff;
+        }
+
+        .close-modal-btn {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .close-modal-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #ff6666;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .modal-info {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #888;
+        }
+
+        .info-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .start-task-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            border-radius: 12px;
+            color: #1a0033;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-task-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
+        }
+
+        .start-task-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <button class="back-btn" onclick="history.back()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </button>
+            <div class="header-title">Task Hall</div>
+        </div>
+        <div class="view-toggle">
+            <button class="toggle-btn active" onclick="switchView('grid')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/>
+                </svg>
+            </button>
+            <button class="toggle-btn" onclick="switchView('list')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filter-bar">
+            <div class="filter-chip active">All Tasks</div>
+            <div class="filter-chip">High Rewards</div>
+            <div class="filter-chip">Quick Tasks</div>
+            <div class="filter-chip">VIP 1</div>
+            <div class="filter-chip">VIP 2</div>
+            <div class="filter-chip">VIP 3+</div>
+        </div>
+
+        <div class="tasks-grid" id="tasksContainer">
+            <div class="task-card" onclick="openTaskModal('E-commerce Review Task', 'VIP 0', 5.50, false)">
+                <div class="task-image">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#fff" opacity="0.3">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    </svg>
+                    <div class="task-badge">Popular</div>
+                </div>
+                <div class="task-content">
+                    <div class="task-title">E-commerce Review Task</div>
+                    <div class="task-description">Review and rate products from partner stores</div>
+                    <div class="task-commission">+5.50 USDT</div>
+                    <div class="task-requirement">
+                        <svg class="requirement-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                        </svg>
+                        <span>No VIP Required</span>
+                    </div>
+                    <div class="task-footer">
+                        <div class="task-duration">⏱ 5 min</div>
+                        <div class="arrow-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card locked" onclick="showUpgradeNotice('VIP 1')">
+                <div class="lock-overlay">
+                    <svg class="lock-icon" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <div class="unlock-text">Requires VIP 1</div>
+                </div>
+                <div class="task-image">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#fff" opacity="0.3">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM11 15h2v-2h-2v2zm0-4h2V7h-2v4z"/>
+                    </svg>
+                    <div class="task-badge">VIP 1</div>
+                </div>
+                <div class="task-content">
+                    <div class="task-title">App Testing Task</div>
+                    <div class="task-description">Test mobile applications and provide feedback</div>
+                    <div class="task-commission">+15.50 USDT</div>
+                    <div class="task-requirement">
+                        <svg class="requirement-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                        </svg>
+                        <span>VIP 1 Required</span>
+                    </div>
+                    <div class="task-footer">
+                        <div class="task-duration">⏱ 10 min</div>
+                        <div class="arrow-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card locked" onclick="showUpgradeNotice('VIP 2')">
+                <div class="lock-overlay">
+                    <svg class="lock-icon" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <div class="unlock-text">Requires VIP 2</div>
+                </div>
+                <div class="task-image">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#fff" opacity="0.3">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <div class="task-badge">VIP 2</div>
+                </div>
+                <div class="task-content">
+                    <div class="task-title">Email Marketing Task</div>
+                    <div class="task-description">Interact with promotional emails and surveys</div>
+                    <div class="task-commission">+28.00 USDT</div>
+                    <div class="task-requirement">
+                        <svg class="requirement-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                        </svg>
+                        <span>VIP 2 Required</span>
+                    </div>
+                    <div class="task-footer">
+                        <div class="task-duration">⏱ 8 min</div>
+                        <div class="arrow-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card locked" onclick="showUpgradeNotice('VIP 3')">
+                <div class="lock-overlay">
+                    <svg class="lock-icon" viewBox="0 0 24 24">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <div class="unlock-text">Requires VIP 3</div>
+                </div>
+                <div class="task-image">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="#fff" opacity="0.3">
+                        <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+                    </svg>
+                    <div class="task-badge">VIP 3</div>
+                </div>
+                <div class="task-content">
+                    <div class="task-title">Website Optimization Task</div>
+                    <div class="task-description">Analyze and optimize website performance</div>
+                    <div class="task-commission">+90.00 USDT</div>
+                    <div class="task-requirement">
+                        <svg class="requirement-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+                        </svg>
+                        <span>VIP 3 Required</span>
+                    </div>
+                    <div class="task-footer">
+                        <div class="task-duration">⏱ 15 min</div>
+                        <div class="arrow-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTaskTitle">Task Details</div>
+                <button class="close-modal-btn" onclick="closeTaskModal()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-description" id="modalDescription">
+                Complete this task by following the instructions provided. Your reward will be credited immediately upon successful completion.
+            </div>
+            <div class="modal-info">
+                <div class="info-row">
+                    <span class="info-label">Commission:</span>
+                    <span class="info-value" id="modalCommission">0.00 USDT</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Required VIP:</span>
+                    <span class="info-value" id="modalVIP">VIP 0</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Time Limit:</span>
+                    <span class="info-value">30 minutes</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Difficulty:</span>
+                    <span class="info-value">Easy</span>
+                </div>
+            </div>
+            <button class="start-task-btn" id="startTaskBtn" onclick="startTask()">Start Task</button>
+        </div>
+    </div>
+
+    <script>
+        function switchView(view) {
+            const container = document.getElementById('tasksContainer');
+            const toggleBtns = document.querySelectorAll('.toggle-btn');
+            
+            toggleBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.toggle-btn').classList.add('active');
+            
+            if (view === 'grid') {
+                container.className = 'tasks-grid';
+            } else {
+                container.className = 'tasks-list';
+            }
+        }
+
+        function openTaskModal(title, vip, commission, locked) {
+            if (locked) return;
+            
+            document.getElementById('modalTaskTitle').textContent = title;
+            document.getElementById('modalCommission').textContent = commission.toFixed(2) + ' USDT';
+            document.getElementById('modalVIP').textContent = vip;
+            document.getElementById('taskModal').classList.add('show');
+        }
+
+        function closeTaskModal() {
+            document.getElementById('taskModal').classList.remove('show');
+        }
+
+        function startTask() {
+            alert('Task started! Follow the instructions to complete it.');
+            closeTaskModal();
+        }
+
+        function showUpgradeNotice(vipLevel) {
+            if (confirm(`This task requires ${vipLevel}. Would you like to upgrade now?`)) {
+                window.location.href = 'vip.html';
+            }
+        }
+
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                filterChips.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+</body>
+</html>

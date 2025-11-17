@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - Lucky Spin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+        .close-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #ff6666;
+        }
+        .spin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .remaining-times {
+            font-size: 16px;
+            color: #00ffff;
+        }
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff0000 0deg 45deg,
+                #ff8800 45deg 90deg,
+                #ffff00 90deg 135deg,
+                #00ff00 135deg 180deg,
+                #00ffff 180deg 225deg,
+                #0088ff 225deg 270deg,
+                #8800ff 270deg 315deg,
+                #ff00ff 315deg 360deg
+            );
+            border: 8px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+        .spin-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #ff00ff);
+            border-radius: 50%;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5);
+        }
+        .spin-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .requirement-text {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .share-btn {
+            width: 200px;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            border-radius: 10px;
+            color: #1a0033;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-btn" onclick="window.location.href='index.html'">
+        <svg viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    </button>
+    <div class="spin-header">
+        <h2 style="margin-bottom: 10px;">Lucky Spin</h2>
+        <div class="remaining-times">Remaining times: 1</div>
+    </div>
+    <div class="wheel-container">
+        <div class="wheel" id="wheel"></div>
+        <button class="spin-btn" onclick="spinWheel()">SPIN</button>
+    </div>
+    <div class="requirement-text">
+        Invite friends to recharge 100 USDT<br>Get a chance to spin
+    </div>
+    <button class="share-btn">Share with Friends</button>
+    <script>
+        let isSpinning = false;
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+            const wheel = document.getElementById('wheel');
+            const randomDegree = Math.floor(Math.random() * 360) + 1800;
+            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            setTimeout(() => {
+                alert('Congratulations! You won 88.00 USDT!');
+                isSpinning = false;
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
