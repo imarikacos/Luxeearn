@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags -->
     <title>LuxeEarn - Earn Money Online with Crypto Trading & Investment Platform</title>
     <meta name="description" content="LuxeEarn is a leading quantitative trading and investment platform. Earn passive income through crypto trading, team building, and VIP rewards. Join now and start earning!">
     <meta name="keywords" content="LuxeEarn, crypto trading, investment platform, earn money online, passive income, quantitative trading, VIP rewards, team building, referral program">
     <meta name="author" content="LuxeEarn">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="LuxeEarn - Earn Money Online with Crypto Trading">
     <meta property="og:description" content="Join LuxeEarn and start earning through our intelligent quantitative trading platform. Get VIP benefits and team rewards!">
     <meta property="og:type" content="website">
@@ -19,13 +17,11 @@
     <meta property="og:image" content="lexearn.png">
     <meta property="og:site_name" content="LuxeEarn">
     
-    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LuxeEarn - Earn Money Online">
     <meta name="twitter:description" content="Start earning with LuxeEarn's intelligent trading platform. VIP rewards and team bonuses available!">
     <meta name="twitter:image" content="lexearn.png">
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="lexearn.png">
     <link rel="apple-touch-icon" href="lexearn.png">
     
@@ -228,86 +224,56 @@
             font-weight: 500;
         }
 
-        /* Top Coin Ticker */
-        .top-ticker {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+        .price-ticker {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 0;
             margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            overflow-x: auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: tickerScroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .ticker-item {
-            flex: 1;
-            min-width: 100px;
-            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            margin-right: 40px;
+            padding: 0 20px;
         }
 
         .ticker-pair {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fff;
+            margin-right: 10px;
         }
 
         .ticker-price {
             font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 3px;
+            color: #fff;
+            margin-right: 10px;
         }
 
         .ticker-change {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-        }
-
-        .ticker-change.negative {
-            color: #ef4444;
         }
 
         .ticker-change.positive {
             color: #22c55e;
         }
 
-        /* Exchange Tabs */
-        .exchange-tabs {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-        }
-
-        .exchange-tab {
-            font-size: 13px;
-            font-weight: 600;
-            color: #888;
-            cursor: pointer;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .exchange-tab:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .exchange-tab.active {
-            color: #00ffff;
-            background: rgba(0, 255, 255, 0.1);
-        }
-
-        /* Crypto Table Headers */
-        .crypto-table-header {
-            display: grid;
-            grid-template-columns: 2fr 1.5fr 1.5fr;
-            padding: 10px 12px;
-            font-size: 11px;
-            color: #888;
-            font-weight: 600;
-            margin-bottom: 10px;
+        .ticker-change.negative {
+            color: #ef4444;
         }
 
         .crypto-prices {
@@ -323,6 +289,63 @@
             font-weight: 700;
             color: #00ffff;
             margin-bottom: 15px;
+        }
+
+        .exchange-tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+        }
+
+        .exchange-tab {
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: none;
+            background: none;
+            white-space: nowrap;
+        }
+
+        .exchange-tab.active {
+            color: #22c55e;
+        }
+
+        .exchange-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #22c55e;
+        }
+
+        .table-headers {
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            font-size: 11px;
+            color: #888;
+            font-weight: 600;
+        }
+
+        .header-cell {
+            text-align: center;
+        }
+
+        .header-cell:first-child {
+            text-align: left;
+        }
+
+        .header-cell:last-child {
+            text-align: right;
         }
 
         .crypto-item {
@@ -343,10 +366,20 @@
         }
 
         .crypto-icon {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .crypto-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .crypto-name {
@@ -356,11 +389,11 @@
 
         .crypto-symbol {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .crypto-pair {
-            font-size: 10px;
+            font-size: 11px;
             color: #888;
         }
 
@@ -372,15 +405,15 @@
 
         .crypto-price {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .crypto-change {
             padding: 6px 12px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 12px;
-            min-width: 65px;
+            font-size: 13px;
+            min-width: 70px;
             text-align: center;
             transition: all 0.5s ease;
         }
@@ -395,13 +428,83 @@
             color: #fff;
         }
 
+        .floating-bonus {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+            text-decoration: none;
+            filter: grayscale(1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-bonus:hover {
+            transform: scale(1.1);
+            filter: grayscale(0);
+        }
+
+        .floating-bonus-icon {
+            font-size: 30px;
+            animation: bonusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes bonusPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .bonus-countdown {
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        .floating-support {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .floating-support:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-support svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
         .withdrawal-logs {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 25px;
             border: 1px solid rgba(0, 255, 255, 0.1);
-            max-height: 350px;
+            max-height: 300px;
             overflow: hidden;
             position: relative;
         }
@@ -424,19 +527,19 @@
             border-left: 3px solid #22c55e;
             opacity: 0;
             transform: translateY(-20px);
-            animation: smoothFadeInOut 8s ease-in-out forwards;
+            animation: smoothSlideIn 0.8s ease-out forwards;
         }
 
-        @keyframes smoothFadeInOut {
+        @keyframes smoothSlideIn {
             0% {
                 opacity: 0;
                 transform: translateY(-20px);
             }
-            10% {
+            20% {
                 opacity: 1;
                 transform: translateY(0);
             }
-            90% {
+            80% {
                 opacity: 1;
                 transform: translateY(0);
             }
@@ -766,34 +869,29 @@
         .task-image {
             width: 100%;
             height: 100px;
-            background: linear-gradient(135deg, #330066, #660099);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 10px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
         }
 
-        .task-commission {
-            font-size: 18px;
+        .task-info {
+            text-align: center;
+        }
+
+        .task-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .task-reward {
+            font-size: 16px;
             font-weight: 700;
-            color: #ccff00;
-            margin-bottom: 8px;
-        }
-
-        .task-requirement {
-            font-size: 11px;
-            color: #888;
-        }
-
-        .unlock-btn {
-            width: 100%;
-            padding: 8px;
-            background: linear-gradient(135deg, #ccff00, #00ff88);
-            border: none;
-            border-radius: 8px;
-            color: #1a0033;
-            font-weight: 700;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 10px;
+            color: #22c55e;
         }
 
         .bottom-nav {
@@ -803,11 +901,12 @@
             right: 0;
             background: rgba(26, 0, 51, 0.95);
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
             display: flex;
             justify-content: space-around;
+            align-items: center;
             padding: 10px 0;
-            z-index: 100;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 1000;
         }
 
         .nav-item {
@@ -816,153 +915,152 @@
             align-items: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            flex: 1;
+            color: #888;
+        }
+
+        .nav-item.active {
+            color: #00ffff;
         }
 
         .nav-item svg {
             width: 24px;
             height: 24px;
-            fill: #888;
-            margin-bottom: 5px;
-        }
-
-        .nav-item.active svg {
-            fill: #00ffff;
+            fill: currentColor;
+            margin-bottom: 4px;
         }
 
         .nav-label {
             font-size: 11px;
-            color: #888;
+            font-weight: 500;
         }
 
-        .nav-item.active .nav-label {
-            color: #00ffff;
-        }
-
-        .floating-support {
+        .notification {
             position: fixed;
+            top: 70px;
             right: 20px;
-            bottom: 90px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #ff00ff, #ff0066);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5);
-            z-index: 99;
-            transition: all 0.3s ease;
-        }
-
-        .floating-support:hover {
-            transform: scale(1.1);
-        }
-
-        .floating-support svg {
-            width: 24px;
-            height: 24px;
-            fill: #fff;
-        }
-
-        /* Floating Bonus Button */
-        .floating-bonus {
-            position: fixed;
-            left: 20px;
-            bottom: 90px;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
-            z-index: 99;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            text-decoration: none;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
             color: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+            z-index: 1500;
+            max-width: 300px;
+            transform: translateX(400px);
+            opacity: 0;
         }
 
-        .floating-bonus:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
+        .notification.show {
+            animation: slideIn 0.5s ease-out forwards;
         }
 
-        .floating-bonus img {
-            width: 30px;
-            height: 30px;
-            filter: grayscale(100%);
+        .notification.hide {
+            animation: slideOut 0.5s ease-out forwards;
         }
 
-        .bonus-countdown {
-            font-size: 9px;
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .notification-title {
+            font-size: 16px;
             font-weight: 700;
-            margin-top: 2px;
-            color: #00ffff;
+            margin-bottom: 5px;
         }
 
-        /* Popup Announcement */
-        .popup-overlay {
+        .notification-message {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .popup-announcement {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 2000;
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        .popup-overlay.show {
+        .popup-announcement.show {
             opacity: 1;
-            pointer-events: all;
+            visibility: visible;
+        }
+
+        .popup-announcement.hide {
+            animation: fadeOutPopup 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOutPopup {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
         }
 
         .popup-content {
-            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            background: linear-gradient(135deg, #1a0033, #330066);
             border: 2px solid #00ffff;
             border-radius: 20px;
             padding: 30px;
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
             transform: scale(0.7);
-            transition: transform 0.5s ease;
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .popup-overlay.show .popup-content {
+        .popup-announcement.show .popup-content {
             transform: scale(1);
         }
 
-        .popup-title {
+        .popup-header {
             font-size: 24px;
             font-weight: 700;
             color: #00ffff;
             margin-bottom: 15px;
+            text-align: center;
         }
 
         .popup-message {
-            font-size: 16px;
-            color: #fff;
+            font-size: 15px;
             line-height: 1.6;
+            color: #fff;
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .popup-close {
+        .popup-close-btn {
+            width: 100%;
+            padding: 12px;
             background: linear-gradient(135deg, #00ffff, #0099ff);
             border: none;
-            padding: 12px 30px;
             border-radius: 10px;
             color: #fff;
             font-size: 14px;
@@ -971,43 +1069,20 @@
             transition: all 0.3s ease;
         }
 
-        .popup-close:hover {
+        .popup-close-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.5);
-        }
-
-        .notification {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            color: #fff;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
-            z-index: 1001;
-            display: none;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-            }
-            to {
-                transform: translateX(0);
-            }
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.6);
         }
 
         .sidebar-overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.7);
-            z-index: 998;
-            display: none;
+            z-index: 999;
         }
 
         .sidebar {
@@ -1015,24 +1090,25 @@
             top: 0;
             left: -300px;
             width: 280px;
-            height: 100%;
+            height: 100vh;
             background: rgba(26, 0, 51, 0.98);
-            z-index: 999;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             transition: left 0.3s ease;
             overflow-y: auto;
             border-right: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .sidebar.open {
+        .sidebar.active {
             left: 0;
         }
 
         .sidebar-header {
             padding: 20px;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .sidebar-logo {
@@ -1056,12 +1132,20 @@
         .sidebar-close {
             width: 30px;
             height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-close:hover {
+            transform: scale(1.1);
         }
 
         .sidebar-close svg {
-            width: 100%;
-            height: 100%;
+            width: 20px;
+            height: 20px;
             fill: #00ffff;
         }
 
@@ -1077,15 +1161,17 @@
             color: #fff;
             text-decoration: none;
             transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
 
         .sidebar-menu-item:hover {
             background: rgba(0, 255, 255, 0.1);
+            border-left-color: #00ffff;
         }
 
         .sidebar-menu-item svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             fill: #00ffff;
         }
 
@@ -1101,13 +1187,13 @@
 
         .sidebar-footer-text {
             font-size: 12px;
-            color: #888;
+            color: #00ffff;
+            margin-bottom: 5px;
         }
 
         .sidebar-footer-copyright {
             font-size: 10px;
-            color: #666;
-            margin-top: 5px;
+            color: #888;
         }
 
         .main-footer {
@@ -1179,27 +1265,30 @@
                 gap: 12px;
                 padding: 15px;
             }
+            .popup-content {
+                width: 85%;
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="notification" class="notification"></div>
 
-    <!-- Popup Announcement -->
-    <div class="popup-overlay" id="popupAnnouncement">
+    <div class="popup-announcement" id="popupAnnouncement">
         <div class="popup-content">
-            <div class="popup-title">🎉 Welcome to LuxeEarn!</div>
+            <div class="popup-header">🎉 Welcome to LuxeEarn!</div>
             <div class="popup-message">
-                Start earning passive income today! Complete tasks, refer friends, and unlock exclusive VIP rewards. Your journey to financial freedom begins here!
+                Start earning today with our advanced quantitative trading platform! 
+                Complete tasks, build your team, and unlock VIP rewards. 
+                Your journey to financial freedom begins here!
             </div>
-            <button class="popup-close" onclick="closePopup()">Get Started</button>
+            <button class="popup-close-btn" onclick="closePopup()">Get Started</button>
         </div>
     </div>
 
-    <!-- Sidebar Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- Sidebar Menu -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">
@@ -1325,6 +1414,17 @@
         </div>
     </div>
 
+    <a href="spin.html" class="floating-bonus">
+        <div class="floating-bonus-icon">🎁</div>
+        <div class="bonus-countdown" id="bonusCountdown">00:00</div>
+    </a>
+
+    <div class="floating-support" onclick="openPage('https://tinyurl.com/Swift-support')">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM13 14h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+        </svg>
+    </div>
+
     <div class="container">
         <div class="image-carousel">
             <div class="carousel-wrapper">
@@ -1337,25 +1437,6 @@
                 <div class="carousel-slide">
                     <img src="Photo3.png" alt="Slide 3" style="width:100%; height:100%; object-fit:cover;">
                 </div>
-            </div>
-        </div>
-
-        <!-- Top Ticker -->
-        <div class="top-ticker">
-            <div class="ticker-item">
-                <div class="ticker-pair">BTC/USDT</div>
-                <div class="ticker-price" id="tickerBTC">95640.4</div>
-                <div class="ticker-change negative" id="tickerBTCChange">-0.94%</div>
-            </div>
-            <div class="ticker-item">
-                <div class="ticker-pair">TRX/USDT</div>
-                <div class="ticker-price" id="tickerTRX">0.29317</div>
-                <div class="ticker-change negative" id="tickerTRXChange">-1.89%</div>
-            </div>
-            <div class="ticker-item">
-                <div class="ticker-pair">ETH/USDT</div>
-                <div class="ticker-price" id="tickerETH">3196.06</div>
-                <div class="ticker-change negative" id="tickerETHChange">-1.37%</div>
             </div>
         </div>
 
@@ -1436,19 +1517,17 @@
         <div class="crypto-prices">
             <div class="crypto-header">Live Market Prices</div>
             
-            <!-- Exchange Tabs -->
             <div class="exchange-tabs">
-                <div class="exchange-tab" onclick="switchExchange('BINANCE')">BINANCE</div>
-                <div class="exchange-tab active" onclick="switchExchange('OKX')">OKX</div>
-                <div class="exchange-tab" onclick="switchExchange('HUOBI')">HUOBI</div>
-                <div class="exchange-tab" onclick="switchExchange('COINBASE')">COINBASE</div>
+                <button class="exchange-tab active" onclick="switchExchange('binance')">BINANCE</button>
+                <button class="exchange-tab" onclick="switchExchange('okx')">OKX</button>
+                <button class="exchange-tab" onclick="switchExchange('huobi')">HUOBI</button>
+                <button class="exchange-tab" onclick="switchExchange('coinbase')">COINBASE</button>
             </div>
 
-            <!-- Table Headers -->
-            <div class="crypto-table-header">
-                <div>Currency</div>
-                <div style="text-align: center;">Latest Price($)</div>
-                <div style="text-align: center;">24h Rise & Down</div>
+            <div class="table-headers">
+                <div class="header-cell">Currency</div>
+                <div class="header-cell">Latest Price($)</div>
+                <div class="header-cell">24h Rise & Down</div>
             </div>
 
             <div id="cryptoList"></div>
@@ -1584,7 +1663,7 @@
                 <div class="level-stats">
                     <div class="level-stat-row">
                         <span>Commission per task</span>
-                        <span>$12.00</span>
+                        <span>$15.00</span>
                     </div>
                     <div class="level-stat-row">
                         <span>Upgrade requirement</span>
@@ -1598,36 +1677,6 @@
                 <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
             </div>
         </div>
-
-        <div class="main-footer">
-            <div class="footer-logo">
-                <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'">
-            </div>
-            <div class="footer-text">
-                LuxeEarn - Your trusted quantitative trading platform. Earn passive income through intelligent trading and team building.
-            </div>
-            <div class="footer-links">
-                <a href="#" class="footer-link">About Us</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="contact.html" class="footer-link">Contact</a>
-            </div>
-            <div class="footer-copyright">
-                © 2025 LuxeEarn. All Rights Reserved.
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Bonus Button -->
-    <a href="spin.html" class="floating-bonus">
-        <img src="bonus.gif" alt="Bonus">
-        <div class="bonus-countdown" id="bonusCountdown">00:00</div>
-    </a>
-
-    <div class="floating-support" onclick="openPage('contact.html')">
-        <svg viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
-        </svg>
     </div>
 
     <div class="bottom-nav">
@@ -1658,313 +1707,229 @@
     </div>
 
     <script>
-        // Crypto Data with Real Logo URLs
         const cryptoData = [
-            { 
-                symbol: 'BTC', 
-                pair: 'BTC/USDT', 
-                price: 95640.40, 
-                basePrice: 95640.40,
-                logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png'
-            },
-            { 
-                symbol: 'ETH', 
-                pair: 'ETH/USDT', 
-                price: 3196.06, 
-                basePrice: 3196.06,
-                logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png'
-            },
-            { 
-                symbol: 'BNB', 
-                pair: 'BNB/USDT', 
-                price: 612.30, 
-                basePrice: 612.30,
-                logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.png'
-            },
-            { 
-                symbol: 'XRP', 
-                pair: 'XRP/USDT', 
-                price: 1.14, 
-                basePrice: 1.14,
-                logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png'
-            },
-            { 
-                symbol: 'SOL', 
-                pair: 'SOL/USDT', 
-                price: 238.92, 
-                basePrice: 238.92,
-                logo: 'https://cryptologos.cc/logos/solana-sol-logo.png'
-            },
-            { 
-                symbol: 'ADA', 
-                pair: 'ADA/USDT', 
-                price: 1.08, 
-                basePrice: 1.08,
-                logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png'
-            },
-            { 
-                symbol: 'DOGE', 
-                pair: 'DOGE/USDT', 
-                price: 0.38, 
-                basePrice: 0.38,
-                logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png'
-            },
-            { 
-                symbol: 'TRX', 
-                pair: 'TRX/USDT', 
-                price: 0.29317, 
-                basePrice: 0.29317,
-                logo: 'https://cryptologos.cc/logos/tron-trx-logo.png'
-            },
-            { 
-                symbol: 'AVAX', 
-                pair: 'AVAX/USDT', 
-                price: 41.25, 
-                basePrice: 41.25,
-                logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png'
-            },
-            { 
-                symbol: 'MATIC', 
-                pair: 'MATIC/USDT', 
-                price: 0.54, 
-                basePrice: 0.54,
-                logo: 'https://cryptologos.cc/logos/polygon-matic-logo.png'
-            }
+            { symbol: 'BTC', name: 'Bitcoin', pair: 'BTC/USDT', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', basePrice: 95640, volatility: 0.015 },
+            { symbol: 'ETH', name: 'Ethereum', pair: 'ETH/USDT', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png', basePrice: 3196, volatility: 0.02 },
+            { symbol: 'TRX', name: 'Tron', pair: 'TRX/USDT', logo: 'https://cryptologos.cc/logos/tron-trx-logo.png', basePrice: 0.29317, volatility: 0.025 },
+            { symbol: 'BNB', name: 'Binance Coin', pair: 'BNB/USDT', logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.png', basePrice: 635, volatility: 0.022 },
+            { symbol: 'SOL', name: 'Solana', pair: 'SOL/USDT', logo: 'https://cryptologos.cc/logos/solana-sol-logo.png', basePrice: 245, volatility: 0.03 },
+            { symbol: 'XRP', name: 'Ripple', pair: 'XRP/USDT', logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png', basePrice: 1.45, volatility: 0.028 },
+            { symbol: 'ADA', name: 'Cardano', pair: 'ADA/USDT', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png', basePrice: 1.05, volatility: 0.032 },
+            { symbol: 'DOGE', name: 'Dogecoin', pair: 'DOGE/USDT', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png', basePrice: 0.38, volatility: 0.04 },
+            { symbol: 'MATIC', name: 'Polygon', pair: 'MATIC/USDT', logo: 'https://cryptologos.cc/logos/polygon-matic-logo.png', basePrice: 0.92, volatility: 0.035 },
+            { symbol: 'DOT', name: 'Polkadot', pair: 'DOT/USDT', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png', basePrice: 7.85, volatility: 0.03 }
         ];
 
-        // Withdrawal Names
         const withdrawalNames = [
-            'User***123', 'John***456', 'Sarah***789', 'Mike***234', 'Emma***567',
-            'David***890', 'Lisa***345', 'Tom***678', 'Anna***901', 'Chris***432',
-            'Maria***765', 'James***098', 'Lucy***321', 'Peter***654', 'Nina***987'
+            'user***123', 'investor***89', 'trader***45', 'crypto***67', 'earn***234',
+            'vip***901', 'member***567', 'profit***890', 'elite***345', 'lucky***678',
+            'star***234', 'winner***789', 'smart***456', 'rich***123', 'boss***890'
         ];
 
-        // Current Exchange
-        let currentExchange = 'OKX';
+        let currentExchange = 'binance';
+        let priceHistory = {};
 
-        // Switch Exchange
-        function switchExchange(exchange) {
-            currentExchange = exchange;
-            const tabs = document.querySelectorAll('.exchange-tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.textContent === exchange) {
-                    tab.classList.add('active');
-                }
-            });
-        }
+        cryptoData.forEach(coin => {
+            priceHistory[coin.symbol] = coin.basePrice;
+        });
 
-        // Update Crypto List
-        function updateCryptoList() {
+        function updateCryptoPrices() {
             const cryptoList = document.getElementById('cryptoList');
             cryptoList.innerHTML = '';
 
-            cryptoData.forEach(crypto => {
-                // Random price fluctuation (-2% to +2%)
-                const fluctuation = (Math.random() - 0.5) * 0.04;
-                crypto.price = crypto.basePrice * (1 + fluctuation);
-                const change = (fluctuation * 100).toFixed(2);
-                const changeClass = fluctuation >= 0 ? 'positive' : 'negative';
-                const changeSign = fluctuation >= 0 ? '+' : '';
+            cryptoData.forEach(coin => {
+                const oldPrice = priceHistory[coin.symbol];
+                const changePercent = (Math.random() - 0.5) * coin.volatility * 100;
+                const currentPrice = oldPrice * (1 + changePercent / 100);
+                
+                priceHistory[coin.symbol] = currentPrice;
 
-                const item = document.createElement('div');
-                item.className = 'crypto-item';
-                item.innerHTML = `
+                const changeClass = changePercent >= 0 ? 'positive' : 'negative';
+                const changeSymbol = changePercent >= 0 ? '+' : '';
+                
+                const cryptoItem = document.createElement('div');
+                cryptoItem.className = 'crypto-item';
+                cryptoItem.innerHTML = `
                     <div class="crypto-left">
-                        <img src="${crypto.logo}" alt="${crypto.symbol}" class="crypto-icon" onerror="this.style.display='none'">
+                        <div class="crypto-icon">
+                            <img src="${coin.logo}" alt="${coin.symbol}" onerror="this.parentElement.innerHTML='${coin.symbol}'">
+                        </div>
                         <div class="crypto-name">
-                            <div class="crypto-symbol">${crypto.symbol}</div>
-                            <div class="crypto-pair">${crypto.pair}</div>
+                            <div class="crypto-symbol">${coin.symbol}</div>
+                            <div class="crypto-pair">${coin.pair}</div>
                         </div>
                     </div>
                     <div class="crypto-right">
-                        <div class="crypto-price">$${crypto.price.toFixed(crypto.price < 1 ? 5 : 2)}</div>
-                        <div class="crypto-change ${changeClass}">${changeSign}${change}%</div>
+                        <div class="crypto-price">${currentPrice.toFixed(currentPrice < 1 ? 5 : 2)}</div>
+                        <div class="crypto-change ${changeClass}">${changeSymbol}${Math.abs(changePercent).toFixed(2)}%</div>
                     </div>
                 `;
-                cryptoList.appendChild(item);
+                
+                cryptoList.appendChild(cryptoItem);
             });
         }
 
-        // Update Top Ticker
-        function updateTopTicker() {
-            const btcData = cryptoData.find(c => c.symbol === 'BTC');
-            const ethData = cryptoData.find(c => c.symbol === 'ETH');
-            const trxData = cryptoData.find(c => c.symbol === 'TRX');
-
-            if (btcData) {
-                const btcChange = ((btcData.price - btcData.basePrice) / btcData.basePrice * 100).toFixed(2);
-                document.getElementById('tickerBTC').textContent = btcData.price.toFixed(2);
-                const btcChangeEl = document.getElementById('tickerBTCChange');
-                btcChangeEl.textContent = (btcChange >= 0 ? '+' : '') + btcChange + '%';
-                btcChangeEl.className = 'ticker-change ' + (btcChange >= 0 ? 'positive' : 'negative');
-            }
-
-            if (ethData) {
-                const ethChange = ((ethData.price - ethData.basePrice) / ethData.basePrice * 100).toFixed(2);
-                document.getElementById('tickerETH').textContent = ethData.price.toFixed(2);
-                const ethChangeEl = document.getElementById('tickerETHChange');
-                ethChangeEl.textContent = (ethChange >= 0 ? '+' : '') + ethChange + '%';
-                ethChangeEl.className = 'ticker-change ' + (ethChange >= 0 ? 'positive' : 'negative');
-            }
-
-            if (trxData) {
-                const trxChange = ((trxData.price - trxData.basePrice) / trxData.basePrice * 100).toFixed(2);
-                document.getElementById('tickerTRX').textContent = trxData.price.toFixed(5);
-                const trxChangeEl = document.getElementById('tickerTRXChange');
-                trxChangeEl.textContent = (trxChange >= 0 ? '+' : '') + trxChange + '%';
-                trxChangeEl.className = 'ticker-change ' + (trxChange >= 0 ? 'positive' : 'negative');
-            }
+        function switchExchange(exchange) {
+            currentExchange = exchange;
+            const tabs = document.querySelectorAll('.exchange-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            updateCryptoPrices();
         }
 
-        // Add Withdrawal Item
-        function addWithdrawalItem() {
+        function generateWithdrawal() {
             const withdrawalList = document.getElementById('withdrawalList');
             const name = withdrawalNames[Math.floor(Math.random() * withdrawalNames.length)];
-            const amount = (Math.random() * 900 + 100).toFixed(2);
-
-            const item = document.createElement('div');
-            item.className = 'withdrawal-item';
-            item.innerHTML = `
+            const amount = (Math.random() * 5000 + 50).toFixed(2);
+            
+            const withdrawalItem = document.createElement('div');
+            withdrawalItem.className = 'withdrawal-item';
+            withdrawalItem.innerHTML = `
                 <div class="withdrawal-user">${name}</div>
                 <div class="withdrawal-amount">$${amount}</div>
             `;
             
-            if (withdrawalList.firstChild) {
-                withdrawalList.insertBefore(item, withdrawalList.firstChild);
-            } else {
-                withdrawalList.appendChild(item);
-            }
-
-            // Remove old items (keep max 5)
-            while (withdrawalList.children.length > 5) {
+            withdrawalList.insertBefore(withdrawalItem, withdrawalList.firstChild);
+            
+            if (withdrawalList.children.length > 5) {
                 withdrawalList.removeChild(withdrawalList.lastChild);
             }
         }
 
-        // Bonus Countdown
-        let bonusTime = 3600; // 60 minutes in seconds
         function updateBonusCountdown() {
-            const minutes = Math.floor(bonusTime / 60);
-            const seconds = bonusTime % 60;
-            document.getElementById('bonusCountdown').textContent = 
-                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            bonusTime--;
-            if (bonusTime < 0) bonusTime = 3600;
+            const now = new Date();
+            const hours = 23 - now.getHours();
+            const minutes = 59 - now.getMinutes();
+            const seconds = 59 - now.getSeconds();
+            
+            const countdownEl = document.getElementById('bonusCountdown');
+            if (countdownEl) {
+                countdownEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+            }
         }
 
-        // Show Popup
-        function showPopup() {
-            const hasVisited = localStorage.getItem('hasVisitedLuxeEarn');
-            if (!hasVisited) {
+        function showPopupOnce() {
+            const hasSeenPopup = localStorage.getItem('luxeearn_popup_seen');
+            
+            if (!hasSeenPopup) {
                 setTimeout(() => {
-                    document.getElementById('popupAnnouncement').classList.add('show');
+                    const popup = document.getElementById('popupAnnouncement');
+                    popup.classList.add('show');
+                    
                     setTimeout(() => {
-                        closePopup();
+                        popup.classList.add('hide');
+                        setTimeout(() => {
+                            popup.classList.remove('show', 'hide');
+                            popup.style.visibility = 'hidden';
+                        }, 500);
                     }, 7000);
                 }, 500);
-                localStorage.setItem('hasVisitedLuxeEarn', 'true');
             }
         }
 
         function closePopup() {
-            document.getElementById('popupAnnouncement').classList.remove('show');
+            const popup = document.getElementById('popupAnnouncement');
+            popup.classList.add('hide');
+            localStorage.setItem('luxeearn_popup_seen', 'true');
+            
+            setTimeout(() => {
+                popup.classList.remove('show', 'hide');
+                popup.style.visibility = 'hidden';
+            }, 500);
         }
 
-        // Sidebar Toggle
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+            sidebar.classList.toggle('active');
+            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
         }
 
         function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').style.display = 'none';
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('active');
+            overlay.style.display = 'none';
         }
 
-        // Utility Functions
         function openPage(url) {
             window.location.href = url;
         }
 
         function copyCode() {
-            const code = document.getElementById('inviteCode').textContent;
+            const code = document.getElementById('inviteCode').innerText;
             navigator.clipboard.writeText(code);
-            showNotification('Invite code copied!');
+            showNotification('Success', 'Invite code copied!');
         }
 
         function copyLink() {
-            const link = document.getElementById('inviteLink').textContent;
+            const link = document.getElementById('inviteLink').innerText;
             navigator.clipboard.writeText(link);
-            showNotification('Invite link copied!');
-        }
-
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
+            showNotification('Success', 'Invite link copied!');
         }
 
         function shareOn(platform) {
-            const link = document.getElementById('inviteLink').textContent;
-            const text = 'Join LuxeEarn and start earning! Use my invite code: ' + document.getElementById('inviteCode').textContent;
+            const link = document.getElementById('inviteLink').innerText;
+            const text = 'Join LuxeEarn and start earning with crypto trading!';
+            let shareUrl = '';
             
-            let url = '';
             switch(platform) {
                 case 'twitter':
-                    url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
                     break;
                 case 'facebook':
-                    url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
                     break;
                 case 'telegram':
-                    url = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
                     break;
                 case 'whatsapp':
-                    url = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
                     break;
                 case 'linkedin':
-                    url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`;
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`;
                     break;
+                case 'instagram':
+                    showNotification('Info', 'Copy the link and share on Instagram!');
+                    copyLink();
+                    return;
             }
-            if (url) window.open(url, '_blank');
+            
+            window.open(shareUrl, '_blank');
+        }
+
+        function showNotification(title, message) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `
+                <div class="notification-title">${title}</div>
+                <div class="notification-message">${message}</div>
+            `;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+                setTimeout(() => {
+                    notification.classList.remove('hide');
+                }, 500);
+            }, 3000);
         }
 
         function handleLogout() {
-            if (confirm('Are you sure you want to logout?')) {
-                window.location.href = 'login.html';
-            }
+            localStorage.clear();
+            window.location.href = 'login.html';
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCryptoList();
-            updateTopTicker();
-            addWithdrawalItem();
-            showPopup();
-            
-            // Update crypto prices every 3 seconds
-            setInterval(() => {
-                updateCryptoList();
-                updateTopTicker();
-            }, 3000);
-            
-            // Add withdrawal every 6 seconds (random timing)
-            setInterval(() => {
-                if (Math.random() > 0.5) {
-                    addWithdrawalItem();
-                }
-            }, 6000);
-            
-            // Update bonus countdown every second
-            setInterval(updateBonusCountdown, 1000);
-            updateBonusCountdown();
-        });
+        updateCryptoPrices();
+        setInterval(updateCryptoPrices, 3000);
+        
+        generateWithdrawal();
+        setInterval(generateWithdrawal, 5000);
+
+        updateBonusCountdown();
+        setInterval(updateBonusCountdown, 1000);
+
+        showPopupOnce();
     </script>
 </body>
 </html>
