@@ -1514,8 +1514,26 @@
             </a>
         </div>
 
+        <div class="price-ticker">
+            <div class="ticker-wrapper" id="tickerWrapper"></div>
+        </div>
+
         <div class="crypto-prices">
             <div class="crypto-header">Live Market Prices</div>
+            
+            <div class="exchange-tabs">
+                <button class="exchange-tab" data-exchange="binance" onclick="switchExchange('binance')">BINANCE</button>
+                <button class="exchange-tab active" data-exchange="okx" onclick="switchExchange('okx')">OKX</button>
+                <button class="exchange-tab" data-exchange="huobi" onclick="switchExchange('huobi')">HUOBI</button>
+                <button class="exchange-tab" data-exchange="coinbase" onclick="switchExchange('coinbase')">COINBASE</button>
+            </div>
+
+            <div class="table-headers">
+                <div class="header-cell">Currency</div>
+                <div class="header-cell">Latest Price($)</div>
+                <div class="header-cell">24h Rise & Down</div>
+            </div>
+
             <div id="cryptoList"></div>
         </div>
 
@@ -1709,7 +1727,47 @@
             'star***234', 'winner***789', 'smart***456', 'rich***123', 'boss***890'
         ];
 
+        let currentExchange = 'okx';
+
+        function updateTicker() {
+            const tickerWrapper = document.getElementById('tickerWrapper');
+            let tickerHTML = '';
+            
+            cryptoData.forEach(coin => {
+                const change = (coin.basePrice / coin.originalPrice - 1) * 100;
+                const changeClass = change >= 0 ? 'positive' : 'negative';
+                const changeSymbol = change >= 0 ? '+' : '';
+                
+                tickerHTML += `
+                    <div class="ticker-item">
+                        <span class="ticker-pair">${coin.pair}</span>
+                        <span class="ticker-price">$${coin.basePrice.toFixed(coin.basePrice < 10 ? 3 : 2)}</span>
+                        <span class="ticker-change ${changeClass}">${changeSymbol}${change.toFixed(2)}%</span>
+                    </div>
+                `;
+            });
+            
+            tickerWrapper.innerHTML = tickerHTML + tickerHTML;
+        }
+
+        function switchExchange(exchange) {
+            currentExchange = exchange;
+            const tabs = document.querySelectorAll('.exchange-tab');
+            tabs.forEach(tab => {
+                if (tab.dataset.exchange === exchange) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
         function updateCryptoPrices() {
+            if (!cryptoData[0].originalPrice) {
+                cryptoData.forEach(coin => {
+                    coin.originalPrice = coin.basePrice;
+                });
+            }
             const cryptoList = document.getElementById('cryptoList');
             cryptoList.innerHTML = '';
 
@@ -1877,8 +1935,12 @@
             window.location.href = 'login.html';
         }
 
+        updateTicker();
         updateCryptoPrices();
-        setInterval(updateCryptoPrices, 3000);
+        setInterval(() => {
+            updateTicker();
+            updateCryptoPrices();
+        }, 3000);
 
         addWithdrawal();
         setInterval(addWithdrawal, 8000);
