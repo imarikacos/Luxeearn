@@ -93,13 +93,10 @@
         .crypto-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
         }
 
         .crypto-name {
@@ -178,16 +175,10 @@
             text-align: center;
         }
 
-        .qr-placeholder {
+        .qr-image {
             width: 200px;
             height: 200px;
             margin: 0 auto;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 14px;
         }
 
         .address-box {
@@ -218,6 +209,20 @@
             color: #fff;
             font-weight: 600;
             cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .recharge-complete-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #FF6B35, #ff5722);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
         .notice-box {
@@ -227,6 +232,61 @@
             padding: 15px;
             font-size: 13px;
             color: #ffaa66;
+            margin-top: 15px;
+        }
+
+        .notification-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notification-popup.show {
+            display: flex;
+        }
+
+        .notification-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 350px;
+            text-align: center;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .notification-icon {
+            margin-bottom: 20px;
+        }
+
+        .notification-icon svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .notification-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .notification-ok-btn {
+            width: 100%;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .bottom-nav {
@@ -270,6 +330,35 @@
         .nav-item.active .nav-label {
             color: #00ffff;
         }
+
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icon {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -284,29 +373,222 @@
 
     <div class="container">
         <div class="crypto-list">
-            <div class="crypto-item" onclick="showDeposit('BNB')">
+            <div class="crypto-item" onclick="showDeposit('BTC', 'Bitcoin')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">BNB</div>
-                    <div class="crypto-name">BNB (Binance Coin)</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#F7931A"/>
+                        <path d="M27 16.5c.3-2-1.2-3.1-3.3-3.8l.7-2.7-1.7-.4-.7 2.6c-.4-.1-.9-.2-1.4-.3l.7-2.7-1.7-.4-.7 2.7c-.4-.1-.7-.2-1.1-.2v-.1l-2.3-.6-.5 1.8s1.3.3 1.2.3c.7.2 .8.7.8 1.1l-1.9 7.7c-.1.3-.4.7-1 .5 0 0-1.2-.3-1.2-.3l-.9 2 2.2.5c.4.1.8.2 1.2.3l-.7 2.8 1.7.4.7-2.7c.5.1 .9.2 1.4.3l-.7 2.7 1.7.4.7-2.8c3 .6 5.2.3 6.2-2.4.8-2.2-.0-3.5-1.6-4.3 1.1-.3 2-1.1 2.2-2.7zm-4 5.6c-.5 2.2-4.1 1-5.3.7l.9-3.8c1.2.3 4.9.9 4.4 3.1zm.5-5.6c-.5 2-3.5.9-4.5.7l.9-3.4c1 .2 4.1.7 3.6 2.7z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">BTC</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                 </svg>
             </div>
 
-            <div class="crypto-item" onclick="showDeposit('TRX')">
+            <div class="crypto-item" onclick="showDeposit('ETH', 'Ethereum')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">TRX</div>
-                    <div class="crypto-name">TRX (Tron)</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#627EEA"/>
+                        <path d="M20 8l-8 13.5L20 25l8-3.5z" fill="white" opacity="0.6"/>
+                        <path d="M20 8v17l8-3.5z" fill="white"/>
+                        <path d="M20 26.5l-8-12L20 32l8-5.5z" fill="white" opacity="0.6"/>
+                        <path d="M20 32V26.5l8-12z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">ETH</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                 </svg>
             </div>
 
-            <div class="crypto-item" onclick="showDeposit('BEP20-USDT')">
+            <div class="crypto-item" onclick="showDeposit('TRX', 'Tron')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">USDT</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#EB0029"/>
+                        <path d="M10 12l18 3-10 15z" fill="white"/>
+                        <path d="M28 15l-10 15 4-20z" fill="white" opacity="0.8"/>
+                    </svg>
+                    <div class="crypto-name">TRX</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('BNB', 'Binance Coin')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#F3BA2F"/>
+                        <path d="M14 16l6-6 6 6-2 2-4-4-4 4zm6 2l2 2-2 2-2-2zm-6 2l6 6 6-6-2-2-4 4-4-4zm10-6l2-2 2 2-2 2zm-16 6l2-2 2 2-2 2z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">BNB</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('SOL', 'Solana')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#14F195"/>
+                        <path d="M11 22l2-2h16l-2 2zm0-6l2-2h16l-2 2zm18 0l-2 2H11l2-2z" fill="#000"/>
+                    </svg>
+                    <div class="crypto-name">SOL</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('XRP', 'Ripple')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#23292F"/>
+                        <path d="M12 12h4l6 6 6-6h4l-10 10zm0 16h4l4-4 4 4h4l-8-8z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">XRP</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('ADA', 'Cardano')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#0033AD"/>
+                        <circle cx="20" cy="20" r="4" fill="white"/>
+                        <circle cx="13" cy="13" r="2" fill="white"/>
+                        <circle cx="27" cy="13" r="2" fill="white"/>
+                        <circle cx="13" cy="27" r="2" fill="white"/>
+                        <circle cx="27" cy="27" r="2" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">ADA</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('DOGE', 'Dogecoin')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#C3A634"/>
+                        <path d="M15 12h5c4 0 7 2.5 7 7s-3 7-7 7h-5zm2 3v8h3c2.5 0 4.5-1.5 4.5-4s-2-4-4.5-4zm-1 3h-5v2h5z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">DOGE</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('MATIC', 'Polygon')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#8247E5"/>
+                        <path d="M24 14l4 2v8l-4 2-4-2v-8zm-8 4l-4 2v6l4 2 4-2v-6zm0-8l-4 2v4l4 2 4-2v-4z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">MATIC</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('DOT', 'Polkadot')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#E6007A"/>
+                        <ellipse cx="20" cy="20" rx="7" ry="12" fill="white"/>
+                        <circle cx="20" cy="12" r="2.5" fill="#E6007A"/>
+                        <circle cx="20" cy="20" r="2.5" fill="#E6007A"/>
+                        <circle cx="20" cy="28" r="2.5" fill="#E6007A"/>
+                    </svg>
+                    <div class="crypto-name">DOT</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('AVAX', 'Avalanche')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#E84142"/>
+                        <path d="M20 10l7 12h-14zm-4 14h8l2 4H14z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">AVAX</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('LINK', 'Chainlink')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#375BD2"/>
+                        <path d="M20 10l-2 1v6l-6 3v8l8 4 8-4v-8l-6-3v-6zm0 12l-4 2v4l4 2 4-2v-4z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">LINK</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('UNI', 'Uniswap')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#FF007A"/>
+                        <path d="M22 10c0 2-1 4-3 5 3 1 5 3 5 6 0 4-3 7-7 7-3 0-6-2-7-5h3c1 2 2 3 4 3 2 0 4-2 4-4 0-3-2-4-5-4v-2c3 0 4-2 4-4 0-2-1-3-3-3-2 0-3 1-3 3H11c0-3 3-6 6-6 4 0 5 3 5 4z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">UNI</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('LTC', 'Litecoin')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#345D9D"/>
+                        <path d="M16 12v8l-3 1 1 2 2-1v6h12v-3h-9v-4l3-1-1-2-2 1v-7z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">LTC</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('ATOM', 'Cosmos')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#2E3148"/>
+                        <circle cx="20" cy="20" r="3" fill="white"/>
+                        <ellipse cx="20" cy="20" rx="14" ry="6" fill="none" stroke="white" stroke-width="1.5" transform="rotate(45 20 20)"/>
+                        <ellipse cx="20" cy="20" rx="14" ry="6" fill="none" stroke="white" stroke-width="1.5" transform="rotate(-45 20 20)"/>
+                        <ellipse cx="20" cy="20" rx="14" ry="6" fill="none" stroke="white" stroke-width="1.5"/>
+                    </svg>
+                    <div class="crypto-name">ATOM</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('BEP20-USDT', 'BEP20-USDT')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M21 14h-2v-2h-6v2h-2v2h2v8h-2v2h2v2h6v-2h2v-2h-2v-8h2v-2zm-4 2v8h-2v-8h2z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#F3BA2F"/>
+                    </svg>
                     <div class="crypto-name">BEP20-USDT</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
@@ -314,9 +596,13 @@
                 </svg>
             </div>
 
-            <div class="crypto-item" onclick="showDeposit('TRC20-USDT')">
+            <div class="crypto-item" onclick="showDeposit('TRC20-USDT', 'TRC20-USDT')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">USDT</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M21 14h-2v-2h-6v2h-2v2h2v8h-2v2h2v2h6v-2h2v-2h-2v-8h2v-2zm-4 2v8h-2v-8h2z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#FF0013"/>
+                    </svg>
                     <div class="crypto-name">TRC20-USDT</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
@@ -324,20 +610,97 @@
                 </svg>
             </div>
 
-            <div class="crypto-item" onclick="showDeposit('ETH')">
+            <div class="crypto-item" onclick="showDeposit('POLYGON-USDC', 'POLYGON-USDC')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">ETH</div>
-                    <div class="crypto-name">ETH (Ethereum)</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#2775CA"/>
+                        <path d="M20 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm0 17c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#8247E5"/>
+                    </svg>
+                    <div class="crypto-name">POLYGON-USDC</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                 </svg>
             </div>
 
-            <div class="crypto-item" onclick="showDeposit('POLYGON-USDT')">
+            <div class="crypto-item" onclick="showDeposit('BEP20-USDC', 'BEP20-USDC')">
                 <div class="crypto-left">
-                    <div class="crypto-icon">USDT</div>
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#2775CA"/>
+                        <path d="M20 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm0 17c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#F3BA2F"/>
+                    </svg>
+                    <div class="crypto-name">BEP20-USDC</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('POLYGON-USDT', 'POLYGON-USDT')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M21 14h-2v-2h-6v2h-2v2h2v8h-2v2h2v2h6v-2h2v-2h-2v-8h2v-2zm-4 2v8h-2v-8h2z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#8247E5"/>
+                    </svg>
                     <div class="crypto-name">POLYGON-USDT</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('ETH-USDT', 'ETH-USDT')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#26A17B"/>
+                        <path d="M21 14h-2v-2h-6v2h-2v2h2v8h-2v2h2v2h6v-2h2v-2h-2v-8h2v-2zm-4 2v8h-2v-8h2z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#627EEA"/>
+                    </svg>
+                    <div class="crypto-name">ETH-USDT</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('ETH-USDC', 'ETH-USDC')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#2775CA"/>
+                        <path d="M20 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm0 17c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#627EEA"/>
+                    </svg>
+                    <div class="crypto-name">ETH-USDC</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('POLYGON', 'Polygon')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#8247E5"/>
+                        <path d="M24 14l4 2v8l-4 2-4-2v-8zm-8 4l-4 2v6l4 2 4-2v-6zm0-8l-4 2v4l4 2 4-2v-4z" fill="white"/>
+                    </svg>
+                    <div class="crypto-name">POLYGON</div>
+                </div>
+                <svg class="arrow-icon" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="crypto-item" onclick="showDeposit('ETH-PYUSD', 'ETH-PYUSD')">
+                <div class="crypto-left">
+                    <svg class="crypto-icon" viewBox="0 0 40 40">
+                        <circle cx="20" cy="20" r="20" fill="#003087"/>
+                        <path d="M16 12h6c3 0 5 2 5 4.5 0 2-1.5 3.5-3.5 4v.5c2.5.5 4.5 2 4.5 4.5 0 3-2.5 5-6 5h-6zm3 3v4h2.5c1.5 0 2.5-1 2.5-2s-1-2-2.5-2zm0 7v4h3c2 0 3-1 3-2s-1-2-3-2z" fill="white"/>
+                        <circle cx="30" cy="10" r="7" fill="#627EEA"/>
+                    </svg>
+                    <div class="crypto-name">ETH-PYUSD</div>
                 </div>
                 <svg class="arrow-icon" viewBox="0 0 24 24">
                     <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
@@ -349,7 +712,7 @@
     <div class="deposit-modal" id="depositModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title" id="modalCryptoName">Deposit BNB</div>
+                <div class="modal-title" id="modalCryptoName">Deposit</div>
                 <button class="close-btn" onclick="closeDeposit()">
                     <svg viewBox="0 0 24 24">
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -358,22 +721,44 @@
             </div>
 
             <div class="qr-container">
-                <div class="qr-placeholder">QR Code Here</div>
+                <img id="qrImage" src="" alt="QR Code" class="qr-image">
             </div>
 
             <div class="address-box">
                 <div class="address-label">Deposit Address</div>
-                <div class="address-text" id="depositAddress">0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb</div>
+                <div class="address-text" id="depositAddress"></div>
                 <button class="copy-address-btn" onclick="copyAddress()">Copy Address</button>
+                <button class="recharge-complete-btn" onclick="showNotification()">RECHARGE COMPLETE</button>
             </div>
 
             <div class="notice-box">
-                <strong>Important:</strong><br>
-                • Minimum deposit: 10 USDT<br>
-                • Network fee applies<br>
-                • Funds will be credited after 3 confirmations
+                <strong>Warm reminder:</strong><br>
+                • Copy the address above or scan the QR code<br>
+                • Minimum deposit: 2 USDT<br>
+                • Funds will arrive in your account in about 1 to 3 minutes after recharging<br>
+                • If it does not arrive for a long time, please refresh the page or contact customer service
             </div>
         </div>
+    </div>
+
+    <div class="notification-popup" id="notificationPopup">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                    <circle cx="30" cy="30" r="28" stroke="#00ffff" stroke-width="4"/>
+                    <path d="M30 18V32M30 38V39" stroke="#00ffff" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <p class="notification-text">Your recharge will take 2 to 3 minutes to reflect in your account</p>
+            <button class="notification-ok-btn" onclick="goToMe()">OK</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="white">
+            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+        </svg>
+        <span id="toastMessage">Copied!</span>
     </div>
 
     <div class="bottom-nav">
@@ -410,8 +795,42 @@
     </div>
 
     <script>
-        function showDeposit(crypto) {
-            document.getElementById('modalCryptoName').textContent = `Deposit ${crypto}`;
+        const cryptoData = {
+            'BTC': { address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', qr: 'qr-codes/qr-btc.png' },
+            'ETH': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-eth.png' },
+            'TRX': { address: 'TGKCEncN2MAu5nCSjcPrQHd8YrgLCXi...', qr: 'qr-codes/qr-trx.png' },
+            'BNB': { address: 'bnb1grpf0955h0ykzq3ar5nmum7y6gdfl6lxfn46h2', qr: 'qr-codes/qr-bnb.png' },
+            'SOL': { address: '7EcDhSYGxXyscszYEp35KHN8vvw3svAuLKTzXwCFLtV', qr: 'qr-codes/qr-sol.png' },
+            'XRP': { address: 'rN7n7otQDd6FczFgLdlqtyMVrn3NnrcVc', qr: 'qr-codes/qr-xrp.png' },
+            'ADA': { address: 'addr1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', qr: 'qr-codes/qr-ada.png' },
+            'DOGE': { address: 'DH5yaieqoZN36fDVciNyRueRGvGLR3mr7L', qr: 'qr-codes/qr-doge.png' },
+            'MATIC': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-matic.png' },
+            'DOT': { address: '15oF4uVJwmo4TdGW7VfQxNLavjCXviqxT9S1MgbjMNHr6Sp5', qr: 'qr-codes/qr-dot.png' },
+            'AVAX': { address: 'X-avax1xy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', qr: 'qr-codes/qr-avax.png' },
+            'LINK': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-link.png' },
+            'UNI': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-uni.png' },
+            'LTC': { address: 'ltc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', qr: 'qr-codes/qr-ltc.png' },
+            'ATOM': { address: 'cosmos1xy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', qr: 'qr-codes/qr-atom.png' },
+            'BEP20-USDT': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-bep20-usdt.png' },
+            'TRC20-USDT': { address: 'TGKCEncN2MAu5nCSjcPrQHd8YrgLCXiGVT', qr: 'qr-codes/qr-trc20-usdt.png' },
+            'POLYGON-USDC': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-polygon-usdc.png' },
+            'BEP20-USDC': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-bep20-usdc.png' },
+            'POLYGON-USDT': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-polygon-usdt.png' },
+            'ETH-USDT': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-eth-usdt.png' },
+            'ETH-USDC': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-eth-usdc.png' },
+            'POLYGON': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-polygon.png' },
+            'ETH-PYUSD': { address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb', qr: 'qr-codes/qr-eth-pyusd.png' }
+        };
+
+        function showDeposit(crypto, fullName) {
+            const data = cryptoData[crypto];
+            if (!data) {
+                console.error('Crypto data not found for:', crypto);
+                return;
+            }
+            document.getElementById('modalCryptoName').textContent = `${crypto}`;
+            document.getElementById('depositAddress').textContent = data.address;
+            document.getElementById('qrImage').src = data.qr;
             document.getElementById('depositModal').classList.add('show');
         }
 
@@ -419,10 +838,57 @@
             document.getElementById('depositModal').classList.remove('show');
         }
 
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
         function copyAddress() {
             const address = document.getElementById('depositAddress').textContent;
-            navigator.clipboard.writeText(address);
-            alert('Address copied to clipboard!');
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(address).then(() => {
+                    showToast('Address copied!');
+                }).catch(() => {
+                    fallbackCopy(address);
+                });
+            } else {
+                fallbackCopy(address);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                textArea.remove();
+                showToast('Address copied!');
+            } catch (err) {
+                textArea.remove();
+                showToast('Failed to copy');
+            }
+        }
+
+        function showNotification() {
+            document.getElementById('notificationPopup').classList.add('show');
+        }
+
+        function goToMe() {
+            window.location.href = 'me.html';
         }
     </script>
 </body>
