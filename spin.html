@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxeEarn - Lucky Spin</title>
+    <title>Lucky Spin - LuxeEarn</title>
+    
+    <link rel="icon" type="image/png" href="lexearn.png">
+    <link rel="apple-touch-icon" href="lexearn.png">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
@@ -16,128 +25,419 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .bg-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 500px;
+            width: 100%;
+        }
+
         .close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 0, 0, 0.2);
+            top: 10px;
+            right: 10px;
+            width: 45px;
+            height: 45px;
+            background: rgba(50, 50, 50, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border: none;
+            z-index: 100;
         }
+
         .close-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: #ff6666;
+            width: 24px;
+            height: 24px;
+            fill: #fff;
         }
+
         .spin-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
+
         .remaining-times {
-            font-size: 16px;
-            color: #00ffff;
+            font-size: 18px;
+            color: #fff;
+            font-weight: 500;
         }
+
+        .remaining-times span {
+            color: #ff6666;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
         .wheel-container {
             position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto 40px;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto 30px;
+            aspect-ratio: 1;
         }
-        .wheel {
+
+        .wheel-outer {
+            position: relative;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: conic-gradient(
-                #ff0000 0deg 45deg,
-                #ff8800 45deg 90deg,
-                #ffff00 90deg 135deg,
-                #00ff00 135deg 180deg,
-                #00ffff 180deg 225deg,
-                #0088ff 225deg 270deg,
-                #8800ff 270deg 315deg,
-                #ff00ff 315deg 360deg
-            );
-            border: 8px solid #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            background: linear-gradient(135deg, #6644ff 0%, #aa66ff 50%, #8855ff 100%);
+            padding: 15px;
+            box-shadow: 0 10px 40px rgba(102, 68, 255, 0.5);
         }
-        .spin-btn {
+
+        .wheel-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .dot.yellow {
+            background: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .wheel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #f5f0ff;
+            overflow: hidden;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .wheel-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .segment-content {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            font-weight: 700;
+            color: #1a0033;
+            transform: rotate(22.5deg);
+        }
+
+        .amount {
+            font-size: 18px;
+            display: block;
+        }
+
+        .currency {
+            font-size: 12px;
+            opacity: 0.7;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .center-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff6b35, #ff00ff);
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
+            background: linear-gradient(135deg, #ff8844 0%, #ff6644 50%, #ff4422 100%);
+            border: 5px solid #fff;
+            box-shadow: 0 5px 20px rgba(255, 68, 68, 0.5);
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-button:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .center-button::before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .pointer {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 20px solid #ff6644;
+            z-index: 5;
+        }
+
+        .requirement-text {
+            text-align: center;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .requirement-text .amount-highlight {
+            color: #ff6666;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .share-btn {
+            width: 100%;
+            max-width: 300px;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a4a6a, #5a5a7a);
             border: none;
+            border-radius: 12px;
             color: #fff;
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 0, 255, 0.5);
-        }
-        .spin-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
-        .requirement-text {
-            text-align: center;
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 20px;
-        }
-        .share-btn {
-            width: 200px;
-            padding: 12px;
-            background: linear-gradient(135deg, #00ff88, #00ffaa);
-            border: none;
-            border-radius: 10px;
-            color: #1a0033;
-            font-weight: 700;
-            cursor: pointer;
             margin: 0 auto;
             display: block;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background: linear-gradient(135deg, #5a5a7a, #6a6a8a);
+            transform: translateY(-2px);
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
     </style>
 </head>
 <body>
-    <button class="close-btn" onclick="window.location.href='index.html'">
+    <div class="bg-blur"></div>
+    
+    <button class="close-btn" onclick="goBack()">
         <svg viewBox="0 0 24 24">
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
         </svg>
     </button>
-    <div class="spin-header">
-        <h2 style="margin-bottom: 10px;">Lucky Spin</h2>
-        <div class="remaining-times">Remaining times: 1</div>
+
+    <div class="container">
+        <div class="spin-header">
+            <div class="remaining-times">Remaining times <span id="remainingSpins">1</span></div>
+        </div>
+
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <div class="wheel-outer">
+                <div class="wheel-dots" id="wheelDots"></div>
+                <div class="wheel" id="wheel">
+                    <div class="wheel-segment" style="transform: rotate(0deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
+                        <div class="segment-content">
+                            <span class="amount">0.10</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(45deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
+                        <div class="segment-content">
+                            <span class="amount">0.50</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(90deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
+                        <div class="segment-content">
+                            <span class="amount">8.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(135deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
+                        <div class="segment-content">
+                            <span class="amount">66.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(180deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
+                        <div class="segment-content">
+                            <span class="amount">33333.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(225deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
+                        <div class="segment-content">
+                            <span class="amount">6666.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(270deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
+                        <div class="segment-content">
+                            <span class="amount">11.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                    <div class="wheel-segment" style="transform: rotate(315deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
+                        <div class="segment-content">
+                            <span class="amount">333.00</span>
+                            <span class="currency">(USDT)</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="center-button" onclick="spinWheel()"></button>
+            </div>
+        </div>
+
+        <div class="requirement-text">
+            Invite friends to recharge <span class="amount-highlight">100 (USDT)</span> Get a<br>chance
+        </div>
+
+        <button class="share-btn" onclick="shareWithFriends()">Share</button>
     </div>
-    <div class="wheel-container">
-        <div class="wheel" id="wheel"></div>
-        <button class="spin-btn" onclick="spinWheel()">SPIN</button>
-    </div>
-    <div class="requirement-text">
-        Invite friends to recharge 100 USDT<br>Get a chance to spin
-    </div>
-    <button class="share-btn">Share with Friends</button>
+
     <script>
+        const prizes = [
+            { angle: 0, amount: '0.10', name: '0.10 USDT' },
+            { angle: 45, amount: '0.50', name: '0.50 USDT' },
+            { angle: 90, amount: '8.00', name: '8.00 USDT' },
+            { angle: 135, amount: '66.00', name: '66.00 USDT' },
+            { angle: 180, amount: '33333.00', name: '33333.00 USDT' },
+            { angle: 225, amount: '6666.00', name: '6666.00 USDT' },
+            { angle: 270, amount: '11.00', name: '11.00 USDT' },
+            { angle: 315, amount: '333.00', name: '333.00 USDT' }
+        ];
+
         let isSpinning = false;
+        let totalRotation = 0;
+
+        function createDots() {
+            const dotsContainer = document.getElementById('wheelDots');
+            const numDots = 12;
+            
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                const angle = (i * 360) / numDots;
+                const radius = 50;
+                const x = 50 + radius * Math.cos((angle - 90) * Math.PI / 180);
+                const y = 50 + radius * Math.sin((angle - 90) * Math.PI / 180);
+                
+                dot.className = i % 3 === 0 ? 'dot yellow' : 'dot';
+                dot.style.left = `${x}%`;
+                dot.style.top = `${y}%`;
+                dot.style.transform = 'translate(-50%, -50%)';
+                
+                dotsContainer.appendChild(dot);
+            }
+        }
+
         function spinWheel() {
             if (isSpinning) return;
+            
+            const remainingSpins = parseInt(document.getElementById('remainingSpins').textContent);
+            if (remainingSpins <= 0) {
+                alert('No remaining spins! Invite friends to get more chances.');
+                return;
+            }
+            
             isSpinning = true;
             const wheel = document.getElementById('wheel');
-            const randomDegree = Math.floor(Math.random() * 360) + 1800;
-            wheel.style.transform = `rotate(${randomDegree}deg)`;
+            
+            const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
+            const targetPrize = prizes[randomPrizeIndex];
+            
+            const spinRotations = 5 + Math.random() * 3;
+            const targetAngle = 360 - targetPrize.angle + 22.5;
+            totalRotation = (360 * spinRotations) + targetAngle;
+            
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+            
             setTimeout(() => {
-                alert('Congratulations! You won 88.00 USDT!');
+                alert(`🎉 Congratulations! You won ${targetPrize.name}!`);
+                document.getElementById('remainingSpins').textContent = remainingSpins - 1;
                 isSpinning = false;
-            }, 3000);
+            }, 4000);
         }
+
+        function shareWithFriends() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'LuxeEarn - Lucky Spin',
+                    text: 'Join LuxeEarn and spin to win USDT rewards!',
+                    url: window.location.origin
+                }).catch(() => {
+                    copyShareLink();
+                });
+            } else {
+                copyShareLink();
+            }
+        }
+
+        function copyShareLink() {
+            const userEmail = localStorage.getItem('userEmail') || 'guest';
+            const referralLink = `${window.location.origin}?ref=${btoa(userEmail)}`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(referralLink).then(() => {
+                    alert('Referral link copied to clipboard!');
+                });
+            } else {
+                alert(`Your referral link: ${referralLink}`);
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'index6.html';
+        }
+
+        window.onload = function() {
+            const userEmail = localStorage.getItem('userEmail');
+            if (!userEmail) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            createDots();
+        };
     </script>
 </body>
 </html>
