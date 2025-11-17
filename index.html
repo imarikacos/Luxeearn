@@ -224,58 +224,6 @@
             font-weight: 500;
         }
 
-        .price-ticker {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px 0;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .ticker-wrapper {
-            display: flex;
-            animation: tickerScroll 30s linear infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 40px;
-            padding: 0 20px;
-        }
-
-        .ticker-pair {
-            font-weight: 700;
-            font-size: 13px;
-            color: #fff;
-            margin-right: 10px;
-        }
-
-        .ticker-price {
-            font-size: 14px;
-            color: #fff;
-            margin-right: 10px;
-        }
-
-        .ticker-change {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .ticker-change.positive {
-            color: #22c55e;
-        }
-
-        .ticker-change.negative {
-            color: #ef4444;
-        }
-
         .crypto-prices {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
@@ -328,7 +276,7 @@
 
         .table-headers {
             display: grid;
-            grid-template-columns: 2fr 2fr 2fr;
+            grid-template-columns: 2fr 2fr 2fr 0.5fr;
             padding: 8px 10px;
             margin-bottom: 10px;
             font-size: 11px;
@@ -344,14 +292,10 @@
             text-align: left;
         }
 
-        .header-cell:last-child {
-            text-align: right;
-        }
-
         .crypto-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr 0.5fr;
             align-items: center;
-            justify-content: space-between;
             padding: 12px;
             margin-bottom: 10px;
             background: rgba(0, 0, 0, 0.2);
@@ -397,15 +341,10 @@
             color: #888;
         }
 
-        .crypto-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .crypto-price {
             font-weight: 700;
             font-size: 16px;
+            text-align: center;
         }
 
         .crypto-change {
@@ -413,7 +352,6 @@
             border-radius: 8px;
             font-weight: 700;
             font-size: 13px;
-            min-width: 70px;
             text-align: center;
             transition: all 0.5s ease;
         }
@@ -426,6 +364,101 @@
         .crypto-change.negative {
             background: #ef4444;
             color: #fff;
+        }
+
+        .pick-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .pick-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .pick-btn.show-pick::after {
+            content: 'Pick';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #22c55e;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+            white-space: nowrap;
+            animation: pickPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pickPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .price-ticker-bottom {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 0;
+            margin-top: 15px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .ticker-wrapper-bottom {
+            display: flex;
+            animation: tickerScrollBottom 40s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes tickerScrollBottom {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item-bottom {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 40px;
+            padding: 0 20px;
+        }
+
+        .ticker-pair-bottom {
+            font-weight: 700;
+            font-size: 12px;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .ticker-price-bottom {
+            font-size: 13px;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .ticker-change-bottom {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .ticker-change-bottom.positive {
+            color: #22c55e;
+        }
+
+        .ticker-change-bottom.negative {
+            color: #ef4444;
         }
 
         .floating-bonus {
@@ -577,7 +610,8 @@
         .user-email {
             font-size: 14px;
             color: #fff;
-            margin-top: 5px;
+            margin-top: 8px;
+            opacity: 0.9;
         }
 
         .logout-btn {
@@ -807,91 +841,6 @@
 
         .details-btn:hover {
             background: rgba(0, 0, 0, 0.5);
-        }
-
-        .announcement-banner {
-            background: linear-gradient(90deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-
-        .announcement-text {
-            animation: scroll 20s linear infinite;
-            white-space: nowrap;
-            font-size: 14px;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        .task-preview {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .task-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .task-card.locked::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        .lock-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            width: 40px;
-            height: 40px;
-            fill: #ff00ff;
-        }
-
-        .task-image {
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-        }
-
-        .task-info {
-            text-align: center;
-        }
-
-        .task-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .task-reward {
-            font-size: 16px;
-            font-weight: 700;
-            color: #22c55e;
         }
 
         .bottom-nav {
@@ -1252,9 +1201,6 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            .task-preview {
-                grid-template-columns: 1fr;
-            }
             .notification {
                 right: 10px;
                 left: 10px;
@@ -1528,9 +1474,14 @@
                 <div class="header-cell">Currency</div>
                 <div class="header-cell">Latest Price($)</div>
                 <div class="header-cell">24h Rise & Down</div>
+                <div class="header-cell"></div>
             </div>
 
             <div id="cryptoList"></div>
+
+            <div class="price-ticker-bottom">
+                <div class="ticker-wrapper-bottom" id="tickerWrapperBottom"></div>
+            </div>
         </div>
 
         <div class="withdrawal-logs">
@@ -1677,6 +1628,26 @@
                 <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
             </div>
         </div>
+
+        <div class="main-footer">
+            <div class="footer-logo">
+                <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'">
+            </div>
+            <div class="footer-text">
+                LuxeEarn is your trusted platform for cryptocurrency trading and investment. 
+                Join thousands of users earning passive income through our intelligent quantitative trading system.
+                Trade safely, earn consistently, and build your financial future with us.
+            </div>
+            <div class="footer-links">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="terms.html" class="footer-link">Terms of Service</a>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 LuxeEarn. All Rights Reserved. | Secure Trading Platform
+            </div>
+        </div>
     </div>
 
     <div class="bottom-nav">
@@ -1707,6 +1678,53 @@
     </div>
 
     <script>
+        // Authentication check - redirect if not logged in or session expired
+        function checkAuth() {
+            const userData = localStorage.getItem('luxeEarnUser');
+            
+            if (!userData) {
+                window.location.href = 'login.html';
+                return false;
+            }
+
+            try {
+                const user = JSON.parse(userData);
+                const loginTime = user.loginTime || user.registrationDate;
+                
+                if (!loginTime) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                // Check if 24 hours have passed
+                const currentTime = new Date().getTime();
+                const loginTimestamp = new Date(loginTime).getTime();
+                const hoursPassed = (currentTime - loginTimestamp) / (1000 * 60 * 60);
+                
+                if (hoursPassed >= 24) {
+                    localStorage.removeItem('luxeEarnUser');
+                    localStorage.removeItem('rememberMe');
+                    localStorage.removeItem('luxeearn_popup_seen');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                // Display user email
+                const userEmailEl = document.getElementById('userEmail');
+                if (userEmailEl && user.email) {
+                    userEmailEl.textContent = user.email;
+                }
+
+                return true;
+            } catch (e) {
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        // Run auth check on page load
+        checkAuth();
+
         const cryptoData = [
             { symbol: 'BTC', name: 'Bitcoin', pair: 'BTC/USDT', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', basePrice: 95640, volatility: 0.015 },
             { symbol: 'ETH', name: 'Ethereum', pair: 'ETH/USDT', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png', basePrice: 3196, volatility: 0.02 },
@@ -1717,7 +1735,12 @@
             { symbol: 'ADA', name: 'Cardano', pair: 'ADA/USDT', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png', basePrice: 1.05, volatility: 0.032 },
             { symbol: 'DOGE', name: 'Dogecoin', pair: 'DOGE/USDT', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png', basePrice: 0.38, volatility: 0.04 },
             { symbol: 'MATIC', name: 'Polygon', pair: 'MATIC/USDT', logo: 'https://cryptologos.cc/logos/polygon-matic-logo.png', basePrice: 0.92, volatility: 0.035 },
-            { symbol: 'DOT', name: 'Polkadot', pair: 'DOT/USDT', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png', basePrice: 7.85, volatility: 0.03 }
+            { symbol: 'DOT', name: 'Polkadot', pair: 'DOT/USDT', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png', basePrice: 7.85, volatility: 0.03 },
+            { symbol: 'AVAX', name: 'Avalanche', pair: 'AVAX/USDT', logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png', basePrice: 42.5, volatility: 0.035 },
+            { symbol: 'LINK', name: 'Chainlink', pair: 'LINK/USDT', logo: 'https://cryptologos.cc/logos/chainlink-link-logo.png', basePrice: 18.75, volatility: 0.03 },
+            { symbol: 'UNI', name: 'Uniswap', pair: 'UNI/USDT', logo: 'https://cryptologos.cc/logos/uniswap-uni-logo.png', basePrice: 12.85, volatility: 0.032 },
+            { symbol: 'LTC', name: 'Litecoin', pair: 'LTC/USDT', logo: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png', basePrice: 105.3, volatility: 0.025 },
+            { symbol: 'ATOM', name: 'Cosmos', pair: 'ATOM/USDT', logo: 'https://cryptologos.cc/logos/cosmos-atom-logo.png', basePrice: 11.25, volatility: 0.033 }
         ];
 
         const withdrawalNames = [
@@ -1746,6 +1769,7 @@
 
                 const changeClass = changePercent >= 0 ? 'positive' : 'negative';
                 const changeSymbol = changePercent >= 0 ? '+' : '';
+                const showPick = changePercent >= 0;
                 
                 const cryptoItem = document.createElement('div');
                 cryptoItem.className = 'crypto-item';
@@ -1759,14 +1783,38 @@
                             <div class="crypto-pair">${coin.pair}</div>
                         </div>
                     </div>
-                    <div class="crypto-right">
-                        <div class="crypto-price">${currentPrice.toFixed(currentPrice < 1 ? 5 : 2)}</div>
-                        <div class="crypto-change ${changeClass}">${changeSymbol}${Math.abs(changePercent).toFixed(2)}%</div>
-                    </div>
+                    <div class="crypto-price">${currentPrice.toFixed(currentPrice < 1 ? 5 : 2)}</div>
+                    <div class="crypto-change ${changeClass}">${changeSymbol}${Math.abs(changePercent).toFixed(2)}%</div>
+                    <a href="recharge.html" class="pick-btn ${showPick ? 'show-pick' : ''}">+</a>
                 `;
                 
                 cryptoList.appendChild(cryptoItem);
             });
+
+            updateBottomTicker();
+        }
+
+        function updateBottomTicker() {
+            const tickerWrapperBottom = document.getElementById('tickerWrapperBottom');
+            let tickerHTML = '';
+            
+            cryptoData.forEach(coin => {
+                const price = priceHistory[coin.symbol];
+                const changePercent = (Math.random() - 0.5) * coin.volatility * 100;
+                const changeClass = changePercent >= 0 ? 'positive' : 'negative';
+                const changeSymbol = changePercent >= 0 ? '+' : '';
+                
+                tickerHTML += `
+                    <div class="ticker-item-bottom">
+                        <span class="ticker-pair-bottom">${coin.pair}</span>
+                        <span class="ticker-price-bottom">$${price.toFixed(price < 1 ? 5 : 2)}</span>
+                        <span class="ticker-change-bottom ${changeClass}">${changeSymbol}${Math.abs(changePercent).toFixed(2)}%</span>
+                    </div>
+                `;
+            });
+            
+            // Duplicate for seamless loop
+            tickerWrapperBottom.innerHTML = tickerHTML + tickerHTML;
         }
 
         function switchExchange(exchange) {
@@ -1916,7 +1964,9 @@
         }
 
         function handleLogout() {
-            localStorage.clear();
+            localStorage.removeItem('luxeEarnUser');
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('luxeearn_popup_seen');
             window.location.href = 'login.html';
         }
 
