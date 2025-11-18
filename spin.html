@@ -23,10 +23,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .bg-blur {
@@ -45,10 +46,11 @@
             z-index: 10;
             max-width: 500px;
             width: 100%;
+            margin-top: 40px;
         }
 
         .close-btn {
-            position: absolute;
+            position: fixed;
             top: 10px;
             right: 10px;
             width: 45px;
@@ -145,27 +147,29 @@
             left: 50%;
             transform-origin: 0% 0%;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
             text-align: center;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
         }
 
         .segment-content {
             position: absolute;
-            top: 20%;
-            left: 20%;
+            top: 25%;
+            left: 15%;
             font-weight: 700;
             color: #1a0033;
-            transform: rotate(22.5deg);
+            white-space: nowrap;
         }
 
         .amount {
-            font-size: 18px;
+            font-size: 16px;
             display: block;
+            line-height: 1.2;
         }
 
         .currency {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.7;
             display: block;
             margin-top: 2px;
@@ -240,7 +244,7 @@
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
-            margin: 0 auto;
+            margin: 0 auto 30px;
             display: block;
             transition: all 0.3s ease;
         }
@@ -250,9 +254,152 @@
             transform: translateY(-2px);
         }
 
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            min-width: 280px;
+            max-width: 90%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .notification-content {
+            text-align: center;
+        }
+
+        .notification-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .notification-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a0033;
+            margin-bottom: 10px;
+        }
+
+        .notification-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .notification-btn {
+            background: linear-gradient(135deg, #6644ff, #8855ff);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .notification-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Transaction History Styles */
+        .transaction-section {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .transaction-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .transaction-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-amount {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .transaction-amount.win {
+            color: #4ade80;
+        }
+
+        .transaction-amount.lose {
+            color: #f87171;
+        }
+
+        .transaction-date {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .transaction-status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .no-transactions {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
         @keyframes celebrate {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
+        }
+
+        /* Scrollbar Styles */
+        .transaction-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .transaction-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .transaction-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -274,56 +421,7 @@
             <div class="pointer"></div>
             <div class="wheel-outer">
                 <div class="wheel-dots" id="wheelDots"></div>
-                <div class="wheel" id="wheel">
-                    <div class="wheel-segment" style="transform: rotate(0deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
-                        <div class="segment-content">
-                            <span class="amount">0.10</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(45deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
-                        <div class="segment-content">
-                            <span class="amount">0.50</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(90deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
-                        <div class="segment-content">
-                            <span class="amount">8.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(135deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
-                        <div class="segment-content">
-                            <span class="amount">66.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(180deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
-                        <div class="segment-content">
-                            <span class="amount">33333.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(225deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
-                        <div class="segment-content">
-                            <span class="amount">6666.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(270deg) skew(45deg); background: linear-gradient(135deg, #e8e0ff, #f0e8ff);">
-                        <div class="segment-content">
-                            <span class="amount">11.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                    <div class="wheel-segment" style="transform: rotate(315deg) skew(45deg); background: linear-gradient(135deg, #d8d0ff, #e0d8ff);">
-                        <div class="segment-content">
-                            <span class="amount">333.00</span>
-                            <span class="currency">(USDT)</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="wheel" id="wheel"></div>
                 <button class="center-button" onclick="spinWheel()"></button>
             </div>
         </div>
@@ -333,13 +431,30 @@
         </div>
 
         <button class="share-btn" onclick="shareWithFriends()">Share</button>
+
+        <div class="transaction-section">
+            <div class="transaction-header">Transaction History</div>
+            <div class="transaction-list" id="transactionList">
+                <div class="no-transactions">No transactions yet. Spin to win!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Template -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <div class="notification-icon" id="notificationIcon">🎉</div>
+            <div class="notification-title" id="notificationTitle">Congratulations!</div>
+            <div class="notification-message" id="notificationMessage">You won 6666.00 USDT!</div>
+            <button class="notification-btn" onclick="closeNotification()">OK</button>
+        </div>
     </div>
 
     <script>
         const prizes = [
             { angle: 0, amount: '0.10', name: '0.10 USDT' },
             { angle: 45, amount: '0.50', name: '0.50 USDT' },
-            { angle: 90, amount: '8.00', name: '8.00 USDT' },
+            { angle: 90, amount: '0.00', name: '0 USDT' },
             { angle: 135, amount: '66.00', name: '66.00 USDT' },
             { angle: 180, amount: '33333.00', name: '33333.00 USDT' },
             { angle: 225, amount: '6666.00', name: '6666.00 USDT' },
@@ -349,6 +464,36 @@
 
         let isSpinning = false;
         let totalRotation = 0;
+
+        function createWheel() {
+            const wheel = document.getElementById('wheel');
+            const segmentAngle = 360 / prizes.length;
+            
+            prizes.forEach((prize, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'wheel-segment';
+                
+                const rotation = index * segmentAngle;
+                const bgColor = index % 2 === 0 
+                    ? 'linear-gradient(135deg, #e8e0ff, #f0e8ff)' 
+                    : 'linear-gradient(135deg, #d8d0ff, #e0d8ff)';
+                
+                segment.style.transform = `rotate(${rotation}deg) skew(${90 - segmentAngle}deg)`;
+                segment.style.background = bgColor;
+                
+                const content = document.createElement('div');
+                content.className = 'segment-content';
+                content.style.transform = `skew(${-(90 - segmentAngle)}deg) rotate(${segmentAngle / 2}deg)`;
+                
+                content.innerHTML = `
+                    <span class="amount">${prize.amount}</span>
+                    <span class="currency">(USDT)</span>
+                `;
+                
+                segment.appendChild(content);
+                wheel.appendChild(segment);
+            });
+        }
 
         function createDots() {
             const dotsContainer = document.getElementById('wheelDots');
@@ -370,30 +515,103 @@
             }
         }
 
+        function showNotification(icon, title, message) {
+            const notification = document.getElementById('notification');
+            document.getElementById('notificationIcon').textContent = icon;
+            document.getElementById('notificationTitle').textContent = title;
+            document.getElementById('notificationMessage').textContent = message;
+            
+            notification.classList.add('show');
+        }
+
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+
+        function saveTransaction(amount, type) {
+            const transactions = JSON.parse(localStorage.getItem('spinTransactions') || '[]');
+            const transaction = {
+                amount: amount,
+                type: type,
+                date: new Date().toISOString(),
+                timestamp: Date.now()
+            };
+            
+            transactions.unshift(transaction);
+            
+            if (transactions.length > 50) {
+                transactions.pop();
+            }
+            
+            localStorage.setItem('spinTransactions', JSON.stringify(transactions));
+            loadTransactions();
+        }
+
+        function loadTransactions() {
+            const transactions = JSON.parse(localStorage.getItem('spinTransactions') || '[]');
+            const listContainer = document.getElementById('transactionList');
+            
+            if (transactions.length === 0) {
+                listContainer.innerHTML = '<div class="no-transactions">No transactions yet. Spin to win!</div>';
+                return;
+            }
+            
+            listContainer.innerHTML = transactions.map(tx => {
+                const date = new Date(tx.date);
+                const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
+                return `
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-amount lose">
+                                0 USDT
+                            </div>
+                            <div class="transaction-date">${formattedDate}</div>
+                        </div>
+                        <div class="transaction-status">Try Again</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function spinWheel() {
             if (isSpinning) return;
             
+            const hasSpun = localStorage.getItem('hasSpun');
+            if (hasSpun === 'true') {
+                showNotification('⚠️', 'Already Used Your Spin!', 'Share with friends to earn more spins!');
+                return;
+            }
+            
             const remainingSpins = parseInt(document.getElementById('remainingSpins').textContent);
             if (remainingSpins <= 0) {
-                alert('No remaining spins! Invite friends to get more chances.');
+                showNotification('⚠️', 'No Spins Left', 'Share with friends to get more chances!');
                 return;
             }
             
             isSpinning = true;
             const wheel = document.getElementById('wheel');
             
-            const randomPrizeIndex = Math.floor(Math.random() * prizes.length);
-            const targetPrize = prizes[randomPrizeIndex];
+            const targetPrizeIndex = 2;
+            const targetPrize = prizes[targetPrizeIndex];
             
             const spinRotations = 5 + Math.random() * 3;
-            const targetAngle = 360 - targetPrize.angle + 22.5;
-            totalRotation = (360 * spinRotations) + targetAngle;
+            const segmentAngle = 360 / prizes.length;
+            const targetAngle = (targetPrizeIndex * segmentAngle);
+            totalRotation = (360 * spinRotations) - targetAngle;
             
             wheel.style.transform = `rotate(${totalRotation}deg)`;
             
             setTimeout(() => {
-                alert(`🎉 Congratulations! You won ${targetPrize.name}!`);
-                document.getElementById('remainingSpins').textContent = remainingSpins - 1;
+                const amount = targetPrize.amount;
+                
+                showNotification('😔', 'Sorry, You Lost!', 'Share with friends to earn more spins and bigger rewards!');
+                
+                saveTransaction(amount, 'lose');
+                
+                localStorage.setItem('hasSpun', 'true');
+                document.getElementById('remainingSpins').textContent = 0;
                 isSpinning = false;
             }, 4000);
         }
@@ -418,10 +636,10 @@
             
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(referralLink).then(() => {
-                    alert('Referral link copied to clipboard!');
+                    showNotification('✅', 'Link Copied!', 'Referral link copied to clipboard!');
                 });
             } else {
-                alert(`Your referral link: ${referralLink}`);
+                showNotification('📋', 'Your Referral Link', referralLink);
             }
         }
 
@@ -430,7 +648,14 @@
         }
 
         window.onload = function() {
+            createWheel();
             createDots();
+            loadTransactions();
+            
+            const hasSpun = localStorage.getItem('hasSpun');
+            if (hasSpun === 'true') {
+                document.getElementById('remainingSpins').textContent = 0;
+            }
         };
     </script>
 </body>
