@@ -1042,7 +1042,7 @@
         }
 
         .vip-level-card {
-            min-width: 250px;
+            min-width: 280px;
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 150, 255, 0.1));
             border-radius: 15px;
             padding: 20px;
@@ -1055,66 +1055,96 @@
             box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
         }
 
-        .level-1 {
-            border-color: #22c55e;
-        }
-
-        .level-2 {
-            border-color: #3b82f6;
-        }
-
-        .level-3 {
-            border-color: #a855f7;
-        }
-
-        .level-4 {
-            border-color: #f59e0b;
-        }
-
         .level-header {
             font-size: 20px;
             font-weight: 700;
             color: #00ffff;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .vip-image {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 15px;
-            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .vip-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .level-stats {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .level-stat-row {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 13px;
+            padding: 8px 0;
+            font-size: 12px;
         }
 
-        .level-stat-row:last-child {
-            border-bottom: none;
+        .stat-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
         }
 
-        .level-stat-row span:last-child {
-            font-weight: 700;
-            color: #00ffff;
+        .stat-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .details-btn {
+        .stat-icon svg {
             width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #00ffff, #0099ff);
+            height: 100%;
+            fill: #00ffff;
+        }
+
+        .stat-right {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .vip-strategy-text {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin: 15px 0;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 12px;
+            background: #00d4ff;
             border: none;
             border-radius: 8px;
             color: #fff;
             font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
         }
 
-        .details-btn:hover {
+        .unlock-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
         }
 
         .bottom-nav {
@@ -1924,80 +1954,474 @@
         </div>
 
         <div class="vip-cards-container">
-            <div class="vip-level-card level-1">
+            <div class="vip-level-card">
                 <div class="level-header">VIP 1</div>
+                <div class="vip-image">
+                    <img src="vip1.png" alt="VIP 1" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDE8L3RleHQ+PC9zdmc+'">
+                </div>
                 <div class="level-stats">
                     <div class="level-stat-row">
-                        <span>Commission per task</span>
-                        <span>$1.05</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Upgrade requirement</span>
-                        <span>$100</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">45.00% ~ 45.00%</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Daily Tasks</span>
-                        <span>40</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥10.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
                     </div>
                 </div>
-                <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
             </div>
 
-            <div class="vip-level-card level-2">
+            <div class="vip-level-card">
                 <div class="level-header">VIP 2</div>
+                <div class="vip-image">
+                    <img src="vip2.png" alt="VIP 2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzNiODJmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDI8L3RleHQ+PC9zdmc+'">
+                </div>
                 <div class="level-stats">
                     <div class="level-stat-row">
-                        <span>Commission per task</span>
-                        <span>$2.25</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Upgrade requirement</span>
-                        <span>$500</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">50.00% ~ 50.00%</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Daily Tasks</span>
-                        <span>40</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥100.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
                     </div>
                 </div>
-                <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
             </div>
 
-            <div class="vip-level-card level-3">
+            <div class="vip-level-card">
                 <div class="level-header">VIP 3</div>
+                <div class="vip-image">
+                    <img src="vip3.png" alt="VIP 3" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2E4NTVmNyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDM8L3RleHQ+PC9zdmc+'">
+                </div>
                 <div class="level-stats">
                     <div class="level-stat-row">
-                        <span>Commission per task</span>
-                        <span>$5.50</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Upgrade requirement</span>
-                        <span>$2,000</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">51.00% ~ 51.00%</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Daily Tasks</span>
-                        <span>40</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥300.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
                     </div>
                 </div>
-                <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
             </div>
 
-            <div class="vip-level-card level-4">
+            <div class="vip-level-card">
                 <div class="level-header">VIP 4</div>
+                <div class="vip-image">
+                    <img src="vip4.png" alt="VIP 4" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2Y1OWUwYiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDQ8L3RleHQ+PC9zdmc+'">
+                </div>
                 <div class="level-stats">
                     <div class="level-stat-row">
-                        <span>Commission per task</span>
-                        <span>$15.00</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Upgrade requirement</span>
-                        <span>$10,000</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">52.00% ~ 52.00%</div>
                     </div>
                     <div class="level-stat-row">
-                        <span>Daily Tasks</span>
-                        <span>40</span>
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥600.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
                     </div>
                 </div>
-                <button class="details-btn" onclick="openPage('vip.html')">View Details</button>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 5</div>
+                <div class="vip-image">
+                    <img src="vip5.png" alt="VIP 5" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2VmNDQ0NCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDU8L3RleHQ+PC9zdmc+'">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">53.00% ~ 53.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥1200.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 6</div>
+                <div class="vip-image">
+                    <img src="vip6.png" alt="VIP 6" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzE0YjhhNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDY8L3RleHQ+PC9zdmc+'">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">54.00% ~ 54.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥2400.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 7</div>
+                <div class="vip-image">
+                    <img src="vip7.png" alt="VIP 7" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzhjNWZmZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDc8L3RleHQ+PC9zdmc+'">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">55.00% ~ 55.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥4800.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 8</div>
+                <div class="vip-image">
+                    <img src="vip8.png" alt="VIP 8" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2ZmMDA2NiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDg8L3RleHQ+PC9zdmc+'">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">56.00% ~ 56.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥9600.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 9</div>
+                <div class="vip-image">
+                    <img src="vip9.png" alt="VIP 9" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2ZmZDcwMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDk8L3RleHQ+PC9zdmc+'">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">58.00% ~ 58.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥19200.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
+            </div>
+
+            <div class="vip-level-card">
+                <div class="level-header">VIP 10</div>
+                <div class="vip-image">
+                    <img src="vip10.png" alt="VIP 10" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2ZmMDBmZiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VklQIDEwPC90ZXh0Pjwvc3ZnPg=='">
+                </div>
+                <div class="level-stats">
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span>Quantification Times Per Day</span>
+                        </div>
+                        <div class="stat-right">1</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            </div>
+                            <span>Profit Ratio</span>
+                        </div>
+                        <div class="stat-right">60.00% ~ 60.00%</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            </div>
+                            <span>Minimum Unlock Amount</span>
+                        </div>
+                        <div class="stat-right">≥38400.00 USDT</div>
+                    </div>
+                    <div class="level-stat-row">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                            </div>
+                            <span>Quantifiable Number Of Days</span>
+                        </div>
+                        <div class="stat-right">120</div>
+                    </div>
+                </div>
+                <div class="vip-strategy-text">VIP Preferred Strategy</div>
+                <a href="vip.html" class="unlock-btn">Click To Unlock</a>
             </div>
         </div>
 
