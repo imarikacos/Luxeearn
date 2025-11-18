@@ -1485,6 +1485,34 @@
 .vid-btn:hover {
     background: rgba(0,0,0,0.7);
 }
+
+ /* Base card styling (keeps images inside back layer) */
+.action-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* The watermark behind text */
+.action-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: 140px;        /* size of pig image */
+    background-position: center bottom;  /* position of pig */
+    opacity: 0.15;                 /* transparency of pig */
+    pointer-events: none;          /* keeps buttons clickable */
+}
+
+/* Set image for Quantitative Trading card */
+.quantitative-card::after {
+    background-image: url('quantitative.png');
+}
+
+/* Set image for Invite Friends card */
+.invite-card::after {
+    background-image: url('invite.png');
+}
         }
     </style>
 </head>
@@ -1788,16 +1816,19 @@
             <div class="top-coins-container" id="topCoinsContainer">
             </div>
 
-            <div class="action-cards">
-                <a href="vip.html" class="action-card">
-                    <div class="action-card-title">Quantitative Trading</div>
-                    <div class="action-card-subtitle">Efficient And Stable Income</div>
-                </a>
-                <a href="team.html" class="action-card">
-                    <div class="action-card-title">Invite Friends</div>
-                    <div class="action-card-subtitle">Earn Income</div>
-                </a>
-            </div>
+<div class="action-cards">
+
+    <a href="vip.html" class="action-card quantitative-card">
+    <div class="action-card-title">Quantitative Trading</div>
+    <div class="action-card-subtitle">Efficient And Stable Income</div>
+</a>
+
+    <a href="team.html" class="action-card invite-card">
+    <div class="action-card-title">Invite Friends</div>
+    <div class="action-card-subtitle">Earn Income</div>
+</a>
+
+</div>
 
             <div class="exchange-tabs">
                 <button class="exchange-tab active" onclick="switchExchange('binance', event)">BINANCE</button>
