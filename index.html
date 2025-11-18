@@ -1861,11 +1861,25 @@
             <div id="withdrawalList"></div>
         </div>
 
-        <div class="user-welcome" id="userWelcome">
-            <div class="welcome-text">Welcome back!</div>
-            <div class="user-email" id="userEmail"></div>
-            <button class="logout-btn" onclick="handleLogout()">Logout</button>
-        </div>
+        <div class="profile-card" id="userWelcome">
+
+    <div class="profile-balance-label">Balance</div>
+    <div class="profile-balance" id="profileBalance">$0.00</div>
+
+    <div class="profile-email" id="profileEmail">Loading...</div>
+
+    <div class="profile-level-row">
+        <span class="profile-level-label">Level</span>
+        <span class="profile-level" id="profileLevel">VIP-1</span>
+    </div>
+
+    <div class="profile-icon-btn">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+        </svg>
+    </div>
+
+</div>
 
         <div class="referral-card">
             <div class="referral-title">My Invitation Code</div>
