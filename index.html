@@ -1722,10 +1722,28 @@
         </div>
 
         <div class="crypto-prices" id="cryptoPricesSection">
-           <div class="video-section">
-    <video width="100%" autoplay muted loop style="border-radius:12px;">
+            <div class="video-section">
+
+    <!-- Main video -->
+    <video id="promoVideo" width="100%" autoplay muted loop style="border-radius:12px;">
         <source src="intro.mp4" type="video/mp4">
     </video>
+
+    <!-- Play with Sound -->
+    <button onclick="playWithSound()" 
+        style="margin-top:10px;padding:8px 14px;border:none;border-radius:6px;background:#0af;color:#fff;cursor:pointer;">
+        Play Video with Sound
+    </button>
+
+    <!-- Toggle Controls -->
+    <button onclick="toggleControls()"
+        style="margin-top:10px;margin-left:8px;padding:8px 14px;border:none;border-radius:6px;background:#333;color:#fff;cursor:pointer;">
+        Toggle Controls
+    </button>
+
+    <!-- Sound Indicator -->
+    <div id="soundIndicator" style="color:#0af;font-size:14px;margin-top:6px;">Muted</div>
+
 </div>
             <div class="crypto-header">Live Market Price</div>
             
@@ -2409,6 +2427,24 @@
         setInterval(updateBonusCountdown, 1000);
 
         showPopupOnce();
+        
+function playWithSound() {
+    const video = document.getElementById("promoVideo");
+    video.muted = false;
+    video.play();
+}
+
+function toggleControls() {
+    const video = document.getElementById("promoVideo");
+    video.controls = !video.controls;
+}
+
+const video = document.getElementById("promoVideo");
+const indicator = document.getElementById("soundIndicator");
+
+video.onvolumechange = function() {
+    indicator.innerHTML = video.muted ? "Muted" : "Sound On";
+};
     </script>
 </body>
 </html>
