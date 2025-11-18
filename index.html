@@ -237,6 +237,117 @@
             font-weight: 700;
             color: #00ffff;
             margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .price-ticker {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: tickerScroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 30px;
+            padding: 0 15px;
+            font-size: 13px;
+        }
+
+        .top-coins-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .top-coin-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-coin-pair {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .top-coin-change {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .top-coin-change.positive {
+            background: #22c55e;
+            color: #fff;
+        }
+
+        .top-coin-change.negative {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .top-coin-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: #00ffff;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .action-card-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #00ffff;
+        }
+
+        .action-card-subtitle {
+            font-size: 11px;
+            color: #888;
         }
 
         .exchange-tabs {
@@ -319,13 +430,13 @@
             display: grid;
             grid-template-columns: 2fr 2fr 2fr;
             align-items: center;
-            padding: 15px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
 
-        .crypto-item:last-child {
-            border-bottom: none;
+        .crypto-item:hover {
+            background: rgba(0, 255, 255, 0.05);
         }
 
         .crypto-left {
@@ -342,8 +453,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.1);
-            flex-shrink: 0;
         }
 
         .crypto-icon img {
@@ -369,10 +478,9 @@
 
         .crypto-price {
             font-weight: 700;
-            font-size: 15px;
+            font-size: 16px;
             text-align: center;
             transition: color 0.5s ease;
-            color: #ef4444;
         }
 
         .crypto-price.flash-up {
@@ -393,13 +501,76 @@
         }
 
         .crypto-change.positive {
-            background: #ef4444;
+            background: #22c55e;
             color: #fff;
         }
 
         .crypto-change.negative {
             background: #ef4444;
             color: #fff;
+        }
+
+        .flash-up {
+            animation: flash-green 0.5s ease;
+        }
+
+        .flash-down {
+            animation: flash-red 0.5s ease;
+        }
+
+        @keyframes flash-green {
+            0% { background-color: rgba(0, 214, 143, 0.3); }
+            50% { background-color: rgba(0, 214, 143, 0.5); }
+            100% { background-color: transparent; }
+        }
+
+        @keyframes flash-red {
+            0% { background-color: rgba(255, 71, 87, 0.3); }
+            50% { background-color: rgba(255, 71, 87, 0.5); }
+            100% { background-color: transparent; }
+        }
+
+        .pick-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .pick-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .pick-btn.show-pick::after {
+            content: 'Pick';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #22c55e;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+            white-space: nowrap;
+            animation: pickPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pickPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
         .price-ticker-bottom {
@@ -766,15 +937,15 @@
         }
 
         .social-share {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            display: flex;
             gap: 10px;
+            flex-wrap: wrap;
             margin-top: 15px;
         }
 
         .social-btn {
-            width: 100%;
-            aspect-ratio: 1;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -784,8 +955,7 @@
         }
 
         .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
         }
 
         .social-btn svg {
@@ -805,7 +975,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .stat-card {
@@ -813,19 +983,18 @@
             border-radius: 15px;
             padding: 20px;
             border: 1px solid rgba(0, 255, 255, 0.1);
-            text-align: center;
         }
 
         .stat-label {
             font-size: 12px;
-            color: #888;
-            margin-bottom: 10px;
+            color: #00ffff;
+            margin-bottom: 8px;
         }
 
         .stat-value {
             font-size: 24px;
             font-weight: 700;
-            color: #00ffff;
+            color: #fff;
         }
 
         .stat-unit {
@@ -837,31 +1006,44 @@
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
+            color: #00ffff;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .see-all {
-            font-size: 12px;
-            color: #00ffff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .see-all:hover {
+            font-size: 13px;
             color: #ff00ff;
+            cursor: pointer;
         }
 
         .vip-cards-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
             gap: 15px;
-            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .vip-cards-container::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .vip-cards-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .vip-cards-container::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 10px;
         }
 
         .vip-level-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            min-width: 250px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 150, 255, 0.1));
             border-radius: 15px;
             padding: 20px;
             border: 1px solid rgba(0, 255, 255, 0.2);
@@ -871,6 +1053,22 @@
         .vip-level-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+        }
+
+        .level-1 {
+            border-color: #22c55e;
+        }
+
+        .level-2 {
+            border-color: #3b82f6;
+        }
+
+        .level-3 {
+            border-color: #a855f7;
+        }
+
+        .level-4 {
+            border-color: #f59e0b;
         }
 
         .level-header {
@@ -888,22 +1086,18 @@
         .level-stat-row {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 12px;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
         }
 
         .level-stat-row:last-child {
             border-bottom: none;
         }
 
-        .level-stat-row span:first-child {
-            color: #888;
-        }
-
         .level-stat-row span:last-child {
-            color: #fff;
-            font-weight: 600;
+            font-weight: 700;
+            color: #00ffff;
         }
 
         .details-btn {
@@ -1520,7 +1714,30 @@
             </a>
         </div>
 
-        <div class="crypto-prices">
+        <div class="crypto-prices" id="cryptoPricesSection">
+            <div class="crypto-header">Live Market Price</div>
+            
+            <div class="price-ticker">
+                <div class="ticker-wrapper">
+                    <div class="ticker-item">📢 Real-time crypto prices from BINANCE, COINBASE, HUOBI, and OKX to ensure the security and stability of global quantitative transactions.</div>
+                    <div class="ticker-item">📢 Real-time crypto prices from BINANCE, COINBASE, HUOBI, and OKX to ensure the security and stability of global quantitative transactions.</div>
+                </div>
+            </div>
+
+            <div class="top-coins-container" id="topCoinsContainer">
+            </div>
+
+            <div class="action-cards">
+                <a href="vip.html" class="action-card">
+                    <div class="action-card-title">Quantitative Trading</div>
+                    <div class="action-card-subtitle">Efficient And Stable Income</div>
+                </a>
+                <a href="team.html" class="action-card">
+                    <div class="action-card-title">Invite Friends</div>
+                    <div class="action-card-subtitle">Earn Income</div>
+                </a>
+            </div>
+
             <div class="exchange-tabs">
                 <button class="exchange-tab active" onclick="switchExchange('binance', event)">BINANCE</button>
                 <button class="exchange-tab" onclick="switchExchange('okx', event)">OKX</button>
@@ -1528,21 +1745,13 @@
                 <button class="exchange-tab" onclick="switchExchange('coinbase', event)">COINBASE</button>
             </div>
 
-            <div class="crypto-list-wrapper">
-                <div class="crypto-list-container" id="cryptoListContainer">
-                    <div class="table-headers">
-                        <div class="header-cell">Currency</div>
-                        <div class="header-cell">Latest Price($)</div>
-                        <div class="header-cell">24h Rise & Down</div>
-                    </div>
-
-                    <div id="cryptoList"></div>
-                </div>
+            <div class="table-headers">
+                <div class="header-cell">Currency</div>
+                <div class="header-cell">Latest Price($)</div>
+                <div class="header-cell">24h Rise & Down</div>
             </div>
 
-            <div class="price-ticker-bottom">
-                <div class="ticker-wrapper-bottom" id="tickerWrapperBottom"></div>
-            </div>
+            <div id="cryptoList"></div>
         </div>
 
         <div class="referral-earnings">
@@ -1792,20 +2001,25 @@
 
         checkAuth();
 
-        const cryptoData = [
-            { symbol: 'BTC', name: 'Bitcoin', pair: 'BTC/USDT', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', basePrice: 92547.9, minChange: -0.005, maxChange: 0.005 },
-            { symbol: 'ETH', name: 'Ethereum', pair: 'ETH/USDT', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png', basePrice: 3030.2613, minChange: -0.004, maxChange: 0.004 },
-            { symbol: 'TRX', name: 'Tron', pair: 'TRX/USDT', logo: 'https://cryptologos.cc/logos/tron-trx-logo.png', basePrice: 0.29313, minChange: -0.003, maxChange: 0.008 },
-            { symbol: 'BNB', name: 'Binance Coin', pair: 'BNB/USDT', logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.png', basePrice: 907.49, minChange: -0.003, maxChange: 0.004 },
-            { symbol: 'SOL', name: 'Solana', pair: 'SOL/USDT', logo: 'https://cryptologos.cc/logos/solana-sol-logo.png', basePrice: 130.8279, minChange: -0.006, maxChange: 0.005 },
-            { symbol: 'XRP', name: 'Ripple', pair: 'XRP/USDT', logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png', basePrice: 2.1472493, minChange: -0.004, maxChange: 0.005 },
-            { symbol: 'ADA', name: 'Cardano', pair: 'ADA/USDT', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png', basePrice: 0.46662, minChange: -0.005, maxChange: 0.004 },
-            { symbol: 'DOGE', name: 'Dogecoin', pair: 'DOGE/USDT', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png', basePrice: 0.1543, minChange: -0.003, maxChange: 0.003 },
-            { symbol: 'DOT', name: 'Polkadot', pair: 'DOT/USDT', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png', basePrice: 2.684, minChange: -0.004, maxChange: 0.004 },
-            { symbol: 'LTC', name: 'Litecoin', pair: 'LTC/USDT', logo: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png', basePrice: 92.6839, minChange: -0.006, maxChange: 0.004 },
-            { symbol: 'SHIB', name: 'Shiba Inu', pair: 'SHIB/USDT', logo: 'https://cryptologos.cc/logos/shiba-inu-shib-logo.png', basePrice: 0.00000867, minChange: -0.003, maxChange: 0.003 },
-            { symbol: 'AVAX', name: 'Avalanche', pair: 'AVAX/USDT', logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png', basePrice: 14.548, minChange: -0.004, maxChange: 0.005 }
+        const cryptoConfig = [
+            { id: 'bitcoin', symbol: 'BTC', pair: 'BTC/USDT', icon: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png', basePrice: 92000 },
+            { id: 'ethereum', symbol: 'ETH', pair: 'ETH/USDT', icon: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png', basePrice: 3100 },
+            { id: 'binancecoin', symbol: 'BNB', pair: 'BNB/USDT', icon: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png', basePrice: 620 },
+            { id: 'ripple', symbol: 'XRP', pair: 'XRP/USDT', icon: 'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png', basePrice: 1.10 },
+            { id: 'cardano', symbol: 'ADA', pair: 'ADA/USDT', icon: 'https://assets.coingecko.com/coins/images/975/small/cardano.png', basePrice: 0.78 },
+            { id: 'solana', symbol: 'SOL', pair: 'SOL/USDT', icon: 'https://assets.coingecko.com/coins/images/4128/small/solana.png', basePrice: 237 },
+            { id: 'dogecoin', symbol: 'DOGE', pair: 'DOGE/USDT', icon: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png', basePrice: 0.38 },
+            { id: 'polkadot', symbol: 'DOT', pair: 'DOT/USDT', icon: 'https://assets.coingecko.com/coins/images/12171/small/polkadot.png', basePrice: 6.85 },
+            { id: 'litecoin', symbol: 'LTC', pair: 'LTC/USDT', icon: 'https://assets.coingecko.com/coins/images/2/small/litecoin.png', basePrice: 88 },
+            { id: 'tron', symbol: 'TRX', pair: 'TRX/USDT', icon: 'https://assets.coingecko.com/coins/images/1094/small/tron-logo.png', basePrice: 0.20 },
+            { id: 'shiba-inu', symbol: 'SHIB', pair: 'SHIB/USDT', icon: 'https://assets.coingecko.com/coins/images/11939/small/shiba.png', basePrice: 0.000024 },
+            { id: 'avalanche-2', symbol: 'AVAX', pair: 'AVAX/USDT', icon: 'https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png', basePrice: 38 }
         ];
+
+        let cryptoData = {};
+        let fakeGreenCoins = [];
+        let fakeGreenStartTime = 0;
+        let lastApiData = {};
 
         const withdrawalNames = [
             'user***123', 'investor***89', 'trader***45', 'crypto***67', 'earn***234',
@@ -1821,218 +2035,264 @@
         ];
 
         let currentExchange = 'binance';
-        let priceHistory = {};
-        let priceChangeTimers = {};
 
-        cryptoData.forEach(coin => {
-            priceHistory[coin.symbol] = coin.basePrice;
-        });
-
-        function updateCryptoPrices() {
-            const cryptoList = document.getElementById('cryptoList');
-            cryptoList.innerHTML = '';
-
-            cryptoData.forEach(coin => {
-                const currentPrice = priceHistory[coin.symbol];
-                const dayChangePercent = ((currentPrice - coin.basePrice) / coin.basePrice) * 100;
+        function initializeCryptoData() {
+            cryptoConfig.forEach(coin => {
+                const randomChange = (Math.random() - 0.5) * 10;
+                const priceVariation = coin.basePrice * (1 + (Math.random() - 0.5) * 0.02);
                 
-                const changeClass = 'negative';
-                const changeSymbol = '-';
-                
-                const cryptoItem = document.createElement('div');
-                cryptoItem.className = 'crypto-item';
-                cryptoItem.innerHTML = `
-                    <div class="crypto-left">
-                        <div class="crypto-icon">
-                            <img src="${coin.logo}" alt="${coin.symbol}" onerror="this.parentElement.innerHTML='${coin.symbol}'">
-                        </div>
-                        <div class="crypto-name">
-                            <div class="crypto-symbol">${coin.symbol}</div>
-                            <div class="crypto-pair">/${coin.pair.split('/')[1]}</div>
-                        </div>
-                    </div>
-                    <div class="crypto-price" id="price-${coin.symbol}">${currentPrice.toFixed(currentPrice < 1 ? (currentPrice < 0.001 ? 8 : 5) : 2)}</div>
-                    <div class="crypto-change ${changeClass}">${changeSymbol}${Math.abs(dayChangePercent).toFixed(2)}%</div>
-                `;
-                
-                cryptoList.appendChild(cryptoItem);
+                cryptoData[coin.symbol] = {
+                    price: priceVariation,
+                    change24h: randomChange,
+                    basePrice: coin.basePrice,
+                    ...coin
+                };
+                lastApiData[coin.symbol] = {
+                    price: priceVariation,
+                    change24h: randomChange
+                };
             });
-
-            updateBottomTicker();
+            updateDisplay();
         }
 
-        function updateSinglePrice(coin) {
-            const oldPrice = priceHistory[coin.symbol];
-            const changeRange = coin.maxChange - coin.minChange;
-            const changePercent = coin.minChange + (Math.random() * changeRange);
-            const newPrice = oldPrice * (1 + changePercent);
-            
-            priceHistory[coin.symbol] = newPrice;
-
-            const priceElement = document.getElementById(`price-${coin.symbol}`);
-            if (priceElement) {
-                priceElement.textContent = newPrice.toFixed(newPrice < 1 ? (newPrice < 0.001 ? 8 : 5) : 2);
+        async function fetchCryptoPrices() {
+            try {
+                const ids = cryptoConfig.map(c => c.id).join(',');
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+                const data = await response.json();
                 
-                priceElement.classList.remove('flash-up', 'flash-down');
-                if (changePercent > 0) {
-                    priceElement.classList.add('flash-up');
-                } else if (changePercent < 0) {
-                    priceElement.classList.add('flash-down');
+                cryptoConfig.forEach(coin => {
+                    if (data[coin.id]) {
+                        lastApiData[coin.symbol] = {
+                            price: data[coin.id].usd,
+                            change24h: data[coin.id].usd_24h_change || 0
+                        };
+                    }
+                });
+            } catch (error) {
+                console.log('Using simulated prices');
+            }
+        }
+
+        function simulatePriceChanges() {
+            const now = Date.now();
+            const shouldShowFakeGreen = fakeGreenCoins.length > 0 && (now - fakeGreenStartTime) < 60000;
+            
+            Object.keys(cryptoData).forEach(symbol => {
+                const coin = cryptoData[symbol];
+                const oldPrice = coin.price;
+                const oldChange = coin.change24h;
+                
+                if (shouldShowFakeGreen && fakeGreenCoins.includes(symbol)) {
+                    const fakeIncrease = 3 + Math.random() * 4;
+                    coin.change24h = fakeIncrease;
+                    coin.price = coin.basePrice * (1 + fakeIncrease / 100);
+                } else {
+                    if (lastApiData[symbol]) {
+                        coin.price = lastApiData[symbol].price * (1 + (Math.random() - 0.5) * 0.003);
+                        coin.change24h = lastApiData[symbol].change24h + (Math.random() - 0.5) * 0.5;
+                    } else {
+                        const priceChange = (Math.random() - 0.5) * 0.005;
+                        coin.price = coin.price * (1 + priceChange);
+                        coin.change24h = coin.change24h + (Math.random() - 0.5) * 0.3;
+                    }
                 }
                 
-                setTimeout(() => {
-                    priceElement.classList.remove('flash-up', 'flash-down');
-                }, 500);
-            }
-
-            updateCryptoPrices();
-            
-            const nextUpdate = 3000 + Math.random() * 7000;
-            priceChangeTimers[coin.symbol] = setTimeout(() => updateSinglePrice(coin), nextUpdate);
-        }
-
-        function initializePriceUpdates() {
-            cryptoData.forEach(coin => {
-                const initialDelay = Math.random() * 5000;
-                setTimeout(() => updateSinglePrice(coin), initialDelay);
+                if (Math.abs(coin.price - oldPrice) > 0.001 || Math.abs(coin.change24h - oldChange) > 0.01) {
+                    animatePriceChange(symbol, coin.price > oldPrice);
+                }
             });
+            
+            updateDisplay();
         }
 
-        function updateBottomTicker() {
-            const tickerWrapper = document.getElementById('tickerWrapperBottom');
-            let tickerHTML = '';
+        function activateFakeGreen() {
+            const now = Date.now();
             
-            cryptoData.forEach(coin => {
-                const currentPrice = priceHistory[coin.symbol];
-                const dayChangePercent = ((currentPrice - coin.basePrice) / coin.basePrice) * 100;
-                const changeClass = dayChangePercent >= 0 ? 'positive' : 'negative';
-                const changeSymbol = dayChangePercent >= 0 ? '+' : '';
+            if (fakeGreenCoins.length === 0 || (now - fakeGreenStartTime) > 240000) {
+                const allSymbols = Object.keys(cryptoData);
+                fakeGreenCoins = allSymbols.sort(() => 0.5 - Math.random()).slice(0, 3);
+                fakeGreenStartTime = now;
+                console.log('Fake green activated for:', fakeGreenCoins);
+            }
+            
+            if ((now - fakeGreenStartTime) > 60000 && (now - fakeGreenStartTime) < 240000) {
+                fakeGreenCoins = [];
+            }
+        }
+
+        function animatePriceChange(symbol, isUp) {
+            const priceElement = document.getElementById(`price-${symbol}`);
+            const changeElement = document.getElementById(`change-${symbol}`);
+            
+            if (priceElement) {
+                priceElement.classList.remove('flash-up', 'flash-down');
+                setTimeout(() => {
+                    priceElement.classList.add(isUp ? 'flash-up' : 'flash-down');
+                    setTimeout(() => {
+                        priceElement.classList.remove('flash-up', 'flash-down');
+                    }, 500);
+                }, 10);
+            }
+            
+            if (changeElement) {
+                changeElement.classList.remove('flash-up', 'flash-down');
+                setTimeout(() => {
+                    changeElement.classList.add(isUp ? 'flash-up' : 'flash-down');
+                    setTimeout(() => {
+                        changeElement.classList.remove('flash-up', 'flash-down');
+                    }, 500);
+                }, 10);
+            }
+        }
+
+        function updateDisplay() {
+            updateTopCoins();
+            updateCryptoList();
+        }
+
+        function updateTopCoins() {
+            const container = document.getElementById('topCoinsContainer');
+            const topCoins = ['BTC', 'TRX', 'ETH'];
+            
+            let html = '';
+            topCoins.forEach(symbol => {
+                const coin = cryptoData[symbol];
+                if (coin) {
+                    const changeClass = coin.change24h >= 0 ? 'positive' : 'negative';
+                    const changeSymbol = coin.change24h >= 0 ? '+' : '';
+                    
+                    html += `
+                        <div class="top-coin-card">
+                            <div class="top-coin-pair">${coin.pair}</div>
+                            <div class="top-coin-change ${changeClass}">${changeSymbol}${coin.change24h.toFixed(2)}%</div>
+                            <div class="top-coin-price">$${coin.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: coin.price < 1 ? 6 : 2})}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function updateCryptoList() {
+            const container = document.getElementById('cryptoList');
+            
+            let html = '';
+            Object.values(cryptoData).forEach(coin => {
+                const changeClass = coin.change24h >= 0 ? 'positive' : 'negative';
+                const changeSymbol = coin.change24h >= 0 ? '+' : '';
                 
-                tickerHTML += `
-                    <div class="ticker-item-bottom">
-                        <span class="ticker-pair-bottom">${coin.pair}</span>
-                        <span class="ticker-price-bottom">${currentPrice.toFixed(currentPrice < 1 ? 5 : 2)}</span>
-                        <span class="ticker-change-bottom ${changeClass}">${changeSymbol}${Math.abs(dayChangePercent).toFixed(2)}%</span>
+                html += `
+                    <div class="crypto-item">
+                        <div class="crypto-left">
+                            <div class="crypto-icon">
+                                <img src="${coin.icon}" alt="${coin.symbol}" onerror="this.src='https://via.placeholder.com/32'">
+                            </div>
+                            <div class="crypto-name">
+                                <div class="crypto-symbol">${coin.symbol}</div>
+                                <div class="crypto-pair">${coin.pair}</div>
+                            </div>
+                        </div>
+                        <div class="crypto-price" id="price-${coin.symbol}">${coin.price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: coin.price < 1 ? 6 : 2})}</div>
+                        <div class="crypto-change ${changeClass}" id="change-${coin.symbol}">${changeSymbol}${Math.abs(coin.change24h).toFixed(2)}%</div>
                     </div>
                 `;
             });
             
-            tickerWrapper.innerHTML = tickerHTML + tickerHTML;
+            container.innerHTML = html;
         }
 
         function switchExchange(exchange, event) {
-            if (event) {
-                document.querySelectorAll('.exchange-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                event.target.classList.add('active');
-            }
+            if (event) event.preventDefault();
             
             currentExchange = exchange;
+            const tabs = document.querySelectorAll('.exchange-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
             
-            const container = document.getElementById('cryptoListContainer');
-            container.classList.add('fading');
-            
-            setTimeout(() => {
-                updateCryptoPrices();
-                container.classList.remove('fading');
-            }, 300);
+            updateCryptoList();
         }
 
-        function generateReferralEarnings() {
-            const wrapper = document.getElementById('referralScrollWrapper');
+        function initializeReferralScroll() {
+            const referralScrollWrapper = document.getElementById('referralScrollWrapper');
             let referralHTML = '';
             
-            for (let i = 0; i < 20; i++) {
+            const actions = ['Referred user', 'Earned commission', 'Team bonus', 'Referral reward'];
+            
+            for (let i = 0; i < 15; i++) {
                 const name = referralNames[Math.floor(Math.random() * referralNames.length)];
-                const action = Math.random() > 0.5 ? 'Team Recharge' : 'Team Withdrawal';
+                const action = actions[Math.floor(Math.random() * actions.length)];
                 const amount = (Math.random() * 50 + 5).toFixed(2);
                 
                 referralHTML += `
                     <div class="referral-item">
                         <div class="referral-user">${name}</div>
                         <div class="referral-action">${action}</div>
-                        <div class="referral-amount">$${amount}</div>
+                        <div class="referral-amount">+$${amount}</div>
                     </div>
                 `;
             }
             
-            wrapper.innerHTML = referralHTML + referralHTML;
+            referralScrollWrapper.innerHTML = referralHTML + referralHTML;
         }
 
-        function generateWithdrawalLogs() {
+        function generateWithdrawal() {
             const withdrawalList = document.getElementById('withdrawalList');
+            const name = withdrawalNames[Math.floor(Math.random() * withdrawalNames.length)];
+            const amount = (Math.random() * 5000 + 50).toFixed(2);
             
-            function addWithdrawal() {
-                const name = withdrawalNames[Math.floor(Math.random() * withdrawalNames.length)];
-                const amount = (Math.random() * 500 + 50).toFixed(2);
-                
-                const withdrawalItem = document.createElement('div');
-                withdrawalItem.className = 'withdrawal-item';
-                withdrawalItem.innerHTML = `
-                    <span class="withdrawal-user">${name}</span>
-                    <span class="withdrawal-amount">$${amount}</span>
-                `;
-                
-                withdrawalList.insertBefore(withdrawalItem, withdrawalList.firstChild);
-                
-                if (withdrawalList.children.length > 5) {
-                    withdrawalList.removeChild(withdrawalList.lastChild);
-                }
+            const withdrawalItem = document.createElement('div');
+            withdrawalItem.className = 'withdrawal-item';
+            withdrawalItem.innerHTML = `
+                <div class="withdrawal-user">${name}</div>
+                <div class="withdrawal-amount">$${amount}</div>
+            `;
+            
+            withdrawalList.insertBefore(withdrawalItem, withdrawalList.firstChild);
+            
+            if (withdrawalList.children.length > 5) {
+                withdrawalList.removeChild(withdrawalList.lastChild);
             }
-            
-            for (let i = 0; i < 5; i++) {
-                setTimeout(addWithdrawal, i * 1000);
-            }
-            
-            setInterval(addWithdrawal, 8000);
         }
 
         function updateBonusCountdown() {
-            const bonusCountdown = document.getElementById('bonusCountdown');
-            let hours = 0;
-            let minutes = 30;
-            let seconds = 0;
-
-            setInterval(() => {
-                seconds--;
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                }
-                if (minutes < 0) {
-                    minutes = 59;
-                    hours--;
-                }
-                if (hours < 0) {
-                    hours = 0;
-                    minutes = 30;
-                    seconds = 0;
-                }
-
-                bonusCountdown.textContent = 
-                    String(hours).padStart(2, '0') + ':' + 
-                    String(minutes).padStart(2, '0') + ':' + 
-                    String(seconds).padStart(2, '0');
-            }, 1000);
+            const now = new Date();
+            const hours = 23 - now.getHours();
+            const minutes = 59 - now.getMinutes();
+            
+            const countdownEl = document.getElementById('bonusCountdown');
+            if (countdownEl) {
+                countdownEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+            }
         }
 
-        function showPopupIfNeeded() {
-            const popupSeen = localStorage.getItem('luxeearn_popup_seen');
-            if (!popupSeen) {
+        function showPopupOnce() {
+            const hasSeenPopup = localStorage.getItem('luxeearn_popup_seen');
+            
+            if (!hasSeenPopup) {
                 setTimeout(() => {
                     const popup = document.getElementById('popupAnnouncement');
                     popup.classList.add('show');
-                    localStorage.setItem('luxeearn_popup_seen', 'true');
-                }, 1000);
+                    
+                    setTimeout(() => {
+                        popup.classList.add('hide');
+                        setTimeout(() => {
+                            popup.classList.remove('show', 'hide');
+                            popup.style.visibility = 'hidden';
+                        }, 500);
+                    }, 7000);
+                }, 500);
             }
         }
 
         function closePopup() {
             const popup = document.getElementById('popupAnnouncement');
-            popup.classList.remove('show');
             popup.classList.add('hide');
+            localStorage.setItem('luxeearn_popup_seen', 'true');
+            
             setTimeout(() => {
+                popup.classList.remove('show', 'hide');
                 popup.style.visibility = 'hidden';
             }, 500);
         }
@@ -2052,36 +2312,29 @@
         }
 
         function openPage(url) {
-            if (url.startsWith('http')) {
-                window.open(url, '_blank');
-            } else {
-                window.location.href = url;
-            }
+            window.location.href = url;
         }
 
         function copyCode() {
-            const code = document.getElementById('inviteCode').textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                showNotification('Success', 'Invitation code copied!');
-            });
+            const code = document.getElementById('inviteCode').innerText;
+            navigator.clipboard.writeText(code);
+            showNotification('Success', 'Invite code copied!');
         }
 
         function copyLink() {
-            const link = document.getElementById('inviteLink').textContent;
-            navigator.clipboard.writeText(link).then(() => {
-                showNotification('Success', 'Invitation link copied!');
-            });
+            const link = document.getElementById('inviteLink').innerText;
+            navigator.clipboard.writeText(link);
+            showNotification('Success', 'Invite link copied!');
         }
 
         function shareOn(platform) {
-            const code = document.getElementById('inviteCode').textContent;
-            const link = document.getElementById('inviteLink').textContent;
-            const text = `Join LuxeEarn and start earning! Use my invitation code: ${code} or register here: ${link}`;
-            
+            const link = document.getElementById('inviteLink').innerText;
+            const text = 'Join LuxeEarn and start earning with crypto trading!';
             let shareUrl = '';
+            
             switch(platform) {
                 case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
                     break;
                 case 'facebook':
                     shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`;
@@ -2090,19 +2343,18 @@
                     shareUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
                     break;
                 case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
                     break;
                 case 'linkedin':
                     shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`;
                     break;
                 case 'instagram':
-                    showNotification('Info', 'Please copy the link and share on Instagram manually');
+                    showNotification('Info', 'Copy the link and share on Instagram!');
+                    copyLink();
                     return;
             }
             
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            }
+            window.open(shareUrl, '_blank');
         }
 
         function showNotification(title, message) {
@@ -2116,6 +2368,9 @@
             setTimeout(() => {
                 notification.classList.remove('show');
                 notification.classList.add('hide');
+                setTimeout(() => {
+                    notification.classList.remove('hide');
+                }, 500);
             }, 3000);
         }
 
@@ -2126,12 +2381,22 @@
             window.location.href = 'login.html';
         }
 
-        updateCryptoPrices();
-        initializePriceUpdates();
-        generateReferralEarnings();
-        generateWithdrawalLogs();
+        initializeCryptoData();
+        fetchCryptoPrices();
+        
+        setInterval(fetchCryptoPrices, 60000);
+        setInterval(simulatePriceChanges, 2000);
+        setInterval(activateFakeGreen, 10000);
+        
+        initializeReferralScroll();
+        
+        generateWithdrawal();
+        setInterval(generateWithdrawal, 5000);
+
         updateBonusCountdown();
-        showPopupIfNeeded();
+        setInterval(updateBonusCountdown, 1000);
+
+        showPopupOnce();
     </script>
 </body>
 </html>
