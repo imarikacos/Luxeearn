@@ -1428,6 +1428,30 @@
             font-size: 10px;
             color: #888;
         }
+          .exchange-logos-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.exchange-title {
+    font-size: 18px;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.exchange-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 0 20px;
+}
+
+.exchange-item img {
+    width: 90px;
+    height: auto;
+    opacity: 0.9;
+    filter: brightness(1.2);
+}
 
         .main-footer {
             background: rgba(26, 0, 51, 0.95);
@@ -1542,6 +1566,33 @@
 /* Set image for Invite Friends card */
 .invite-card::after {
     background-image: url('invite.png');
+}
+
+  .stats-two-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.08);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-title {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.stat-value {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #00aaff;
 }
         }
     </style>
@@ -1700,10 +1751,7 @@
         <div class="bonus-countdown" id="bonusCountdown">00:00</div>
     </a>
 
-    <div class="floating-support" onclick="openPage('https://tinyurl.com/Swift-support')">
-        <svg viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM13 14h-2v-2h2v2zm0-4h-2V6h2v4z"/>
-        </svg>
+    
     </div>
 
     <div class="container">
@@ -1801,6 +1849,17 @@
     <video id="promoVideo" autoplay muted loop style="width:100%; border-radius:12px;">
         <source src="intro.mp4" type="video/mp4">
     </video>
+ <div class="stats-cards">
+    <div class="stat-card">
+        <div class="stat-title">Safe Operation</div>
+        <div class="stat-value">1793 Day</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-title">Cumulative Income</div>
+        <div class="stat-value">261072015 USD</div>
+    </div>
+</div>
 
     <!-- SOUND TOGGLE BUTTON -->
     <button id="soundBtn" onclick="toggleSound()" class="vid-btn" style="top:10px; left:10px;">
@@ -2374,6 +2433,31 @@
                 <a href="vip.html" class="unlock-btn">Click To Unlock</a>
             </div>
         </div>
+           <!-- Exchange Logo Section -->
+<div class="exchange-logos-section">
+    <h2 class="exchange-title">Core Cooperative Financial Institutions</h2>
+
+    <div class="exchange-grid">
+        <div class="exchange-item">
+            <img src="binance.png" alt="Binance">
+        </div>
+        <div class="exchange-item">
+            <img src="kraken.png" alt="Kraken">
+        </div>
+        <div class="exchange-item">
+            <img src="kucoin.png" alt="KuCoin">
+        </div>
+        <div class="exchange-item">
+            <img src="okx.png" alt="OKX">
+        </div>
+        <div class="exchange-item">
+            <img src="coinbase.png" alt="Coinbase">
+        </div>
+        <div class="exchange-item">
+            <img src="bybit.png" alt="Bybit">
+        </div>
+    </div>
+</div>
 
         <div class="main-footer">
             <div class="footer-logo">
