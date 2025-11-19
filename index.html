@@ -2579,17 +2579,51 @@
         let lastApiData = {};
 
         const withdrawalNames = [
-            'user***123', 'investor***89', 'trader***45', 'crypto***67', 'earn***234',
-            'vip***901', 'member***567', 'profit***890', 'elite***345', 'lucky***678',
-            'star***234', 'winner***789', 'smart***456', 'rich***123', 'boss***890'
-        ];
+    'james***123', 'michael****89', 'robert***45', 'john*****67', 'david***234',
+    'william****901', 'richard***567', 'joseph****890', 'thomas***345', 'charles****678',
+    'daniel***234', 'matthew****789', 'anthony***456', 'mark****123', 'donald***890',
+    'steven****512', 'paul***743', 'andrew****256', 'joshua***891', 'kenneth****634',
+    'kevin***178', 'brian****429', 'george***765', 'timothy****983', 'ronald***341',
+    'edward****827', 'jason***194', 'jeffrey****658', 'ryan***923', 'jacob****405',
+    'gary***572', 'nicholas****938', 'eric***264', 'jonathan****791', 'stephen***436',
+    'larry****805', 'justin***129', 'scott****683', 'brandon***947', 'benjamin****215',
+    'samuel***594', 'raymond****862', 'gregory***437', 'frank****701', 'alexander***968',
+    'patrick****324', 'jack***789', 'dennis****156', 'jerry***623', 'tyler****491',
+    'aaron***857', 'jose****214', 'adam***679', 'nathan****932', 'henry***385',
+    'douglas****741', 'zachary***508', 'peter****876', 'kyle***243', 'noah****619',
+    'ethan***984', 'jeremy****352', 'walter***726', 'christian****193', 'keith***561',
+    'roger****829', 'terry***407', 'austin****785', 'sean***142', 'gerald****518',
+    'carl***973', 'harold****236', 'dylan***694', 'arthur****851', 'joe***429',
+    'victor****705', 'albert***183', 'lawrence****649', 'mason***916', 'logan****274',
+    'willie***532', 'jordan****898', 'jesse***365', 'ralph****721', 'russell***147',
+    'roy****594', 'louis***862', 'philip****239', 'randy***617', 'howard****983',
+    'eugene***451', 'carlos****728', 'bobby***196', 'johnny****574', 'phillip***842',
+    'martin****319', 'antonio***685', 'marcus****951', 'vincent***428', 'hunter****796'
+];
+
 
         const referralNames = [
-            'Alex***45', 'Sarah***89', 'Mike***23', 'Emma***67', 'John***12',
-            'Lisa***90', 'David***34', 'Anna***56', 'Chris***78', 'Maria***01',
-            'Tom***43', 'Lucy***87', 'Sam***65', 'Kate***21', 'Ben***98',
-            'Nina***76', 'Paul***54', 'Mia***32', 'Jack***10', 'Eva***48'
-        ];
+    'Alex***45', 'Sarah****89', 'Mike***23', 'Emma****67', 'Oliver***12',
+    'Lisa****90', 'Liam***34', 'Anna****56', 'Noah***78', 'Maria****01',
+    'Lucas***43', 'Lucy****87', 'Mason***65', 'Kate****21', 'Ethan***98',
+    'Nina****76', 'Aiden***54', 'Mia****32', 'Elijah***10', 'Eva****48',
+    'Carter***92', 'Grace****15', 'Owen***73', 'Chloe****36', 'Wyatt***59',
+    'Zoe****84', 'Grayson***27', 'Lily****61', 'Leo***05', 'Sophia****93',
+    'Julian***38', 'Ella****72', 'Isaac***46', 'Ava****19', 'Hudson***81',
+    'Harper****53', 'Luke***26', 'Amelia****68', 'Henry***94', 'Emily****37',
+    'Sebastian***60', 'Aria****02', 'Lincoln***75', 'Scarlett****49', 'Levi***83',
+    'Madison****17', 'Gabriel***51', 'Layla****96', 'Jaxon***24', 'Abigail****58',
+    'Mateo***91', 'Riley****33', 'Connor***66', 'Bella****08', 'Asher***42',
+    'Ellie****77', 'Austin***14', 'Nora****50', 'Maverick***86', 'Camila****29',
+    'Ezra***63', 'Hazel****95', 'Landon***31', 'Luna****69', 'Hunter***04',
+    'Stella****97', 'Adrian***40', 'Penelope****18', 'Caleb***74', 'Violet****52',
+    'Josiah***88', 'Aurora****25', 'Miles***55', 'Hannah****99', 'Theo***22',
+    'Maya****62', 'Kayden***35', 'Addison****07', 'Colton***70', 'Natalie****44',
+    'Nolan***82', 'Elena****16', 'Eli***57', 'Savannah****90', 'Ryan***28',
+    'Brooklyn****64', 'Ian***39', 'Audrey****03', 'Dominic***71', 'Claire****98',
+    'Waylon***13', 'Skylar****47', 'Cooper***80', 'Leah****21', 'Jameson***54',
+    'Zoey****85', 'Cameron***30', 'Aaliyah****67', 'Angel***41', 'Madelyn****79'
+];
 
         let currentExchange = 'binance';
 
@@ -2775,8 +2809,14 @@
             const referralScrollWrapper = document.getElementById('referralScrollWrapper');
             let referralHTML = '';
             
-            const actions = ['Referred user', 'Earned commission', 'Team bonus', 'Referral reward'];
-            
+            const actions = [
+    'Referred user', 'Earned commission', 'Team bonus', 'Referral reward',
+    'Level up bonus', 'Achievement unlocked', 'Daily reward claimed', 'Weekly milestone',
+    'New member joined', 'Withdrawal processed', 'Deposit received', 'Investment profit',
+    'Trading bonus', 'Cashback earned', 'VIP reward', 'Loyalty bonus',
+    'Signup bonus', 'First deposit bonus', 'Recharge completed', 'Task completed',
+    'Mission accomplished', 'Streak bonus', 'Rank promotion', 'Team milestone'
+];            
             for (let i = 0; i < 15; i++) {
                 const name = referralNames[Math.floor(Math.random() * referralNames.length)];
                 const action = actions[Math.floor(Math.random() * actions.length)];
