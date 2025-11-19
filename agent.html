@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeEarn - Agent Cooperation</title>
+    <link rel="icon" type="image/png" href="lexearn.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            color: #fff;
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+        .back-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .commission-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        th {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        td {
+            color: #ccc;
+            font-size: 14px;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ccff00;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+        }
+        .section-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        .section-content p {
+            margin-bottom: 12px;
+        }
+        .highlight {
+            color: #00ffff;
+            font-weight: 600;
+        }
+        .note-box {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 13px;
+            color: #ffaa66;
+            margin-top: 15px;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+        }
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            margin-bottom: 5px;
+        }
+        .nav-item.active svg {
+            fill: #00ffff;
+        }
+        .nav-label {
+            font-size: 11px;
+            color: #888;
+        }
+        .nav-item.active .nav-label {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+        <div class="header-title">Agent Cooperation</div>
+    </div>
+    <div class="container">
+        <div class="commission-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>ABC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>L1-10</td>
+                        <td>5%</td>
+                        <td>2%</td>
+                        <td>1%</td>
+                        <td>8%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="#ccff00">
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Cumulative Rewards
+            </div>
+            <div class="section-content">
+                <p>If the number of inviters reaches <span class="highlight">10</span>, an additional reward of <span class="highlight">3 USDT</span> will be given.</p>
+                <p>If the number of inviters reaches <span class="highlight">20</span>, an additional reward of <span class="highlight">10 USDT</span> will be awarded.</p>
+                <p>If the number of inviters reaches <span class="highlight">30</span>, an additional reward of <span class="highlight">20 USDT</span> will be awarded.</p>
+                <p>If the number of inviters reaches <span class="highlight">40</span>, an additional reward of <span class="highlight">30 USDT</span> will be awarded.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">
+                <svg class="check-icon" viewBox="0 0 24 24" fill="#ccff00">
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Viva-AI Global Partner Plan
+            </div>
+            <div class="section-content">
+                <p>Recruit full-time agents globally, with a fixed monthly salary of <span class="highlight">1,200 USDT</span> for agents.</p>
+                <p>The agent invites at least <span class="highlight">20 A-level subordinates</span> every month, and the total team recharge cannot be less than <span class="highlight">2,000 USDT</span>.</p>
+                <p>If you are interested, please contact the recruitment manager.</p>
+                <p><strong>Note:</strong> VIP0 does not participate in rebates, please upgrade as soon as possible! If you want to qualify as a partner, you need to submit an application. Salary will be paid every other month after approval.</p>
+                <p>For details, please contact the platform account manager.</p>
+                <div class="note-box">
+                    <strong>(According to the platform's early comprehensive data analysis, the investment income of members themselves only accounts for 20-30% of the total income, while the income from developing subordinate teams will account for more than 70%.)</strong>
+                    <p style="margin-top: 10px;">Passive income is the largest source of income! The most effective way to get rid of financial difficulties is to act now, don't hesitate, start building your team!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='tasks.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <div class="nav-label">Tasks</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='team.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <div class="nav-label">Team</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='vip.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
+            </svg>
+            <div class="nav-label">VIP</div>
+        </div>
+        <div class="nav-item" onclick="window.location.href='me.html'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <div class="nav-label">Me</div>
+        </div>
+    </div>
+</body>
+  </html>
