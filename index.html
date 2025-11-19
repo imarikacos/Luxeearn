@@ -1601,639 +1601,1121 @@
 }
         }
     
-        
-        /* Authentication Pages Styles */
-        .auth-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
-            z-index: 10000;
-            display: none;
-            overflow-y: auto;
-            padding-bottom: 80px;
-        }
-
-        .auth-page.active {
-            display: block;
-        }
-
-        .auth-header {
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        .back-arrow {
-            width: 35px;
-            height: 35px;
-            background: rgba(0, 255, 255, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .back-arrow:hover {
-            background: rgba(0, 255, 255, 0.2);
-        }
-
-        .back-arrow svg {
-            width: 20px;
-            height: 20px;
-            fill: #00ffff;
-        }
-
-        .auth-header-title {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .auth-container {
-            padding: 30px 20px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .auth-logo-img {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 15px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-        }
-
-        .auth-logo-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-        }
-
-        .auth-title {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .auth-subtitle {
-            font-size: 14px;
-            color: #00ffff;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .auth-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            border-radius: 10px;
-            color: #888;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .auth-tab.active {
-            background: linear-gradient(135deg, #00ffff, #0099ff);
-            color: #fff;
-        }
-
-        .google-signin-btn {
-            width: 100%;
-            padding: 15px;
-            background: #fff;
-            border: none;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        .google-signin-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .divider {
-            text-align: center;
-            margin: 20px 0;
-            color: #888;
-            font-size: 14px;
-            position: relative;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            color: #00ffff;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .form-input-wrapper {
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px 45px 15px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #00ffff;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-input::placeholder {
-            color: #666;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-        }
-
-        .input-icon svg {
-            width: 100%;
-            height: 100%;
-            fill: #00ffff;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-        }
-
-        .toggle-password svg {
-            width: 100%;
-            height: 100%;
-            fill: #00ffff;
-        }
-
-        .validation-message {
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .validation-message.error {
-            color: #ff4444;
-            display: block;
-        }
-
-        .validation-message.success {
-            color: #22c55e;
-            display: block;
-        }
-
-        .password-strength {
-            margin-top: 8px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            display: none;
-        }
-
-        .password-strength.active {
-            display: block;
-        }
-
-        .password-strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: all 0.3s ease;
-            background: #ff4444;
-        }
-
-        .password-strength-bar.weak {
-            width: 33%;
-            background: #ff4444;
-        }
-
-        .password-strength-bar.medium {
-            width: 66%;
-            background: #ffaa00;
-        }
-
-        .password-strength-bar.strong {
-            width: 100%;
-            background: #22c55e;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 2px;
-            cursor: pointer;
-        }
-
-        .checkbox-label {
-            font-size: 13px;
-            color: #ccc;
-            line-height: 1.4;
-        }
-
-        .checkbox-label a {
-            color: #00ffff;
-            text-decoration: none;
-        }
-
-        .checkbox-label a:hover {
-            text-decoration: underline;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #00ff88, #00ffff);
-            border: none;
-            border-radius: 10px;
-            color: #1a0033;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .auth-footer-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #888;
-        }
-
-        .auth-footer-link a {
-            color: #00ffff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .auth-footer-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* Notification Styles */
-        .notification-banner {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 20000;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            min-width: 300px;
-            max-width: 90%;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .notification-banner.show {
-            top: 20px;
-        }
-
-        .notification-banner.success {
-            background: #22c55e;
-            color: #fff;
-        }
-
-        .notification-banner.error {
-            background: #ff4444;
-            color: #fff;
-        }
-
-        .notification-icon {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 3px;
-        }
-
-        .notification-message {
-            font-size: 13px;
-            opacity: 0.95;
-        }
-
-        /* Welcome Message Styles */
-        .welcome-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .welcome-page.active {
-            display: flex;
-        }
-
-        .welcome-content {
-            text-align: center;
-            max-width: 400px;
-        }
-
-        .welcome-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: welcomePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes welcomePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .welcome-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-info {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .welcome-info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .welcome-info-row:last-child {
-            border-bottom: none;
-        }
-
-        .welcome-info-label {
-            color: #00ffff;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .welcome-info-value {
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .welcome-continue-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #00ff88, #00ffff);
-            border: none;
-            border-radius: 10px;
-            color: #1a0033;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .welcome-continue-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
-        }
-
-        /* Info Pages Styles */
-        .info-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
-            z-index: 10000;
-            display: none;
-            overflow-y: auto;
-        }
-
-        .info-page.active {
-            display: block;
-        }
-
-        .info-content {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            padding-bottom: 100px;
-        }
-
-        .info-section {
-            margin-bottom: 30px;
-        }
-
-        .info-section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 15px;
-        }
-
-        .info-section-content {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .info-section-content p {
-            margin-bottom: 12px;
-        }
-
-        .info-section-content ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .info-section-content li {
-            margin-bottom: 8px;
-        }
-
-        .info-image {
-            width: 100%;
-            max-width: 400px;
-            margin: 20px auto;
-            display: block;
-            border-radius: 15px;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .contact-card-title {
-            font-weight: 700;
-            color: #00ffff;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .contact-card-content {
-            color: #ccc;
-            font-size: 14px;
-        }
-
-        .agent-cooperation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .agent-cooperation-table th,
-        .agent-cooperation-table td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .agent-cooperation-table th {
-            background: rgba(0, 255, 255, 0.2);
-            font-weight: 700;
-            color: #00ffff;
-        }
-
-        .agent-cooperation-table td {
-            color: #fff;
-        }
-
-        .highlight-box {
-            background: rgba(0, 255, 255, 0.1);
-            border-left: 4px solid #00ffff;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-        }
-
-        .highlight-box p {
-            margin: 0;
-            color: #fff;
-        }
+/* ============= AUTHENTICATION SYSTEM STYLES ============= */
+.auth-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.auth-overlay.active {
+    display: block;
+}
+
+.auth-container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #00ffff, #0099ff);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.auth-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    font-size: 15px;
+    color: #00ffff;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    color: #888;
+}
+
+.auth-tab.active {
+    background: linear-gradient(135deg, #00ffff, #0099ff);
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #00ffff;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 45px 14px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.form-input::placeholder {
+    color: #666;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+.input-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #00ffff;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.toggle-password svg {
+    width: 100%;
+    height: 100%;
+    fill: #666;
+}
+
+.validation-hint {
+    font-size: 11px;
+    margin-top: 5px;
+    color: #666;
+    display: none;
+}
+
+.validation-hint.show {
+    display: block;
+}
+
+.validation-hint.error {
+    color: #ff4444;
+}
+
+.validation-hint.success {
+    color: #22c55e;
+}
+
+.password-strength {
+    margin-top: 8px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    display: none;
+}
+
+.password-strength.show {
+    display: block;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background: #ff4444;
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background: #ffaa00;
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background: #22c55e;
+}
+
+.password-requirements {
+    font-size: 11px;
+    margin-top: 8px;
+    color: #666;
+}
+
+.password-requirements div {
+    margin: 3px 0;
+}
+
+.password-requirements div.met {
+    color: #22c55e;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.checkbox-group label {
+    font-size: 13px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.checkbox-group label a {
+    color: #00ffff;
+    text-decoration: none;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.auth-btn-primary {
+    background: linear-gradient(135deg, #ff6b9d, #c06cef);
+    color: #fff;
+}
+
+.auth-btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+}
+
+.auth-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.auth-btn-google {
+    background: #fff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.auth-btn-google:hover {
+    background: #f0f0f0;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.auth-divider span {
+    color: #666;
+    font-size: 13px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #00ffff;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.back-arrow:hover {
+    background: rgba(0, 255, 255, 0.2);
+}
+
+.back-arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: #00ffff;
+}
+
+/* ============= NOTIFICATION SYSTEM ============= */
+.global-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 100000;
+    transition: transform 0.3s ease;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.global-notification.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.global-notification.success {
+    background: #22c55e;
+    color: #fff;
+}
+
+.global-notification.error {
+    background: #ff4444;
+    color: #fff;
+}
+
+/* ============= WELCOME MESSAGE ============= */
+.welcome-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10001;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-overlay.active {
+    display: flex;
+}
+
+.welcome-card {
+    background: linear-gradient(135deg, #1a0033, #330066);
+    border: 2px solid #00ffff;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0, 255, 255, 0.5);
+    animation: welcomeSlideIn 0.5s ease;
+}
+
+@keyframes welcomeSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.welcome-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.welcome-info {
+    font-size: 16px;
+    color: #fff;
+    margin: 15px 0;
+}
+
+.welcome-email {
+    font-size: 14px;
+    color: #00ffff;
+    margin-bottom: 30px;
+}
+
+.welcome-btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #00ffff, #0099ff);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.welcome-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+}
+
+/* ============= CONTENT PAGES ============= */
+.content-page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 80px 20px 40px;
+}
+
+.content-page.active {
+    display: block;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-header {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00ffff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.content-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.content-section h2 {
+    font-size: 20px;
+    color: #00ffff;
+    margin-bottom: 15px;
+}
+
+.content-section h3 {
+    font-size: 18px;
+    color: #00ffff;
+    margin: 20px 0 10px 0;
+}
+
+.content-section p {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.content-section ul {
+    margin-left: 20px;
+    color: #ccc;
+}
+
+.content-section li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.content-image {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.agent-table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.agent-table th,
+.agent-table td {
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 12px;
+    text-align: center;
+}
+
+.agent-table th {
+    background: rgba(0, 255, 255, 0.1);
+    color: #00ffff;
+    font-weight: 700;
+}
+
+.agent-table td {
+    color: #ccc;
+}
+
     </style>
 </head>
 <body>
+
+    <!-- Global Notification System -->
+    <div id="globalNotification" class="global-notification"></div>
+
+
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay" class="welcome-overlay">
+        <div class="welcome-card">
+            <div class="welcome-title">Welcome!</div>
+            <div class="welcome-info">Username: <span id="welcomeUsername"></span></div>
+            <div class="welcome-email">Email: <span id="welcomeEmail"></span></div>
+            <button class="welcome-btn" onclick="closeWelcome()">Get Started</button>
+        </div>
+    </div>
+
+
+    <!-- Authentication Overlay -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="back-arrow" id="authBackArrow" onclick="closeAuth()" style="display:none;">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="auth-logo">L</div>
+                <div class="auth-title">LuxeEarn</div>
+                <div class="auth-subtitle">Premium Investment Platform</div>
+            </div>
+            
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="showAuthTab('register')">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" style="display:block;">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <input type="email" class="form-input" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="validation-hint" id="loginEmailHint"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                            </div>
+                            <input type="password" class="form-input" id="loginPassword" placeholder="Enter password" required>
+                            <div class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn auth-btn-primary">Login</button>
+                    
+                    <a class="auth-link" onclick="showForgotPassword()">Forgot Password?</a>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="registerForm" style="display:none;">
+                    <button type="button" class="auth-btn auth-btn-google" onclick="signInWithGoogle()">
+                        <svg class="google-icon" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+                    
+                    <div class="auth-divider"><span>OR</span></div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <input type="email" class="form-input" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="validation-hint" id="registerEmailHint"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                            <input type="text" class="form-input" id="registerUsername" placeholder="Choose username" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                            </div>
+                            <input type="password" class="form-input" id="registerPassword" placeholder="Create password" required>
+                            <div class="toggle-password" onclick="togglePasswordVisibility('registerPassword')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                        </div>
+                        <div class="password-requirements" id="passwordRequirements">
+                            <div id="req-length">• At least 8 characters</div>
+                            <div id="req-uppercase">• One uppercase letter</div>
+                            <div id="req-lowercase">• One lowercase letter</div>
+                            <div id="req-number">• One number</div>
+                            <div id="req-special">• One special character</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                            </div>
+                            <input type="password" class="form-input" id="registerConfirmPassword" placeholder="Confirm password" required>
+                            <div class="toggle-password" onclick="togglePasswordVisibility('registerConfirmPassword')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="validation-hint" id="confirmPasswordHint"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Invitation Code (Optional)</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+                                </svg>
+                            </div>
+                            <input type="text" class="form-input" id="registerInviteCode" placeholder="Enter invitation code">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <input type="tel" class="form-input" id="registerPhone" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="validation-hint" id="phoneHint"></div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms">I agree to <a onclick="showContentPage('terms')">Terms & Conditions</a></label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreePrivacy" required>
+                        <label for="agreePrivacy">I agree to <a onclick="showContentPage('privacy')">Privacy Policy</a></label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn auth-btn-primary" id="registerBtn" disabled>Register Now</button>
+                    
+                    <div class="auth-link" onclick="showAuthTab('login')">Already have an account? Login</div>
+                </form>
+                
+                <!-- Forgot Password Form -->
+                <form id="forgotPasswordForm" style="display:none;">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <div class="input-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <input type="email" class="form-input" id="resetEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="validation-hint" id="resetEmailHint"></div>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn auth-btn-primary">Reset Password</button>
+                    
+                    <a class="auth-link" onclick="showAuthTab('login')">Back to Login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- About Us Page -->
+    <div id="aboutPage" class="content-page">
+        <div class="back-arrow" onclick="closeContentPage()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        <div class="content-container">
+            <h1 class="content-header">About Us</h1>
+            
+            <div class="content-section">
+                <h2>Welcome to LuxeEarn</h2>
+                <p>LuxeEarn is a leading quantitative trading and investment platform, designed to empower individuals worldwide to achieve financial freedom through intelligent crypto trading and team building.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Our Mission</h2>
+                <p>Our mission is to democratize access to advanced trading strategies and create opportunities for passive income generation. We combine cutting-edge technology with user-friendly interfaces to make crypto trading accessible to everyone.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Why Choose LuxeEarn?</h2>
+                <ul>
+                    <li><strong>Advanced Trading Algorithms:</strong> Our proprietary quantitative trading system analyzes market trends 24/7 to maximize your returns.</li>
+                    <li><strong>Team Building Rewards:</strong> Earn additional income by building your team and helping others succeed.</li>
+                    <li><strong>VIP Benefits:</strong> Unlock exclusive perks and higher earning potential as you level up.</li>
+                    <li><strong>Secure Platform:</strong> Your assets and data are protected with bank-level security.</li>
+                    <li><strong>24/7 Support:</strong> Our dedicated team is always here to help you succeed.</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>Our Vision</h2>
+                <p>We envision a world where financial opportunities are available to everyone, regardless of their background or experience. LuxeEarn is more than just a platform—it's a community of like-minded individuals working together toward financial independence.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Page -->
+    <div id="termsPage" class="content-page">
+        <div class="back-arrow" onclick="closeContentPage()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        <div class="content-container">
+            <h1 class="content-header">Terms of Service</h1>
+            
+            <div class="content-section">
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing and using LuxeEarn, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use our services.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>2. User Accounts</h2>
+                <p>You must be at least 18 years old to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+                <ul>
+                    <li>Provide accurate and complete information during registration</li>
+                    <li>Keep your password secure and confidential</li>
+                    <li>Notify us immediately of any unauthorized access</li>
+                    <li>One account per person is allowed</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>3. Trading and Investment</h2>
+                <p>LuxeEarn provides a platform for crypto trading and investment. All trading involves risk, and you may lose some or all of your capital. Past performance does not guarantee future results.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>4. Prohibited Activities</h2>
+                <p>Users are strictly prohibited from:</p>
+                <ul>
+                    <li>Creating multiple accounts</li>
+                    <li>Engaging in fraudulent activities</li>
+                    <li>Attempting to manipulate the platform</li>
+                    <li>Using automated systems without authorization</li>
+                    <li>Violating any applicable laws or regulations</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>5. Fees and Payments</h2>
+                <p>LuxeEarn may charge fees for certain services. All fees will be clearly disclosed before you complete a transaction. Payments are non-refundable except as required by law.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>6. Termination</h2>
+                <p>We reserve the right to suspend or terminate your account at any time for violation of these terms or for any other reason at our discretion.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>7. Limitation of Liability</h2>
+                <p>LuxeEarn and its affiliates shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the platform.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>8. Changes to Terms</h2>
+                <p>We reserve the right to modify these terms at any time. Continued use of the platform after changes constitutes acceptance of the modified terms.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>9. Contact Information</h2>
+                <p>If you have questions about these Terms of Service, please contact us through our support channels.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Page -->
+    <div id="privacyPage" class="content-page">
+        <div class="back-arrow" onclick="closeContentPage()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        <div class="content-container">
+            <h1 class="content-header">Privacy Policy</h1>
+            
+            <div class="content-section">
+                <h2>1. Information We Collect</h2>
+                <p>We collect information that you provide directly to us, including:</p>
+                <ul>
+                    <li>Personal information (name, email, phone number)</li>
+                    <li>Account credentials</li>
+                    <li>Transaction history</li>
+                    <li>Communication preferences</li>
+                    <li>Device and usage information</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>2. How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide and improve our services</li>
+                    <li>Process your transactions</li>
+                    <li>Send you important updates and notifications</li>
+                    <li>Prevent fraud and enhance security</li>
+                    <li>Comply with legal obligations</li>
+                    <li>Personalize your experience</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>3. Information Sharing</h2>
+                <p>We do not sell your personal information. We may share your information with:</p>
+                <ul>
+                    <li>Service providers who assist in our operations</li>
+                    <li>Law enforcement when required by law</li>
+                    <li>Third parties with your consent</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>4. Data Security</h2>
+                <p>We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, alteration, and destruction.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>5. Cookies and Tracking</h2>
+                <p>We use cookies and similar tracking technologies to enhance your experience, analyze usage patterns, and improve our services. You can control cookie settings through your browser.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>6. Your Rights</h2>
+                <p>You have the right to:</p>
+                <ul>
+                    <li>Access your personal information</li>
+                    <li>Correct inaccurate data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Opt-out of marketing communications</li>
+                    <li>Object to certain processing activities</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>7. Data Retention</h2>
+                <p>We retain your personal information for as long as necessary to provide our services and comply with legal obligations. You may request deletion of your account at any time.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>8. Children's Privacy</h2>
+                <p>Our services are not intended for individuals under 18 years of age. We do not knowingly collect information from children.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>9. Changes to Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes through email or platform notifications.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>10. Contact Us</h2>
+                <p>If you have questions about our Privacy Policy or how we handle your data, please contact our support team.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contactPage" class="content-page">
+        <div class="back-arrow" onclick="closeContentPage()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        <div class="content-container">
+            <h1 class="content-header">Contact Us</h1>
+            
+            <div class="content-section">
+                <h2>Get in Touch</h2>
+                <p>We're here to help! Whether you have questions, need support, or want to learn more about our platform, our team is ready to assist you 24/7.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Support Channels</h2>
+                <p><strong>Live Chat:</strong> Click the support button in the bottom-left corner for instant assistance.</p>
+                <p><strong>Email Support:</strong> support@luxeearn.com</p>
+                <p><strong>Response Time:</strong> We typically respond within 24 hours.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Frequently Asked Questions</h2>
+                <h3>How do I start trading?</h3>
+                <p>After creating your account and completing verification, you can make your first deposit and start trading immediately using our intuitive platform.</p>
+                
+                <h3>What are the minimum deposit requirements?</h3>
+                <p>The minimum deposit varies by payment method. Check the Recharge section for current minimums.</p>
+                
+                <h3>How do withdrawals work?</h3>
+                <p>Withdrawals are typically processed within 24-48 hours. Navigate to the Withdraw section and follow the instructions.</p>
+                
+                <h3>Is my money safe?</h3>
+                <p>Yes, we use industry-leading security measures to protect your funds and personal information.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Business Inquiries</h2>
+                <p>For partnership opportunities and business inquiries, please email: business@luxeearn.com</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Office Hours</h2>
+                <p>Our customer support team is available 24/7 to assist you. Our business development team operates Monday through Friday, 9 AM - 6 PM EST.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agent Cooperation Page -->
+    <div id="agentPage" class="content-page">
+        <div class="back-arrow" onclick="closeContentPage()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        <div class="content-container">
+            <h1 class="content-header">Agent Cooperation</h1>
+            
+            <div class="content-section">
+                <h2>Join Our Agent Network</h2>
+                <p>Become a LuxeEarn agent and earn substantial rewards by growing our community. Our agent program offers multiple income streams and unlimited earning potential.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Commission Structure</h2>
+                <table class="agent-table">
+                    <tr>
+                        <th>Level</th>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>ABC</th>
+                    </tr>
+                    <tr>
+                        <td>L1-10</td>
+                        <td>5%</td>
+                        <td>2%</td>
+                        <td>1%</td>
+                        <td>8%</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="content-section">
+                <h2>Cumulative Rewards</h2>
+                <p>✅ <strong>Cumulative rewards:</strong> If the number of inviters reaches 10, an additional reward of 3 USDT will be given. If the number of inviters reaches 20, an additional reward of 10 USDT will be awarded. If the number of inviters reaches 30, an additional reward of 20 USDT will be awarded. If the number of inviters reaches 40, an additional reward of 30 USDT will be awarded.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Viva-AI Global Partner Plan</h2>
+                <p>✅ <strong>Viva-AI Global Partner Plan:</strong> Recruit full-time agents globally, with a fixed monthly salary of 1,200 USDT for agents. The agent invites at least 20 A-level subordinates every month, and the total team recharge cannot be less than 2,000 USDT. If you are interested, please contact the recruitment manager.</p>
+                <p><strong>Note:</strong> VIPO does not participate in rebates, please upgrade as soon as possible! To qualify as a partner, you need to submit an application. Salary will be paid every other month after approval.</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>Income Analysis</h2>
+                <p>According to the platform's early comprehensive data analysis, <strong>the investment income of members themselves only accounts for 20-30% of the total income, while the income from developing subordinate teams will account for more than 70%</strong>. Passive income is the largest source of income! The most effective way to get rid of financial difficulties is to act now, don't hesitate, start building your team!</p>
+            </div>
+            
+            <div class="content-section">
+                <h2>How to Become an Agent</h2>
+                <ul>
+                    <li>Register and verify your account</li>
+                    <li>Complete your profile</li>
+                    <li>Contact our agent support team</li>
+                    <li>Receive your unique referral code</li>
+                    <li>Start inviting and earning!</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h2>Agent Benefits</h2>
+                <ul>
+                    <li>Unlimited earning potential</li>
+                    <li>Passive income from your team's activities</li>
+                    <li>Exclusive agent training and resources</li>
+                    <li>Priority customer support</li>
+                    <li>Monthly bonus opportunities</li>
+                    <li>Recognition and rewards program</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
     <div id="notification" class="notification"></div>
 
     <div class="popup-announcement" id="popupAnnouncement">
@@ -2348,7 +2830,7 @@
         </div>
     </div>
 
-    <div id="mainContent"><div class="header">
+    <div class="header">
         <div class="header-left">
             <div class="logo-small">
                 <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'; this.parentElement.innerHTML='L';">
@@ -2406,7 +2888,7 @@
         </div>
 
         <div class="nav-grid">
-            <a href="recharge.html" class="nav-grid-item" onclick="return false;">
+            <a href="recharge.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#4ade80">
                         <path d="M21,14c0,0.55-0.45,1-1,1h-2.5c-0.55,0-1,0.45-1,1v2.5c0,0.55-0.45,1-1,1h-9c-0.55,0-1-0.45-1-1V16c0-0.55-0.45-1-1-1H2 c-0.55,0-1-0.45-1-1V9c0-0.55,0.45-1,1-1h2.5c0.55,0,1-0.45,1-1V4.5c0-0.55,0.45-1,1-1h9c0.55,0,1,0.45,1,1V7c0,0.55,0.45,1,1,1H20 c0.55,0,1,0.45,1,1V14z M11,7v4H8v2h3v4l5-5L11,7z"/>
@@ -2415,7 +2897,7 @@
                 <span>Recharge</span>
             </a>
 
-            <a href="withdraw.html" class="nav-grid-item" onclick="return false;">
+            <a href="withdraw.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#fb923c">
                         <path d="M11.8,10.9c-2.27-0.59-3-1.2-3-2.15c0-1.09,1.01-1.85,2.7-1.85c1.78,0,2.44,0.85,2.5,2.1h2.21c-0.07-1.72-1.12-3.3-3.21-3.81 V3h-3v2.16c-1.94,0.42-3.5,1.68-3.5,3.61c0,2.31,1.91,3.46,4.7,4.13c2.5,0.6,3,1.48,3,2.41c0,0.69-0.49,1.79-2.7,1.79 c-2.06,0-2.87-0.92-2.98-2.1h-2.2c0.12,2.19,1.76,3.42,3.68,3.83V21h3v-2.15c1.95-0.37,3.5-1.5,3.5-3.55 C16.2,12.72,14.07,11.5,11.8,10.9z"/>
@@ -2424,7 +2906,7 @@
                 <span>Withdraw</span>
             </a>
 
-            <a href="contact.html" class="nav-grid-item" onclick="return false;">
+            <a href="contact.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#a78bfa">
                         <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M13,19h-2v-2h2V19z M15.07,11.25 l-0.9,0.92C13.45,12.9,13,13.5,13,15h-2v-0.5c0-1.1,0.45-2.1,1.17-2.83l1.24-1.26c0.37-0.36,0.59-0.86,0.59-1.41 c0-1.1-0.9-2-2-2s-2,0.9-2,2H8c0-2.21,1.79-4,4-4s4,1.79,4,4C16,9.89,15.64,10.64,15.07,11.25z"/>
@@ -2433,7 +2915,7 @@
                 <span>Help</span>
             </a>
 
-            <a href="team.html" class="nav-grid-item" onclick="return false;">
+            <a href="team.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#22d3ee">
                         <path d="M16,11c1.66,0,2.99-1.34,2.99-3S17.66,5,16,5s-3,1.34-3,3S14.34,11,16,11z M8,11c1.66,0,2.99-1.34,2.99-3S9.66,5,8,5 S5,6.34,5,8S6.34,11,8,11z M8,13c-2.33,0-7,1.17-7,3.5V19h14v-2.5C15,14.17,10.33,13,8,13z M16,13c-0.29,0-0.62,0.02-0.97,0.05 c1.16,0.84,1.97,1.97,1.97,3.45V19h6v-2.5C23,14.17,18.33,13,16,13z"/>
@@ -2442,7 +2924,7 @@
                 <span>Team</span>
             </a>
 
-            <a href="https://tinyurl.com/Swift-support" target="_blank" class="nav-grid-item" onclick="return false;">
+            <a href="https://tinyurl.com/Swift-support" target="_blank" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#818cf8">
                         <path d="M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10 C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.71,1.39-3.1,3.1-3.1 s3.1,1.39,3.1,3.1V8z"/>
@@ -2451,7 +2933,7 @@
                 <span>Download APP</span>
             </a>
 
-            <a href="activity.html" class="nav-grid-item" onclick="return false;">
+            <a href="activity.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#f87171">
                         <path d="M16,6l2.29,2.29-4.88,4.88-4-4L2,16.59L3.41,18l6-6l4,4l6.3-6.29L22,12V6H16z"/>
@@ -2460,7 +2942,7 @@
                 <span>Activity</span>
             </a>
 
-            <a href="agent.html" class="nav-grid-item" onclick="return false;">
+            <a href="agent.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#60a5fa">
                         <path d="M16.5,12C19,12,21,10,21,7.5S19,3,16.5,3S12,5,12,7.5S14,12,16.5,12z M9,11c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4 S5,4.79,5,7C5,9.21,6.79,11,9,11z M16.5,14c-3.17,0-9.5,1.59-9.5,4.75V21h19v-2.25C26,15.59,19.67,14,16.5,14z M9,13 c-3.33,0-10,1.67-10,5v3h9v-2.25c0-1.15,0.42-2.69,3-4.33C10.07,13.76,9.46,13,9,13z"/>
@@ -2469,7 +2951,7 @@
                 <span>Agent Cooperation</span>
             </a>
 
-            <a href="reffer.html" class="nav-grid-item" onclick="return false;">
+            <a href="reffer.html" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#facc15">
                         <path d="M16,11c1.66,0,2.99-1.34,2.99-3S17.66,5,16,5s-3,1.34-3,3S14.34,11,16,11z M8,11c1.66,0,2.99-1.34,2.99-3S9.66,5,8,5 S5,6.34,5,8S6.34,11,8,11z M8,13c-2.33,0-7,1.17-7,3.5V19h14v-2.5C15,14.17,10.33,13,8,13z M16,13c-0.29,0-0.62,0.02-0.97,0.05 c0.02,0.01,0.03,0.03,0.04,0.04c1.14,0.83,1.93,1.94,1.93,3.41V19h6v-2.5C23,14.17,18.33,13,16,13z M12.51,4.05 C13.43,5.11,14,6.49,14,8s-0.57,2.89-1.49,3.95C14.47,11.7,16,10.04,16,8S14.47,4.3,12.51,4.05z"/>
@@ -3125,19 +3607,13 @@
             </svg>
             <span class="nav-label">Home</span>
         </div>
-        <div class="nav-item" onclick="navigateWithAuth('tasks.html')">
+        <div class="nav-item" onclick="openPage('tasks.html')">
             <svg viewBox="0 0 24 24">
                 <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
             </svg>
             <span class="nav-label">Tasks</span>
         </div>
-        <div class="nav-item" onclick="navigateWithAuth('invest.html')">
-            <svg viewBox="0 0 24 24">
-                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
-            </svg>
-            <span class="nav-label">Invest</span>
-        </div>
-        <div class="nav-item" onclick="navigateWithAuth('team.html')">
+        <div class="nav-item" onclick="openPage('team.html')">
             <svg viewBox="0 0 24 24">
                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
             </svg>
@@ -3152,6 +3628,48 @@
     </div>
 
     <script>
+        function checkAuth() {
+            const userData = localStorage.getItem('luxeEarnUser');
+            
+            if (!userData) {
+                window.location.href = 'login.html';
+                return false;
+            }
+
+            try {
+                const user = JSON.parse(userData);
+                const loginTime = user.loginTime || user.registrationDate;
+                
+                if (!loginTime) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                const currentTime = new Date().getTime();
+                const loginTimestamp = new Date(loginTime).getTime();
+                const hoursPassed = (currentTime - loginTimestamp) / (1000 * 60 * 60);
+                
+                if (hoursPassed >= 24) {
+                    localStorage.removeItem('luxeEarnUser');
+                    localStorage.removeItem('rememberMe');
+                    localStorage.removeItem('luxeearn_popup_seen');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                const userEmailEl = document.getElementById('userEmail');
+                if (userEmailEl && user.email) {
+                    userEmailEl.textContent = user.email;
+                }
+
+                return true;
+            } catch (e) {
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        checkAuth();
 
         const cryptoConfig = [
             { id: 'bitcoin', symbol: 'BTC', pair: 'BTC/USDT', icon: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png', basePrice: 92000 },
@@ -3567,20 +4085,10 @@
         }
 
         function handleLogout() {
-            // Use the new Firebase logout handler
-            if (typeof window.handleLogout !== 'undefined') {
-                window.handleLogout();
-            } else {
-                // Fallback to clearing data and showing auth page
-                localStorage.removeItem('luxeEarnUser');
-                localStorage.removeItem('rememberMe');
-                localStorage.removeItem('luxeearn_popup_seen');
-                localStorage.removeItem('luxeearn_last_login');
-                localStorage.removeItem('luxeearn_user_data');
-                
-                // Show embedded auth page instead of redirecting
-                showAuthPage('login');
-            }
+            localStorage.removeItem('luxeEarnUser');
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('luxeearn_popup_seen');
+            window.location.href = 'login.html';
         }
 
         initializeCryptoData();
@@ -3645,1205 +4153,601 @@ function shrinkVideo() {
 }
 </script>
 
+<script type="module">
+// ============= FIREBASE CONFIGURATION AND INITIALIZATION =============
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    sendPasswordResetEmail,
+    signOut,
+    onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// Firebase configuration (hardcoded as requested)
+const firebaseConfig = {
+    apiKey: "AIzaSyBtx-D3nbl1lKOhCzEixDZRgRDM4NbtOBE",
+    authDomain: "swiftauth-5fcb5.firebaseapp.com",
+    projectId: "swiftauth-5fcb5",
+    storageBucket: "swiftauth-5fcb5.firebasestorage.app",
+    messagingSenderId: "990160652137",
+    appId: "1:990160652137:web:abac238567edfdb5671ff8",
+    measurementId: "G-5C1DS28B5S"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+// ============= APPLICATION STATE =============
+window.App = {
+    currentUser: null,
+    pendingAction: null,
+    navigationStack: []
+};
+
+// ============= NOTIFICATION SYSTEM =============
+window.showGlobalNotification = function(message, type = 'success') {
+    const notification = document.getElementById('globalNotification');
+    notification.textContent = message;
+    notification.className = `global-notification ${type}`;
+    notification.classList.add('show');
     
-    <!-- Notification Banner -->
-    <div id="notificationBanner" class="notification-banner">
-        <div class="notification-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            </svg>
-        </div>
-        <div class="notification-content">
-            <div class="notification-title">Success</div>
-            <div class="notification-message">Operation completed successfully</div>
-        </div>
-    </div>
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+};
 
-    <!-- Login/Register Page -->
-    <div id="loginPage" class="auth-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideAuthPages()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Authentication</div>
-        </div>
-        
-        <div class="auth-container">
-            <div class="auth-logo">
-                <div class="auth-logo-img">
-                    <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'; this.parentElement.textContent='L'">
-                </div>
-                <div class="auth-title">LuxeEarn</div>
-                <div class="auth-subtitle">Premium Investment Platform</div>
-            </div>
-
-            <div class="auth-tabs">
-                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-                <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
-            </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="email" 
-                            id="loginEmail" 
-                            class="form-input" 
-                            placeholder="Enter your email"
-                            oninput="onEmailInput('loginEmail', 'loginEmailError')"
-                            required
-                        >
-                    </div>
-                    <div id="loginEmailError" class="validation-message"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="password" 
-                            id="loginPassword" 
-                            class="form-input" 
-                            placeholder="Enter password"
-                            required
-                        >
-                        <div class="toggle-password" onclick="togglePassword('loginPassword')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">Login</button>
-
-                <div class="auth-footer-link">
-                    <a href="#" onclick="event.preventDefault(); showAuthPage('forgot')">Forgot Password?</a>
-                </div>
-            </form>
-
-            <!-- Register Form -->
-            <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
-                <button type="button" class="google-signin-btn" onclick="handleGoogleSignIn()">
-                    <svg width="20" height="20" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    Sign up with Google
-                </button>
-
-                <div class="divider">OR</div>
-
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="email" 
-                            id="registerEmail" 
-                            class="form-input" 
-                            placeholder="Enter your email"
-                            oninput="onEmailInput('registerEmail', 'registerEmailError')"
-                            required
-                        >
-                    </div>
-                    <div id="registerEmailError" class="validation-message"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Username</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="text" 
-                            id="registerUsername" 
-                            class="form-input" 
-                            placeholder="Choose username"
-                            required
-                        >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="password" 
-                            id="registerPassword" 
-                            class="form-input" 
-                            placeholder="Create password"
-                            oninput="onPasswordInput('registerPassword', 'registerPasswordStrength', 'registerPasswordError'); onConfirmPasswordInput()"
-                            required
-                        >
-                        <div class="toggle-password" onclick="togglePassword('registerPassword')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="password-strength">
-                        <div id="registerPasswordStrength" class="password-strength-bar"></div>
-                    </div>
-                    <div id="registerPasswordError" class="validation-message"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Confirm Password</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="password" 
-                            id="registerConfirmPassword" 
-                            class="form-input" 
-                            placeholder="Confirm password"
-                            oninput="onConfirmPasswordInput()"
-                            required
-                        >
-                        <div class="toggle-password" onclick="togglePassword('registerConfirmPassword')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div id="confirmPasswordError" class="validation-message"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Invitation Code (Optional)</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="text" 
-                            id="registerInviteCode" 
-                            class="form-input" 
-                            placeholder="Enter invitation code"
-                        >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="tel" 
-                            id="registerPhone" 
-                            class="form-input" 
-                            placeholder="Enter phone number"
-                            oninput="onPhoneInput('registerPhone', 'registerPhoneError')"
-                            required
-                        >
-                    </div>
-                    <div id="registerPhoneError" class="validation-message"></div>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="termsCheckbox" required>
-                    <label class="checkbox-label" for="termsCheckbox">
-                        I agree to <a href="#" onclick="event.preventDefault(); showInfoPage('terms')">Terms & Conditions</a>
-                    </label>
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="privacyCheckbox" required>
-                    <label class="checkbox-label" for="privacyCheckbox">
-                        I agree to <a href="#" onclick="event.preventDefault(); showInfoPage('privacy')">Privacy Policy</a>
-                    </label>
-                </div>
-
-                <button type="submit" class="submit-btn">Register Now</button>
-
-                <div class="auth-footer-link">
-                    Already have an account? <a href="#" onclick="event.preventDefault(); switchAuthTab('login')">Login</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Forgot Password Page -->
-    <div id="forgotPage" class="auth-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="showAuthPage('login')">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Reset Password</div>
-        </div>
-        
-        <div class="auth-container">
-            <div class="auth-logo">
-                <div class="auth-logo-img">
-                    <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'; this.parentElement.textContent='L'">
-                </div>
-                <div class="auth-title">LuxeEarn</div>
-                <div class="auth-subtitle">Premium Investment Platform</div>
-            </div>
-
-            <form onsubmit="handleForgotPassword(event)">
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <div class="form-input-wrapper">
-                        <div class="input-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                        </div>
-                        <input 
-                            type="email" 
-                            id="forgotEmail" 
-                            class="form-input" 
-                            placeholder="Enter your email"
-                            oninput="onEmailInput('forgotEmail', 'forgotEmailError')"
-                            required
-                        >
-                    </div>
-                    <div id="forgotEmailError" class="validation-message"></div>
-                </div>
-
-                <button type="submit" class="submit-btn">Reset Password</button>
-
-                <div class="auth-footer-link">
-                    <a href="#" onclick="event.preventDefault(); showAuthPage('login')">Back to Login</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Welcome Page -->
-    <div id="welcomePage" class="welcome-page">
-        <div class="welcome-content">
-            <div class="welcome-icon">🎉</div>
-            <div class="welcome-title">Welcome!</div>
-            
-            <div class="welcome-info">
-                <div class="welcome-info-row">
-                    <div class="welcome-info-label">Username:</div>
-                    <div class="welcome-info-value" id="welcomeUsername">-</div>
-                </div>
-                <div class="welcome-info-row">
-                    <div class="welcome-info-label">Email:</div>
-                    <div class="welcome-info-value" id="welcomeEmail">-</div>
-                </div>
-            </div>
-            
-            <button class="welcome-continue-btn" onclick="continueToApp()">Continue to App</button>
-        </div>
-    </div>
-
-    <!-- About Us Page -->
-    <div id="aboutPage" class="info-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideInfoPage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">About Us</div>
-        </div>
-        
-        <div class="info-content">
-            <div class="info-section">
-                <div class="info-section-title">Who We Are</div>
-                <div class="info-section-content">
-                    <p>LuxeEarn is a leading quantitative trading and investment platform that provides cutting-edge financial technology solutions to investors worldwide.</p>
-                    <p>Founded with a vision to democratize advanced trading strategies, we combine artificial intelligence, machine learning, and sophisticated algorithms to deliver consistent returns to our users.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Our Mission</div>
-                <div class="info-section-content">
-                    <p>To empower individuals globally with access to institutional-grade trading technology, enabling everyone to participate in and benefit from the cryptocurrency revolution.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">What We Offer</div>
-                <div class="info-section-content">
-                    <ul>
-                        <li>Advanced quantitative trading algorithms</li>
-                        <li>Real-time market analysis and insights</li>
-                        <li>Multiple VIP levels with increasing benefits</li>
-                        <li>Team building and referral rewards</li>
-                        <li>24/7 customer support</li>
-                        <li>Secure and transparent transactions</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Our Technology</div>
-                <div class="info-section-content">
-                    <p>We integrate with leading cryptocurrency exchanges including Binance, OKX, Huobi, and Coinbase to ensure:</p>
-                    <ul>
-                        <li>Real-time price feeds and execution</li>
-                        <li>Maximum liquidity and best prices</li>
-                        <li>Diversified risk management</li>
-                        <li>Industry-leading security standards</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms of Service Page -->
-    <div id="termsPage" class="info-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideInfoPage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Terms of Service</div>
-        </div>
-        
-        <div class="info-content">
-            <div class="info-section">
-                <div class="info-section-title">1. Acceptance of Terms</div>
-                <div class="info-section-content">
-                    <p>By accessing and using LuxeEarn, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">2. User Accounts</div>
-                <div class="info-section-content">
-                    <p>Users must:</p>
-                    <ul>
-                        <li>Provide accurate and complete information during registration</li>
-                        <li>Maintain the security of their account credentials</li>
-                        <li>Be at least 18 years of age</li>
-                        <li>Comply with all applicable laws and regulations</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">3. Trading Risks</div>
-                <div class="info-section-content">
-                    <p>Cryptocurrency trading involves substantial risk of loss. Users acknowledge that:</p>
-                    <ul>
-                        <li>Past performance does not guarantee future results</li>
-                        <li>Market prices can be volatile and unpredictable</li>
-                        <li>They should only invest funds they can afford to lose</li>
-                        <li>LuxeEarn does not guarantee any specific returns</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">4. Fees and Payments</div>
-                <div class="info-section-content">
-                    <p>Users agree to pay all applicable fees as outlined in their chosen VIP level. All fees are non-refundable unless otherwise stated.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">5. Prohibited Activities</div>
-                <div class="info-section-content">
-                    <p>Users may not:</p>
-                    <ul>
-                        <li>Engage in fraudulent or illegal activities</li>
-                        <li>Manipulate or attempt to manipulate the platform</li>
-                        <li>Share account credentials with others</li>
-                        <li>Reverse engineer or copy our technology</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">6. Termination</div>
-                <div class="info-section-content">
-                    <p>LuxeEarn reserves the right to suspend or terminate accounts that violate these terms or engage in suspicious activities.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Page -->
-    <div id="privacyPage" class="info-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideInfoPage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Privacy Policy</div>
-        </div>
-        
-        <div class="info-content">
-            <div class="info-section">
-                <div class="info-section-title">1. Information We Collect</div>
-                <div class="info-section-content">
-                    <p>We collect the following types of information:</p>
-                    <ul>
-                        <li><strong>Personal Information:</strong> Name, email address, phone number, and payment information</li>
-                        <li><strong>Usage Data:</strong> Trading activity, platform interactions, and preferences</li>
-                        <li><strong>Technical Data:</strong> IP address, browser type, device information, and cookies</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">2. How We Use Your Information</div>
-                <div class="info-section-content">
-                    <p>Your information is used to:</p>
-                    <ul>
-                        <li>Provide and improve our services</li>
-                        <li>Process transactions and manage your account</li>
-                        <li>Send important notifications and updates</li>
-                        <li>Comply with legal obligations</li>
-                        <li>Prevent fraud and enhance security</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">3. Information Sharing</div>
-                <div class="info-section-content">
-                    <p>We do not sell your personal information. We may share data with:</p>
-                    <ul>
-                        <li>Service providers who assist in platform operations</li>
-                        <li>Law enforcement when legally required</li>
-                        <li>Business partners with your explicit consent</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">4. Data Security</div>
-                <div class="info-section-content">
-                    <p>We implement industry-standard security measures including:</p>
-                    <ul>
-                        <li>Encryption of sensitive data</li>
-                        <li>Secure server infrastructure</li>
-                        <li>Regular security audits</li>
-                        <li>Two-factor authentication options</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">5. Your Rights</div>
-                <div class="info-section-content">
-                    <p>You have the right to:</p>
-                    <ul>
-                        <li>Access your personal data</li>
-                        <li>Request correction of inaccurate data</li>
-                        <li>Request deletion of your data</li>
-                        <li>Opt-out of marketing communications</li>
-                        <li>Export your data in a portable format</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">6. Cookies and Tracking</div>
-                <div class="info-section-content">
-                    <p>We use cookies to enhance user experience, analyze platform usage, and remember your preferences. You can control cookie settings through your browser.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">7. Data Retention</div>
-                <div class="info-section-content">
-                    <p>We retain your personal information for as long as necessary to provide services and comply with legal obligations. Inactive accounts may be archived after 2 years.</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">8. Contact Us</div>
-                <div class="info-section-content">
-                    <p>For privacy-related questions or concerns, please contact our Data Protection Officer at privacy@luxeearn.com</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Page -->
-    <div id="contactPage" class="info-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideInfoPage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Contact Us</div>
-        </div>
-        
-        <div class="info-content">
-            <div class="info-section">
-                <div class="info-section-title">Get In Touch</div>
-                <div class="info-section-content">
-                    <p>We're here to help! Reach out to us through any of the following channels:</p>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-card-title">📧 Email Support</div>
-                <div class="contact-card-content">
-                    <p>support@luxeearn.com</p>
-                    <p style="font-size: 12px; color: #888;">Average response time: 2-4 hours</p>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-card-title">💬 Live Chat</div>
-                <div class="contact-card-content">
-                    <p>Available 24/7 on our platform</p>
-                    <p style="font-size: 12px; color: #888;">Click the support button in the app</p>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-card-title">📱 Telegram Community</div>
-                <div class="contact-card-content">
-                    <p>@LuxeEarnOfficial</p>
-                    <p style="font-size: 12px; color: #888;">Join our community for updates and support</p>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-card-title">🌐 Social Media</div>
-                <div class="contact-card-content">
-                    <p>Twitter: @LuxeEarn</p>
-                    <p>Facebook: /LuxeEarnOfficial</p>
-                    <p>Instagram: @luxeearn_official</p>
-                </div>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-card-title">🏢 Business Inquiries</div>
-                <div class="contact-card-content">
-                    <p>business@luxeearn.com</p>
-                    <p style="font-size: 12px; color: #888;">For partnerships and business proposals</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Office Hours</div>
-                <div class="info-section-content">
-                    <p><strong>Customer Support:</strong> 24/7</p>
-                    <p><strong>Business Department:</strong> Monday - Friday, 9:00 AM - 6:00 PM (UTC)</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Agent Cooperation Page -->
-    <div id="agentPage" class="info-page">
-        <div class="auth-header">
-            <div class="back-arrow" onclick="hideInfoPage()">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                </svg>
-            </div>
-            <div class="auth-header-title">Agent Cooperation</div>
-        </div>
-        
-        <div class="info-content">
-            <div class="info-section">
-                <div class="info-section-title">Commission Structure</div>
-                <div class="info-section-content">
-                    <p>Earn generous commissions by becoming a LuxeEarn agent!</p>
-                </div>
-
-                <table class="agent-cooperation-table">
-                    <thead>
-                        <tr>
-                            <th>Level</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>ABC</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>L1-10</td>
-                            <td>5%</td>
-                            <td>2%</td>
-                            <td>1%</td>
-                            <td>8%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Cumulative Rewards</div>
-                <div class="info-section-content">
-                    <div class="highlight-box">
-                        <p>✅ <strong>Cumulative rewards:</strong> If the number of inviters reaches 10, an additional reward of 3 USDT will be given. If the number of inviters reaches 20, an additional reward of 10 USDT will be awarded. If the number of inviters reaches 30, an additional reward of 20 USDT will be awarded. And if the number of inviters reaches 40, an additional reward of 30 USDT will be awarded.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Viva-AI Global Partner Plan</div>
-                <div class="info-section-content">
-                    <div class="highlight-box">
-                        <p>✅ <strong>Viva-AI Global Partner Plan:</strong> Recruit full-time agents globally, with a fixed monthly salary of 1,200 USDT for agents. The agent invites at least 20 A-level subordinates every month, and the total team recharge cannot be less than 2,000 USDT. If you are interested, please contact the recruitment manager.</p>
-                        <p><strong>Note:</strong> VIPO does not participate in rebates, please upgrade as soon as possible! To qualify as a partner, you need to submit an application. Salary will be paid every other month after approval.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Income Distribution</div>
-                <div class="info-section-content">
-                    <p class="highlight-box">(According to the platform's early comprehensive data analysis, the investment income of members themselves only accounts for 20-30% of the total income, while the income from developing subordinate teams will account for more than 70%. Passive income is the largest source of income! The most effective way to get rid of financial difficulties is to act now, don't hesitate, start building your team!)</p>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">How to Become an Agent</div>
-                <div class="info-section-content">
-                    <ul>
-                        <li>Sign up for a LuxeEarn account</li>
-                        <li>Complete your profile verification</li>
-                        <li>Apply for agent status through your profile</li>
-                        <li>Start inviting users and earning commissions</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="info-section">
-                <div class="info-section-title">Contact Agent Department</div>
-                <div class="info-section-content">
-                    <p>For more information about the agent program, contact:</p>
-                    <p><strong>Email:</strong> agents@luxeearn.com</p>
-                    <p><strong>Telegram:</strong> @LuxeEarnAgents</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+// ============= VALIDATION UTILITIES =============
+const Validation = {
+    validateEmail: function(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    },
     
-    
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
-                 signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBtx-D3nbl1lKOhCzEixDZRgRDM4NbtOBE",
-            authDomain: "swiftauth-5fcb5.firebaseapp.com",
-            projectId: "swiftauth-5fcb5",
-            storageBucket: "swiftauth-5fcb5.firebasestorage.app",
-            messagingSenderId: "990160652137",
-            appId: "1:990160652137:web:abac238567edfdb5671ff8",
-            measurementId: "G-5C1DS28B5S"
+    validatePasswordStrength: function(password) {
+        const requirements = {
+            length: password.length >= 8,
+            uppercase: /[A-Z]/.test(password),
+            lowercase: /[a-z]/.test(password),
+            number: /[0-9]/.test(password),
+            special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
         };
+        
+        const score = Object.values(requirements).filter(Boolean).length;
+        let strength = 'weak';
+        if (score >= 4) strength = 'medium';
+        if (score === 5) strength = 'strong';
+        
+        return { requirements, strength, score };
+    },
+    
+    validatePhone: function(phone) {
+        const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/;
+        return phoneRegex.test(phone);
+    }
+};
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const analytics = getAnalytics(app);
-        const googleProvider = new GoogleAuthProvider();
-
-        window.firebaseAuth = auth;
-        window.googleProvider = googleProvider;
-        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
-        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
-        window.signInWithPopup = signInWithPopup;
-        window.sendPasswordResetEmail = sendPasswordResetEmail;
-        window.signOut = signOut;
-    </script>
-
-    <!-- Authentication JavaScript -->
-    <script>
-        function checkAuth() {
-            const lastLogin = localStorage.getItem('luxeearn_last_login');
-            const userData = localStorage.getItem('luxeearn_user_data');
-            
-            if (!lastLogin || !userData) {
-                showAuthPage('login');
-                return false;
-            }
-            
-            const now = Date.now();
-            const timeDiff = now - parseInt(lastLogin);
-            const hoursDiff = timeDiff / (1000 * 60 * 60);
-            
-            if (hoursDiff >= 24) {
-                showNotification('Session Expired', 'Please login again', 'error');
-                clearAuthData();
-                showAuthPage('login');
-                return false;
-            }
-            
-            return true;
-        }
-
-        function clearAuthData() {
-            localStorage.removeItem('luxeearn_last_login');
-            localStorage.removeItem('luxeearn_user_data');
-        }
-
-        function showAuthPage(page) {
-            document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
-            const authPage = document.getElementById(page + 'Page');
-            if (authPage) {
-                authPage.classList.add('active');
-                document.getElementById('mainContent').style.display = 'none';
-            }
-        }
-
-        function hideAuthPages() {
-            document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
-            document.getElementById('mainContent').style.display = 'block';
-        }
-
-        function showNotification(title, message, type) {
-            const notification = document.getElementById('notificationBanner');
-            notification.className = 'notification-banner ' + type;
-            notification.querySelector('.notification-title').textContent = title;
-            notification.querySelector('.notification-message').textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        function switchAuthTab(tab) {
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (tab === 'login') {
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('registerForm').style.display = 'none';
+// ============= FORM VALIDATION LISTENERS =============
+function setupValidation() {
+    // Login email validation
+    const loginEmail = document.getElementById('loginEmail');
+    if (loginEmail) {
+        loginEmail.addEventListener('blur', function() {
+            const hint = document.getElementById('loginEmailHint');
+            if (this.value && !Validation.validateEmail(this.value)) {
+                hint.textContent = 'Please enter a valid email address';
+                hint.className = 'validation-hint show error';
             } else {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('registerForm').style.display = 'block';
-            }
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function validatePassword(password) {
-            const hasNumber = /\d/.test(password);
-            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-            const hasLower = /[a-z]/.test(password);
-            const hasUpper = /[A-Z]/.test(password);
-            const isLongEnough = password.length >= 8;
-            
-            return {
-                valid: hasNumber && hasSpecial && hasLower && hasUpper && isLongEnough,
-                strength: (hasNumber ? 1 : 0) + (hasSpecial ? 1 : 0) + (hasLower ? 1 : 0) + (hasUpper ? 1 : 0) + (isLongEnough ? 1 : 0)
-            };
-        }
-
-        function validatePhone(phone) {
-            const re = /^[\d\s\-\+\(\)]{10,}$/;
-            return re.test(phone);
-        }
-
-        function onEmailInput(inputId, errorId) {
-            const input = document.getElementById(inputId);
-            const error = document.getElementById(errorId);
-            const email = input.value.trim();
-            
-            if (email && !validateEmail(email)) {
-                error.textContent = 'Please enter a valid email address';
-                error.className = 'validation-message error';
-                return false;
-            } else if (email) {
-                error.textContent = 'Valid email';
-                error.className = 'validation-message success';
-                return true;
-            } else {
-                error.className = 'validation-message';
-                return false;
-            }
-        }
-
-        function onPasswordInput(inputId, strengthBarId, errorId) {
-            const input = document.getElementById(inputId);
-            const strengthBar = document.getElementById(strengthBarId);
-            const error = document.getElementById(errorId);
-            const password = input.value;
-            
-            if (password) {
-                const validation = validatePassword(password);
-                strengthBar.parentElement.classList.add('active');
-                
-                if (validation.strength <= 2) {
-                    strengthBar.className = 'password-strength-bar weak';
-                    error.textContent = 'Weak password - add uppercase, lowercase, numbers and special characters';
-                    error.className = 'validation-message error';
-                } else if (validation.strength <= 4) {
-                    strengthBar.className = 'password-strength-bar medium';
-                    error.textContent = 'Medium strength - add more variety';
-                    error.className = 'validation-message error';
-                } else {
-                    strengthBar.className = 'password-strength-bar strong';
-                    error.textContent = 'Strong password';
-                    error.className = 'validation-message success';
-                }
-                
-                return validation.valid;
-            } else {
-                strengthBar.parentElement.classList.remove('active');
-                error.className = 'validation-message';
-                return false;
-            }
-        }
-
-        function onPhoneInput(inputId, errorId) {
-            const input = document.getElementById(inputId);
-            const error = document.getElementById(errorId);
-            const phone = input.value.trim();
-            
-            if (phone && !validatePhone(phone)) {
-                error.textContent = 'Please enter a valid phone number (min 10 digits)';
-                error.className = 'validation-message error';
-                return false;
-            } else if (phone) {
-                error.textContent = 'Valid phone number';
-                error.className = 'validation-message success';
-                return true;
-            } else {
-                error.className = 'validation-message';
-                return false;
-            }
-        }
-
-        function onConfirmPasswordInput() {
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            const error = document.getElementById('confirmPasswordError');
-            
-            if (confirmPassword && password !== confirmPassword) {
-                error.textContent = 'Passwords do not match';
-                error.className = 'validation-message error';
-                return false;
-            } else if (confirmPassword && password === confirmPassword) {
-                error.textContent = 'Passwords match';
-                error.className = 'validation-message success';
-                return true;
-            } else {
-                error.className = 'validation-message';
-                return false;
-            }
-        }
-
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
-
-        async function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!validateEmail(email)) {
-                showNotification('Invalid Email', 'Please enter a valid email address', 'error');
-                return;
-            }
-            
-            try {
-                const userCredential = await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
-                const user = userCredential.user;
-                
-                const userData = {
-                    email: user.email,
-                    username: user.email.split('@')[0],
-                    uid: user.uid
-                };
-                
-                localStorage.setItem('luxeearn_user_data', JSON.stringify(userData));
-                localStorage.setItem('luxeearn_last_login', Date.now().toString());
-                localStorage.setItem('luxeearn_email', user.email);
-                localStorage.setItem('luxeearn_username', userData.username);
-                
-                showNotification('Login Successful', 'Welcome back!', 'success');
-                setTimeout(() => {
-                    hideAuthPages();
-                    displayUserInfo();
-                }, 1500);
-            } catch (error) {
-                console.error('Login error:', error);
-                showNotification('Login Failed', error.message, 'error');
-            }
-        }
-
-        async function handleRegister(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('registerEmail').value.trim();
-            const username = document.getElementById('registerUsername').value.trim();
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            const phone = document.getElementById('registerPhone').value.trim();
-            const termsAccepted = document.getElementById('termsCheckbox').checked;
-            const privacyAccepted = document.getElementById('privacyCheckbox').checked;
-            
-            if (!validateEmail(email)) {
-                showNotification('Invalid Email', 'Please enter a valid email address', 'error');
-                return;
-            }
-            
-            if (!username) {
-                showNotification('Username Required', 'Please enter a username', 'error');
-                return;
-            }
-            
-            const passwordValidation = validatePassword(password);
-            if (!passwordValidation.valid) {
-                showNotification('Weak Password', 'Password must contain uppercase, lowercase, numbers, and special characters (min 8 chars)', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showNotification('Password Mismatch', 'Passwords do not match', 'error');
-                return;
-            }
-            
-            if (phone && !validatePhone(phone)) {
-                showNotification('Invalid Phone', 'Please enter a valid phone number', 'error');
-                return;
-            }
-            
-            if (!termsAccepted || !privacyAccepted) {
-                showNotification('Terms Required', 'Please accept Terms & Conditions and Privacy Policy', 'error');
-                return;
-            }
-            
-            try {
-                const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
-                const user = userCredential.user;
-                
-                const userData = {
-                    email: email,
-                    username: username,
-                    phone: phone,
-                    uid: user.uid
-                };
-                
-                localStorage.setItem('luxeearn_user_data', JSON.stringify(userData));
-                localStorage.setItem('luxeearn_last_login', Date.now().toString());
-                localStorage.setItem('luxeearn_email', email);
-                localStorage.setItem('luxeearn_username', username);
-                localStorage.setItem('luxeearn_phone', phone);
-                
-                showNotification('Registration Successful', 'Account created successfully!', 'success');
-                
-                setTimeout(() => {
-                    showWelcomeMessage(userData);
-                }, 1500);
-            } catch (error) {
-                console.error('Registration error:', error);
-                showNotification('Registration Failed', error.message, 'error');
-            }
-        }
-
-        async function handleGoogleSignIn() {
-            try {
-                const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
-                const user = result.user;
-                
-                const userData = {
-                    email: user.email,
-                    username: user.displayName || user.email.split('@')[0],
-                    uid: user.uid
-                };
-                
-                localStorage.setItem('luxeearn_user_data', JSON.stringify(userData));
-                localStorage.setItem('luxeearn_last_login', Date.now().toString());
-                localStorage.setItem('luxeearn_email', user.email);
-                localStorage.setItem('luxeearn_username', userData.username);
-                
-                const isNewUser = result._tokenResponse?.isNewUser;
-                
-                if (isNewUser) {
-                    showWelcomeMessage(userData);
-                } else {
-                    showNotification('Login Successful', 'Welcome back!', 'success');
-                    setTimeout(() => {
-                        hideAuthPages();
-                        displayUserInfo();
-                    }, 1500);
-                }
-            } catch (error) {
-                console.error('Google sign-in error:', error);
-                showNotification('Google Sign-in Failed', error.message, 'error');
-            }
-        }
-
-        async function handleForgotPassword(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('forgotEmail').value.trim();
-            
-            if (!validateEmail(email)) {
-                showNotification('Invalid Email', 'Please enter a valid email address', 'error');
-                return;
-            }
-            
-            try {
-                await window.sendPasswordResetEmail(window.firebaseAuth, email);
-                showNotification('Email Sent', 'Password reset email has been sent. Please check your inbox.', 'success');
-                
-                setTimeout(() => {
-                    showAuthPage('login');
-                }, 2000);
-            } catch (error) {
-                console.error('Password reset error:', error);
-                showNotification('Reset Failed', error.message, 'error');
-            }
-        }
-
-        function maskEmail(email) {
-            const parts = email.split('@');
-            if (parts.length !== 2) return email;
-            
-            const username = parts[0];
-            const domain = parts[1];
-            
-            if (username.length <= 2) {
-                return username[0] + '***@' + domain;
-            }
-            
-            const visibleChars = Math.ceil(username.length * 0.3);
-            const maskedPart = '*'.repeat(username.length - visibleChars * 2);
-            
-            return username.substring(0, visibleChars) + maskedPart + username.substring(username.length - visibleChars) + '@' + domain;
-        }
-
-        function showWelcomeMessage(userData) {
-            const welcomePage = document.getElementById('welcomePage');
-            document.getElementById('welcomeUsername').textContent = userData.username;
-            document.getElementById('welcomeEmail').textContent = maskEmail(userData.email);
-            
-            welcomePage.classList.add('active');
-            
-            document.querySelectorAll('.auth-page').forEach(p => p.classList.remove('active'));
-        }
-
-        function continueToApp() {
-            document.getElementById('welcomePage').classList.remove('active');
-            hideAuthPages();
-            displayUserInfo();
-        }
-
-        function displayUserInfo() {
-            const userData = JSON.parse(localStorage.getItem('luxeearn_user_data') || '{}');
-            const userEmailElement = document.getElementById('userEmail');
-            
-            if (userEmailElement && userData.email) {
-                userEmailElement.textContent = maskEmail(userData.email);
-            }
-        }
-
-        function showInfoPage(pageName) {
-            if (!checkAuth()) {
-                return;
-            }
-            
-            document.querySelectorAll('.info-page').forEach(p => p.classList.remove('active'));
-            const page = document.getElementById(pageName + 'Page');
-            if (page) {
-                page.classList.add('active');
-                document.getElementById('mainContent').style.display = 'none';
-            }
-        }
-
-        function hideInfoPage() {
-            document.querySelectorAll('.info-page').forEach(p => p.classList.remove('active'));
-            document.getElementById('mainContent').style.display = 'block';
-        }
-
-        function navigateWithAuth(url) {
-            if (!checkAuth()) {
-                return false;
-            }
-            window.location.href = url;
-            return true;
-        }
-
-        async function handleLogout() {
-            try {
-                await window.signOut(window.firebaseAuth);
-                clearAuthData();
-                showNotification('Logged Out', 'You have been logged out successfully', 'success');
-                setTimeout(() => {
-                    showAuthPage('login');
-                }, 1500);
-            } catch (error) {
-                console.error('Logout error:', error);
-                showNotification('Logout Failed', error.message, 'error');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-grid-item, .action-card, .nav-item');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href') || this.getAttribute('onclick');
-                    if (href && href !== 'index.html' && !href.includes('showInfoPage') && !checkAuth()) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    }
-                });
-            });
-            
-            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
-                if (checkAuth()) {
-                    displayUserInfo();
-                }
+                hint.className = 'validation-hint';
             }
         });
-    </script>
-    </div></body>
+    }
+    
+    // Register email validation
+    const registerEmail = document.getElementById('registerEmail');
+    if (registerEmail) {
+        registerEmail.addEventListener('blur', function() {
+            const hint = document.getElementById('registerEmailHint');
+            if (this.value && !Validation.validateEmail(this.value)) {
+                hint.textContent = 'Please enter a valid email address';
+                hint.className = 'validation-hint show error';
+            } else if (this.value) {
+                hint.textContent = 'Email looks good!';
+                hint.className = 'validation-hint show success';
+            }
+        });
+    }
+    
+    // Password strength validation
+    const registerPassword = document.getElementById('registerPassword');
+    if (registerPassword) {
+        registerPassword.addEventListener('input', function() {
+            const strengthBar = document.getElementById('passwordStrength');
+            const bar = document.getElementById('passwordStrengthBar');
+            const requirements = document.getElementById('passwordRequirements');
+            
+            if (this.value) {
+                strengthBar.classList.add('show');
+                const validation = Validation.validatePasswordStrength(this.value);
+                
+                // Update strength bar
+                bar.className = `password-strength-bar ${validation.strength}`;
+                
+                // Update requirements
+                document.getElementById('req-length').className = validation.requirements.length ? 'met' : '';
+                document.getElementById('req-uppercase').className = validation.requirements.uppercase ? 'met' : '';
+                document.getElementById('req-lowercase').className = validation.requirements.lowercase ? 'met' : '';
+                document.getElementById('req-number').className = validation.requirements.number ? 'met' : '';
+                document.getElementById('req-special').className = validation.requirements.special ? 'met' : '';
+                
+                checkRegisterFormValidity();
+            } else {
+                strengthBar.classList.remove('show');
+            }
+        });
+    }
+    
+    // Confirm password validation
+    const confirmPassword = document.getElementById('registerConfirmPassword');
+    if (confirmPassword) {
+        confirmPassword.addEventListener('blur', function() {
+            const password = document.getElementById('registerPassword').value;
+            const hint = document.getElementById('confirmPasswordHint');
+            
+            if (this.value && this.value !== password) {
+                hint.textContent = 'Passwords do not match';
+                hint.className = 'validation-hint show error';
+            } else if (this.value && this.value === password) {
+                hint.textContent = 'Passwords match!';
+                hint.className = 'validation-hint show success';
+            }
+            checkRegisterFormValidity();
+        });
+    }
+    
+    // Phone validation
+    const registerPhone = document.getElementById('registerPhone');
+    if (registerPhone) {
+        registerPhone.addEventListener('blur', function() {
+            const hint = document.getElementById('phoneHint');
+            if (this.value && !Validation.validatePhone(this.value)) {
+                hint.textContent = 'Please enter a valid phone number';
+                hint.className = 'validation-hint show error';
+            } else if (this.value) {
+                hint.textContent = 'Phone number looks good!';
+                hint.className = 'validation-hint show success';
+            }
+            checkRegisterFormValidity();
+        });
+    }
+    
+    // Terms and privacy checkboxes
+    const agreeTerms = document.getElementById('agreeTerms');
+    const agreePrivacy = document.getElementById('agreePrivacy');
+    if (agreeTerms) agreeTerms.addEventListener('change', checkRegisterFormValidity);
+    if (agreePrivacy) agreePrivacy.addEventListener('change', checkRegisterFormValidity);
+}
+
+function checkRegisterFormValidity() {
+    const email = document.getElementById('registerEmail').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+    const phone = document.getElementById('registerPhone').value;
+    const agreeTerms = document.getElementById('agreeTerms').checked;
+    const agreePrivacy = document.getElementById('agreePrivacy').checked;
+    
+    const passwordValidation = Validation.validatePasswordStrength(password);
+    const isPasswordStrong = passwordValidation.score === 5;
+    const passwordsMatch = password === confirmPassword && password.length > 0;
+    const emailValid = Validation.validateEmail(email);
+    const phoneValid = Validation.validatePhone(phone);
+    
+    const isValid = email && username && password && confirmPassword && phone &&
+                   emailValid && phoneValid && isPasswordStrong && passwordsMatch &&
+                   agreeTerms && agreePrivacy;
+    
+    document.getElementById('registerBtn').disabled = !isValid;
+}
+
+// ============= PASSWORD VISIBILITY TOGGLE =============
+window.togglePasswordVisibility = function(inputId) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+    } else {
+        input.type = 'password';
+    }
+};
+
+// ============= AUTHENTICATION TAB SWITCHING =============
+window.showAuthTab = function(tab) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    const tabs = document.querySelectorAll('.auth-tab');
+    
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'none';
+    forgotForm.style.display = 'none';
+    tabs.forEach(t => t.classList.remove('active'));
+    
+    if (tab === 'login') {
+        loginForm.style.display = 'block';
+        tabs[0].classList.add('active');
+    } else if (tab === 'register') {
+        registerForm.style.display = 'block';
+        tabs[1].classList.add('active');
+    }
+};
+
+window.showForgotPassword = function() {
+    const loginForm = document.getElementById('loginForm');
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    loginForm.style.display = 'none';
+    forgotForm.style.display = 'block';
+};
+
+// ============= AUTHENTICATION FLOWS =============
+
+// Login
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const rememberMe = document.getElementById('rememberMe').checked;
+    
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Get stored user data
+        const userData = JSON.parse(localStorage.getItem('luxeearn_users') || '{}');
+        const userProfile = userData[user.email] || { email: user.email };
+        
+        // Save auth data
+        const authData = {
+            email: user.email,
+            username: userProfile.username || user.email.split('@')[0],
+            phone: userProfile.phone || '',
+            lastAuthAt: Date.now(),
+            rememberMe: rememberMe
+        };
+        
+        localStorage.setItem('luxeearn_auth', JSON.stringify(authData));
+        
+        showGlobalNotification('Login successful! Welcome back.', 'success');
+        
+        setTimeout(() => {
+            closeAuth();
+            if (window.App.pendingAction) {
+                const action = window.App.pendingAction;
+                window.App.pendingAction = null;
+                if (action.type === 'navigate') {
+                    window.location.href = action.url;
+                }
+            }
+        }, 1000);
+    } catch (error) {
+        let errorMessage = 'Login failed. Please try again.';
+        if (error.code === 'auth/user-not-found') {
+            errorMessage = 'No account found with this email.';
+        } else if (error.code === 'auth/wrong-password') {
+            errorMessage = 'Incorrect password.';
+        } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'Invalid email address.';
+        }
+        showGlobalNotification(errorMessage, 'error');
+    }
+});
+
+// Register
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('registerEmail').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
+    const phone = document.getElementById('registerPhone').value;
+    const inviteCode = document.getElementById('registerInviteCode').value;
+    
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Save user profile data
+        const userData = JSON.parse(localStorage.getItem('luxeearn_users') || '{}');
+        userData[email] = { username, phone, inviteCode, createdAt: Date.now() };
+        localStorage.setItem('luxeearn_users', JSON.stringify(userData));
+        
+        // Save auth data
+        const authData = {
+            email: email,
+            username: username,
+            phone: phone,
+            lastAuthAt: Date.now(),
+            isNewUser: true
+        };
+        localStorage.setItem('luxeearn_auth', JSON.stringify(authData));
+        
+        showGlobalNotification('Account created successfully!', 'success');
+        
+        setTimeout(() => {
+            closeAuth();
+            showWelcome(username, email);
+        }, 1000);
+    } catch (error) {
+        let errorMessage = 'Registration failed. Please try again.';
+        if (error.code === 'auth/email-already-in-use') {
+            errorMessage = 'Email is already registered.';
+        } else if (error.code === 'auth/weak-password') {
+            errorMessage = 'Password is too weak.';
+        }
+        showGlobalNotification(errorMessage, 'error');
+    }
+});
+
+// Google Sign-In
+window.signInWithGoogle = async function() {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        
+        // Save auth data
+        const authData = {
+            email: user.email,
+            username: user.displayName || user.email.split('@')[0],
+            phone: '',
+            lastAuthAt: Date.now(),
+            isNewUser: result.additionalUserInfo.isNewUser
+        };
+        
+        localStorage.setItem('luxeearn_auth', JSON.stringify(authData));
+        
+        // Save to users database
+        const userData = JSON.parse(localStorage.getItem('luxeearn_users') || '{}');
+        if (!userData[user.email]) {
+            userData[user.email] = {
+                username: user.displayName,
+                phone: '',
+                createdAt: Date.now()
+            };
+            localStorage.setItem('luxeearn_users', JSON.stringify(userData));
+        }
+        
+        showGlobalNotification('Signed in with Google successfully!', 'success');
+        
+        setTimeout(() => {
+            closeAuth();
+            if (result.additionalUserInfo.isNewUser) {
+                showWelcome(authData.username, user.email);
+            } else if (window.App.pendingAction) {
+                const action = window.App.pendingAction;
+                window.App.pendingAction = null;
+                if (action.type === 'navigate') {
+                    window.location.href = action.url;
+                }
+            }
+        }, 1000);
+    } catch (error) {
+        console.error('Google sign-in error:', error);
+        showGlobalNotification('Google sign-in failed. Please try again.', 'error');
+    }
+};
+
+// Forgot Password
+document.getElementById('forgotPasswordForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('resetEmail').value;
+    
+    try {
+        await sendPasswordResetEmail(auth, email);
+        showGlobalNotification('Password reset email sent! Check your inbox.', 'success');
+        setTimeout(() => {
+            showAuthTab('login');
+        }, 2000);
+    } catch (error) {
+        let errorMessage = 'Failed to send reset email.';
+        if (error.code === 'auth/user-not-found') {
+            errorMessage = 'No account found with this email.';
+        }
+        showGlobalNotification(errorMessage, 'error');
+    }
+});
+
+// ============= WELCOME MESSAGE =============
+function showWelcome(username, email) {
+    const maskedEmail = maskEmail(email);
+    document.getElementById('welcomeUsername').textContent = username;
+    document.getElementById('welcomeEmail').textContent = maskedEmail;
+    document.getElementById('welcomeOverlay').classList.add('active');
+}
+
+function maskEmail(email) {
+    const [localPart, domain] = email.split('@');
+    if (localPart.length <= 3) {
+        return email;
+    }
+    const visible = 2;
+    const masked = '*'.repeat(localPart.length - (visible * 2));
+    return `${localPart.substring(0, visible)}${masked}${localPart.substring(localPart.length - visible)}@${domain}`;
+}
+
+window.closeWelcome = function() {
+    document.getElementById('welcomeOverlay').classList.remove('active');
+    const authData = JSON.parse(localStorage.getItem('luxeearn_auth') || '{}');
+    authData.isNewUser = false;
+    localStorage.setItem('luxeearn_auth', JSON.stringify(authData));
+};
+
+// ============= AUTHENTICATION GATE =============
+function isAuthenticatedAndFresh() {
+    const authData = JSON.parse(localStorage.getItem('luxeearn_auth') || 'null');
+    if (!authData) return false;
+    
+    const now = Date.now();
+    const dayInMs = 24 * 60 * 60 * 1000;
+    const timeSinceAuth = now - (authData.lastAuthAt || 0);
+    
+    // Check if more than 24 hours have passed
+    if (timeSinceAuth > dayInMs) {
+        return false;
+    }
+    
+    // Check Firebase auth state
+    return auth.currentUser !== null;
+}
+
+window.requireAuth = function(url) {
+    if (!isAuthenticatedAndFresh()) {
+        window.App.pendingAction = { type: 'navigate', url: url };
+        showAuth();
+    } else {
+        window.location.href = url;
+    }
+};
+
+window.showAuth = function() {
+    const authOverlay = document.getElementById('authOverlay');
+    const backArrow = document.getElementById('authBackArrow');
+    authOverlay.classList.add('active');
+    
+    // Show back arrow if there's content behind
+    if (window.App.navigationStack.length > 0) {
+        backArrow.style.display = 'flex';
+    } else {
+        backArrow.style.display = 'none';
+    }
+};
+
+window.closeAuth = function() {
+    document.getElementById('authOverlay').classList.remove('active');
+    window.App.pendingAction = null;
+};
+
+// ============= CONTENT PAGE NAVIGATION =============
+window.showContentPage = function(pageId) {
+    const pages = {
+        'about': 'aboutPage',
+        'terms': 'termsPage',
+        'privacy': 'privacyPage',
+        'contact': 'contactPage',
+        'agent': 'agentPage'
+    };
+    
+    const pageElement = document.getElementById(pages[pageId]);
+    if (pageElement) {
+        // Save current state
+        window.App.navigationStack.push(pageId);
+        
+        // Hide auth overlay if showing
+        document.getElementById('authOverlay').classList.remove('active');
+        
+        // Show content page
+        pageElement.classList.add('active');
+    }
+};
+
+window.closeContentPage = function() {
+    // Hide all content pages
+    document.querySelectorAll('.content-page').forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Pop navigation stack
+    window.App.navigationStack.pop();
+    
+    // Restore previous state
+    if (window.App.navigationStack.length > 0) {
+        const prevPage = window.App.navigationStack[window.App.navigationStack.length - 1];
+        showContentPage(prevPage);
+    }
+};
+
+window.showHome = function() {
+    // Hide all overlays
+    document.querySelectorAll('.content-page, .auth-overlay').forEach(el => {
+        el.classList.remove('active');
+    });
+    window.App.navigationStack = [];
+};
+
+// ============= AUTH STATE OBSERVER =============
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        window.App.currentUser = user;
+        
+        // Update lastAuthAt
+        const authData = JSON.parse(localStorage.getItem('luxeearn_auth') || '{}');
+        authData.lastAuthAt = Date.now();
+        localStorage.setItem('luxeearn_auth', JSON.stringify(authData));
+    } else {
+        window.App.currentUser = null;
+    }
+});
+
+// ============= INITIALIZE ON PAGE LOAD =============
+document.addEventListener('DOMContentLoaded', () => {
+    setupValidation();
+    
+    // Intercept all clickable elements that should require auth
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('.nav-grid-item, .action-card, .unlock-btn, .pick-btn');
+        if (target && target.hasAttribute('onclick')) {
+            const onclickAttr = target.getAttribute('onclick');
+            
+            // Skip if already has requireAuth
+            if (onclickAttr.includes('requireAuth')) {
+                return;
+            }
+            
+            // Skip if it's a content page link
+            if (onclickAttr.includes('showContentPage')) {
+                return;
+            }
+            
+            // Skip home navigation
+            if (onclickAttr.includes('showHome')) {
+                return;
+            }
+            
+            // Check if requires auth
+            if (onclickAttr.includes('openPage') || onclickAttr.includes('.html')) {
+                if (!isAuthenticatedAndFresh()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Extract URL if possible
+                    const urlMatch = onclickAttr.match(/openPage\(['"]([^'"]+)['"]/);
+                    if (urlMatch) {
+                        window.App.pendingAction = { type: 'navigate', url: urlMatch[1] };
+                    }
+                    
+                    showAuth();
+                }
+            }
+        }
+    }, true); // Use capture phase
+    
+    // Check auth status on load
+    const authData = JSON.parse(localStorage.getItem('luxeearn_auth') || 'null');
+    if (authData && authData.isNewUser) {
+        setTimeout(() => {
+            showWelcome(authData.username, authData.email);
+        }, 500);
+    }
+});
+
+// Make functions globally available
+window.showAuthTab = showAuthTab;
+window.showForgotPassword = showForgotPassword;
+
+</script>
+\n</body>
 </html>
