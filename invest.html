@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Invest - LuxeEarn</title>
+    <meta name="description" content="Smart investment plans with LuxeEarn. Earn 15% daily returns on your crypto investments.">
+    
+    <link rel="icon" type="image/png" href="lexearn.png">
+    <link rel="apple-touch-icon" href="lexearn.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+            color: #fff;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #aaa;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .investment-list {
+            padding: 15px;
+        }
+
+        .investment-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .investment-card:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #000;
+        }
+
+        .card-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .card-detail {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 4px;
+        }
+
+        .card-price {
+            font-size: 14px;
+            color: #00ffff;
+            font-weight: 600;
+        }
+
+        .card-arrow {
+            font-size: 24px;
+            color: #aaa;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .empty-text {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .confirmation-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .confirmation-page.show {
+            display: block;
+        }
+
+        .confirmation-header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .confirmation-back {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .confirmation-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .confirmation-body {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .qty-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .invest-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .invest-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ffff;
+            margin: 25px 0 15px;
+        }
+
+        .project-intro {
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .intro-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00ffff;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .notification-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+        }
+
+        .notification-popup.show {
+            display: flex;
+        }
+
+        .notification-dialog {
+            background: rgba(30, 30, 50, 0.98);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 320px;
+            width: 85%;
+            text-align: center;
+        }
+
+        .notification-message {
+            font-size: 15px;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .notification-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .notification-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notification-btn.cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .notification-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .notification-btn.confirm {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #fff;
+        }
+
+        .notification-btn.confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            flex: 1;
+            max-width: 100px;
+            text-decoration: none;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #00ffff;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+        }
+
+        .floating-support {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .floating-support:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-support svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid #00ffff;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-to-top.show {
+            display: flex;
+        }
+
+        .scroll-to-top:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .scroll-to-top svg {
+            width: 24px;
+            height: 24px;
+            fill: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-title">Invest</div>
+    </div>
+
+    <div class="container">
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('smart-investment')">Smart investment</button>
+                <button class="tab" onclick="switchTab('investment-record')">Invest Record</button>
+            </div>
+        </div>
+
+        <div id="smart-investment" class="tab-content active">
+            <div class="investment-list">
+                <div class="investment-card" onclick="openConfirmation(10, 2105)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:10 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(60, 2330)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:60 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(200, 2322)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:200 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(500, 2450)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:500 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(1600, 2580)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:1600 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(3800, 2710)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:3800 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(5800, 2850)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:5800 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(7800, 2990)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:7800 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(10800, 3120)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:10800 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+
+                <div class="investment-card" onclick="openConfirmation(15800, 3250)">
+                    <div class="card-icon">
+                        <img src="vip photo.png" alt="VIP">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">Contract investment</div>
+                        <div class="card-detail">Daily Rate: 15.00%</div>
+                        <div class="card-detail">Cycle:180 Day</div>
+                        <div class="card-price">Price:15800 USDT</div>
+                    </div>
+                    <div class="card-arrow">›</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="investment-record" class="tab-content">
+            <div class="empty-state">
+                <div class="empty-icon">🐢</div>
+                <div class="empty-text">Empty</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmation-page" class="confirmation-page">
+        <div class="confirmation-header">
+            <span class="confirmation-back" onclick="closeConfirmation()">‹</span>
+            <span class="confirmation-title">Smart investment</span>
+        </div>
+        <div class="confirmation-body">
+            <div class="info-row">
+                <span class="info-label">Available Balance</span>
+                <span class="info-value" id="available-balance">0.000000USDT</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Price</span>
+                <span class="info-value" id="modal-price">0USDT</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Remaining Amount</span>
+                <span class="info-value" id="remaining-amount">0</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Purchase Limit</span>
+                <span class="info-value">No Limit(Bought0)</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Purchase Quantity</span>
+                <div class="quantity-control">
+                    <button class="qty-btn" onclick="decreaseQuantity()">-</button>
+                    <span class="qty-display" id="quantity">1</span>
+                    <button class="qty-btn" onclick="increaseQuantity()">+</button>
+                </div>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Cycle</span>
+                <span class="info-value">180Day</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Daily Rate</span>
+                <span class="info-value">15.00%</span>
+            </div>
+
+            <button class="invest-btn" id="invest-button" onclick="processInvestment()">
+                <span id="total-invest">0 USDT</span> Invest
+            </button>
+
+            <div class="section-title">Project Rule</div>
+            <div class="info-row">
+                <span class="info-label">Repayment</span>
+                <span class="info-value">Daily Interest Repayment</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Unit Price</span>
+                <span class="info-value" id="unit-price">0USDT</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Amount</span>
+                <span class="info-value" id="amount">1</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Daily Return</span>
+                <span class="info-value">15.00%</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Invest Cycle</span>
+                <span class="info-value">180Day</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Estimated Revenue</span>
+                <span class="info-value" id="estimated-revenue">0</span>
+            </div>
+
+            <div class="project-intro">
+                <div class="section-title">Project Introduction</div>
+                
+                <div class="intro-text">
+                    <strong>LuxeEarn</strong> is a quantitative investment platform based on artificial intelligence technology. It automatically formulates the best investment strategy for users through deep learning and quantitative analysis of market data. Whether you are a novice or an experienced investor, LuxeEarn can help you easily participate in quantitative trading and obtain stable returns.
+                </div>
+
+                <div class="intro-subtitle">What is quantitative investing?</div>
+                <div class="intro-text">
+                    Quantitative investment refers to the use of mathematical models and statistical data, combined with historical market data, to analyze and predict financial markets and automatically generate investment decisions. LuxeEarn automatically executes quantitative trading strategies through AI algorithms to help users achieve efficient and accurate investments.
+                </div>
+
+                <div class="intro-subtitle">How to use LuxeEarn for quantitative investment</div>
+
+                <div class="step-title">Step 1: Register and log in</div>
+                <div class="intro-text">
+                    First, visit the LuxeEarn platform, register an account and log in. After entering the platform, you will be able to see relevant information and functions of intelligent quantitative investment.
+                </div>
+
+                <div class="step-title">Step 2: Recharge</div>
+                <div class="intro-text">
+                    To start quantitative investing, you need to deposit USDT into your LuxeEarn account. The recharge amount depends on the star rating you choose, and different VIP levels enjoy different revenue ratios.
+                </div>
+
+                <div class="step-title">Step 3: Choose star rating</div>
+                <div class="intro-text">
+                    Based on the recharge amount, you will automatically unlock the corresponding star rating. The higher the star rating, the higher the proportion of your daily quantitative investment income.
+                </div>
+
+                <div class="step-title">Step 4: Start the intelligent quantitative robot</div>
+                <div class="intro-text">
+                    After the recharge is successful, the star rating will be automatically turned on, and the system will automatically start the intelligent quantification robot for you. Click the button to start the automatic quantification. An automatic quantification can be completed in 1-3 minutes without your manual operation. The robot will automatically trade according to market changes, ensuring that you receive stable investment returns every day.
+                </div>
+
+                <div class="step-title">Step 5: Check earnings and withdraw money</div>
+                <div class="intro-text">
+                    You can check daily quantitative earnings in real time on the platform account interface. LuxeEarn supports withdrawals at any time without charging any handling fees, ensuring that you can easily withdraw earnings.
+                </div>
+
+                <div class="intro-subtitle">Advantages of intelligent quantification</div>
+                <div class="intro-text">
+                    <strong>Fully automatic trading:</strong> No manual operation is required. The intelligent robot will automatically search for mainstream exchanges such as BTC, ETH, USDT, etc. to implement the optimal quantitative trading strategy.
+                </div>
+                <div class="intro-text">
+                    <strong>Accurate market analysis:</strong> It only takes a few minutes to automatically complete low-price buying and high-price selling, and quickly complete quantitative transactions.
+                </div>
+                <div class="intro-text">
+                    <strong>Efficient and stable income:</strong> Through different star ratings, users can enjoy stable quantitative investment income every day.
+                </div>
+
+                <div class="intro-subtitle">Summary</div>
+                <div class="intro-text">
+                    Through the LuxeEarn platform, quantitative investment has become simple and efficient. You only need to register, recharge, and start the intelligent quantitative robot without any operations, and you can obtain stable income every day. Start your journey of intelligent quantitative investment now and use AI technology to easily achieve wealth growth!
+                </div>
+                <div class="intro-text">
+                    If you need more help or technical support, please contact LuxeEarn online customer service.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-popup" class="notification-popup">
+        <div class="notification-dialog">
+            <div id="notification-message" class="notification-message">
+                Notification message
+            </div>
+            <div id="notification-buttons" class="notification-buttons">
+                <button class="notification-btn cancel" onclick="closeNotification()">Cancel</button>
+                <button class="notification-btn confirm" onclick="closeNotification()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-support">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+    </div>
+
+    <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24">
+            <path d="M7 14l5-5 5 5z"/>
+        </svg>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="invest.html" class="nav-item active">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+            </svg>
+            <span class="nav-label">Invest</span>
+        </a>
+        <a href="me.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span class="nav-label">Me</span>
+        </a>
+    </div>
+
+    <script>
+        let currentPrice = 0;
+        let currentQuantity = 1;
+        let currentRemaining = 0;
+
+        function getAvailableBalance() {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            return userData.balance || 0;
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function openConfirmation(price, remaining) {
+            currentPrice = price;
+            currentRemaining = remaining;
+            currentQuantity = 1;
+
+            const balance = getAvailableBalance();
+            document.getElementById('available-balance').textContent = balance.toFixed(6) + 'USDT';
+            document.getElementById('modal-price').textContent = price + 'USDT';
+            document.getElementById('remaining-amount').textContent = remaining;
+            document.getElementById('unit-price').textContent = price + 'USDT';
+            document.getElementById('quantity').textContent = currentQuantity;
+            document.getElementById('amount').textContent = currentQuantity;
+            
+            updateCalculations();
+            
+            document.getElementById('confirmation-page').classList.add('show');
+        }
+
+        function closeConfirmation() {
+            document.getElementById('confirmation-page').classList.remove('show');
+        }
+
+        function increaseQuantity() {
+            currentQuantity++;
+            updateQuantityDisplay();
+        }
+
+        function decreaseQuantity() {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                updateQuantityDisplay();
+            }
+        }
+
+        function updateQuantityDisplay() {
+            document.getElementById('quantity').textContent = currentQuantity;
+            document.getElementById('amount').textContent = currentQuantity;
+            updateCalculations();
+        }
+
+        function updateCalculations() {
+            const totalInvest = currentPrice * currentQuantity;
+            const estimatedRevenue = currentPrice * currentQuantity * 0.15 * 180;
+            
+            document.getElementById('total-invest').textContent = totalInvest.toFixed(2) + ' USDT';
+            document.getElementById('estimated-revenue').textContent = currentPrice + ' * ' + currentQuantity + ' * 15% * 180 = ' + estimatedRevenue.toFixed(2) + 'USDT';
+        }
+
+        function showNotification(message, showCancel = false, redirectToRecharge = false) {
+            const popup = document.getElementById('notification-popup');
+            const messageEl = document.getElementById('notification-message');
+            const buttonsEl = document.getElementById('notification-buttons');
+
+            messageEl.textContent = message;
+
+            if (showCancel) {
+                buttonsEl.innerHTML = `
+                    <button class="notification-btn cancel" onclick="closeNotification()">Cancel</button>
+                    <button class="notification-btn confirm" onclick="${redirectToRecharge ? 'redirectToRecharge()' : 'closeNotification()'}">${redirectToRecharge ? 'OK' : 'Confirm'}</button>
+                `;
+            } else {
+                buttonsEl.innerHTML = `
+                    <button class="notification-btn confirm" onclick="closeNotification()">OK</button>
+                `;
+            }
+
+            popup.classList.add('show');
+        }
+
+        function closeNotification() {
+            document.getElementById('notification-popup').classList.remove('show');
+        }
+
+        function redirectToRecharge() {
+            window.location.href = 'recharge.html';
+        }
+
+        function processInvestment() {
+            const balance = getAvailableBalance();
+            const totalInvest = currentPrice * currentQuantity;
+            
+            if (balance < totalInvest) {
+                showNotification('Balance not enough, Please recharge ' + totalInvest.toFixed(2) + 'USDT', false, true);
+                return;
+            }
+
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            userData.balance = balance - totalInvest;
+            
+            const investments = JSON.parse(localStorage.getItem('investments') || '[]');
+            investments.push({
+                price: currentPrice,
+                quantity: currentQuantity,
+                totalInvest: totalInvest,
+                estimatedRevenue: (currentPrice * currentQuantity * 0.15 * 180).toFixed(2),
+                dailyRate: '15.00%',
+                cycle: 180,
+                date: new Date().toISOString(),
+                status: 'Active'
+            });
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('investments', JSON.stringify(investments));
+            
+            closeConfirmation();
+            showNotification('Investment successful! Your contract is now active.', false, false);
+            
+            currentQuantity = 1;
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        });
+
+        window.onclick = function(event) {
+            const notificationPopup = document.getElementById('notification-popup');
+            if (event.target === notificationPopup) {
+                closeNotification();
+            }
+        }
+    </script>
+</body>
+</html>
