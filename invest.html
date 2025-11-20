@@ -107,7 +107,7 @@
         .investment-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 15px;
+            padding: 20px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -115,6 +115,20 @@
             transition: all 0.3s ease;
             cursor: pointer;
             border: 1px solid rgba(0, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+
+        .investment-card.loaded {
+            animation: cardSlideIn 0.5s ease forwards;
+        }
+
+        @keyframes cardSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .investment-card:hover {
@@ -123,9 +137,54 @@
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
         }
 
+        .investment-card.loading {
+            pointer-events: none;
+        }
+
+        .card-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .investment-card.loading .card-spinner {
+            display: block;
+        }
+
+        .card-spinner .dot {
+            width: 8px;
+            height: 8px;
+            background: #00ffff;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 3px;
+            animation: dotPulse 1.4s infinite ease-in-out both;
+        }
+
+        .card-spinner .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .card-spinner .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         .card-icon {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 10px;
             overflow: hidden;
             flex-shrink: 0;
@@ -502,9 +561,203 @@
             height: 24px;
             fill: #00ffff;
         }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.3s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .loader-dots .dot {
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: dotPulse 1.4s infinite ease-in-out both;
+        }
+
+        .loader-dots .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loader-dots .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        .investment-progress-container {
+            padding: 15px;
+        }
+
+        .progress-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .progress-item.loaded {
+            animation: cardSlideIn 0.5s ease forwards;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .progress-status {
+            background: linear-gradient(135deg, #0099ff, #00ffff);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .progress-status.completed {
+            background: #22c55e;
+        }
+
+        .progress-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .progress-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .progress-detail-label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .progress-detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00ffff;
+        }
+
+        .progress-bar-container {
+            margin-top: 15px;
+        }
+
+        .progress-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .progress-bar-percentage {
+            font-size: 12px;
+            font-weight: 600;
+            color: #00ffff;
+        }
+
+        .progress-bar-track {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0099ff, #00ffff);
+            border-radius: 10px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .progress-revenue {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .revenue-label {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .revenue-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #22c55e;
+        }
     </style>
 </head>
 <body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
     <div class="header">
         <div class="header-title">Invest</div>
     </div>
@@ -519,7 +772,12 @@
 
         <div id="smart-investment" class="tab-content active">
             <div class="investment-list">
-                <div class="investment-card" onclick="openConfirmation(10, 2105)">
+                <div class="investment-card" onclick="selectCard(this, 10, 2105)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -532,7 +790,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(60, 2330)">
+                <div class="investment-card" onclick="selectCard(this, 60, 2330)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -545,7 +808,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(200, 2322)">
+                <div class="investment-card" onclick="selectCard(this, 200, 2322)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -558,7 +826,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(500, 2450)">
+                <div class="investment-card" onclick="selectCard(this, 500, 2450)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -571,7 +844,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(1600, 2580)">
+                <div class="investment-card" onclick="selectCard(this, 1600, 2580)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -584,7 +862,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(3800, 2710)">
+                <div class="investment-card" onclick="selectCard(this, 3800, 2710)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -597,7 +880,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(5800, 2850)">
+                <div class="investment-card" onclick="selectCard(this, 5800, 2850)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -610,7 +898,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(7800, 2990)">
+                <div class="investment-card" onclick="selectCard(this, 7800, 2990)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -623,7 +916,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(10800, 3120)">
+                <div class="investment-card" onclick="selectCard(this, 10800, 3120)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -636,7 +934,12 @@
                     <div class="card-arrow">›</div>
                 </div>
 
-                <div class="investment-card" onclick="openConfirmation(15800, 3250)">
+                <div class="investment-card" onclick="selectCard(this, 15800, 3250)">
+                    <div class="card-spinner">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                     <div class="card-icon">
                         <img src="vip photo.png" alt="VIP">
                     </div>
@@ -652,9 +955,12 @@
         </div>
 
         <div id="investment-record" class="tab-content">
-            <div class="empty-state">
+            <div id="investment-progress-list" class="investment-progress-container">
+                <!-- Progress items will be dynamically inserted here -->
+            </div>
+            <div id="empty-progress" class="empty-state" style="display: none;">
                 <div class="empty-icon">🐢</div>
-                <div class="empty-text">Empty</div>
+                <div class="empty-text">No active investments</div>
             </div>
         </div>
     </div>
@@ -801,11 +1107,7 @@
         </div>
     </div>
 
-    <div class="floating-support">
-        <svg viewBox="0 0 24 24">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        </svg>
-    </div>
+    
 
     <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
         <svg viewBox="0 0 24 24">
@@ -820,6 +1122,12 @@
             </svg>
             <span class="nav-label">Invest</span>
         </a>
+        <a href="recharge.html" class="nav-item">
+    <svg viewBox="0 0 24 24">
+        <path d="M12 2c-4.42 0-8 3.58-8 8h2l-3 4-3-4h2c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10c-3.31 0-6.24-1.61-8.06-4.06l1.53-1.53C7.52 17.44 9.66 19 12 19c4.42 0 8-3.58 8-8s-3.58-8-8-8zm1 5v3h3l-4 4-4-4h3V7h2z"/>
+    </svg>
+    <span class="nav-label">Recharge Account</span>
+</a>
         <a href="me.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -833,6 +1141,19 @@
         let currentQuantity = 1;
         let currentRemaining = 0;
 
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('pageLoader').classList.add('hidden');
+                
+                const cards = document.querySelectorAll('.investment-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('loaded');
+                    }, index * 100);
+                });
+            }, 800);
+        });
+
         function getAvailableBalance() {
             const userData = JSON.parse(localStorage.getItem('userData') || '{}');
             return userData.balance || 0;
@@ -844,6 +1165,98 @@
             
             event.target.classList.add('active');
             document.getElementById(tabName).classList.add('active');
+
+            if (tabName === 'investment-record') {
+                loadInvestmentProgress();
+            }
+        }
+
+        function loadInvestmentProgress() {
+            const progressList = document.getElementById('investment-progress-list');
+            const emptyState = document.getElementById('empty-progress');
+            const investments = JSON.parse(localStorage.getItem('investments') || '[]');
+
+            if (investments.length === 0) {
+                progressList.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            progressList.innerHTML = '';
+
+            investments.forEach((investment, index) => {
+                const startDate = new Date(investment.date);
+                const currentDate = new Date();
+                const daysElapsed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+                const daysCompleted = Math.min(daysElapsed, investment.cycle);
+                const progressPercentage = (daysCompleted / investment.cycle) * 100;
+                const dailyRevenue = investment.totalInvest * 0.15;
+                const totalEarned = dailyRevenue * daysCompleted;
+                const isCompleted = daysCompleted >= investment.cycle;
+
+                const progressItem = document.createElement('div');
+                progressItem.className = 'progress-item';
+                progressItem.innerHTML = `
+                    <div class="progress-header">
+                        <div class="progress-title">Contract Investment ${investment.price} USDT</div>
+                        <div class="progress-status ${isCompleted ? 'completed' : ''}">${isCompleted ? 'Completed' : 'Active'}</div>
+                    </div>
+                    <div class="progress-details">
+                        <div class="progress-detail-item">
+                            <span class="progress-detail-label">Investment Amount</span>
+                            <span class="progress-detail-value">${investment.totalInvest} USDT</span>
+                        </div>
+                        <div class="progress-detail-item">
+                            <span class="progress-detail-label">Daily Rate</span>
+                            <span class="progress-detail-value">${investment.dailyRate}</span>
+                        </div>
+                        <div class="progress-detail-item">
+                            <span class="progress-detail-label">Quantity</span>
+                            <span class="progress-detail-value">${investment.quantity}</span>
+                        </div>
+                        <div class="progress-detail-item">
+                            <span class="progress-detail-label">Start Date</span>
+                            <span class="progress-detail-value">${startDate.toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-header">
+                            <span class="progress-bar-label">Progress: Day ${daysCompleted} of ${investment.cycle}</span>
+                            <span class="progress-bar-percentage">${progressPercentage.toFixed(1)}%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" style="width: 0%" data-width="${progressPercentage}%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-revenue">
+                        <span class="revenue-label">Total Revenue Earned</span>
+                        <span class="revenue-amount">+${totalEarned.toFixed(2)} USDT</span>
+                    </div>
+                    <div class="progress-revenue" style="border-top: none; padding-top: 5px; margin-top: 5px;">
+                        <span class="revenue-label">Estimated Final Revenue</span>
+                        <span class="revenue-amount" style="color: #00ffff;">${investment.estimatedRevenue} USDT</span>
+                    </div>
+                `;
+                progressList.appendChild(progressItem);
+
+                setTimeout(() => {
+                    progressItem.classList.add('loaded');
+                    const fillBar = progressItem.querySelector('.progress-bar-fill');
+                    setTimeout(() => {
+                        fillBar.style.width = fillBar.dataset.width;
+                    }, 300);
+                }, index * 100);
+            });
+        }
+
+        function selectCard(cardElement, price, remaining) {
+            cardElement.classList.add('loading');
+            
+            setTimeout(() => {
+                cardElement.classList.remove('loading');
+                openConfirmation(price, remaining);
+            }, 600);
         }
 
         function openConfirmation(price, remaining) {
@@ -954,6 +1367,8 @@
             showNotification('Investment successful! Your contract is now active.', false, false);
             
             currentQuantity = 1;
+            
+            loadInvestmentProgress();
         }
 
         function scrollToTop() {
