@@ -35,23 +35,164 @@
             font-weight: 700;
         }
 
+        .back-arrow {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            fill: #00ffff;
+        }
+
         .container {
             padding: 20px;
         }
 
-        .invitation-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
             border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal-text {
+            font-size: 13px;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .email-input-container {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
             border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
-        .invitation-title {
-            font-size: 16px;
+        .email-input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .edit-icon {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            fill: #00ffff;
+            margin-left: 10px;
+        }
+
+        .modal-question {
+            font-size: 14px;
+            color: #ccff00;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .referral-code-label {
+            font-size: 12px;
             color: #00ffff;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .optional-text {
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .code-validation {
+            font-size: 11px;
+            margin-top: 5px;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .code-valid {
+            color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .code-invalid {
+            color: #ff6666;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
             font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .modal-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .invitation-card {
+            background: linear-gradient(135deg, rgba(204, 153, 102, 0.15), rgba(255, 215, 0, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(204, 153, 102, 0.3);
+        }
+
+        .invitation-title {
+            font-size: 14px;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .share-subtitle {
+            font-size: 13px;
+            color: #ccff00;
+            margin-bottom: 15px;
         }
 
         .code-display {
@@ -71,6 +212,12 @@
             color: #ccff00;
         }
 
+        .link-text {
+            font-size: 11px;
+            color: #00ffff;
+            word-break: break-all;
+        }
+
         .copy-btn {
             background: linear-gradient(135deg, #00ffff, #0099ff);
             border: none;
@@ -80,12 +227,14 @@
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .social-share {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
 
         .social-btn {
@@ -96,6 +245,11 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
         }
 
         .social-btn svg {
@@ -108,6 +262,30 @@
         .facebook { background: #4267B2; }
         .telegram { background: #0088cc; }
         .whatsapp { background: #25D366; }
+        .linkedin { background: #0077B5; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+        .tiktok { background: #000; }
+
+        .calendar-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .calendar-icon {
+            width: 24px;
+            height: 24px;
+            fill: #00ffff;
+        }
+
+        .calendar-text {
+            font-size: 13px;
+            color: #fff;
+        }
 
         .stats-grid {
             display: grid;
@@ -124,13 +302,13 @@
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #00ffff;
             margin-bottom: 8px;
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
         }
 
@@ -146,6 +324,7 @@
             min-width: 280px;
             border-radius: 15px;
             padding: 20px;
+            position: relative;
         }
 
         .level-card.level-1 {
@@ -158,6 +337,15 @@
 
         .level-card.level-3 {
             background: linear-gradient(135deg, #ff6b35, #ff0066);
+        }
+
+        .badge-img {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.7;
         }
 
         .level-header {
@@ -176,13 +364,53 @@
         .details-btn {
             width: 100%;
             padding: 10px;
-            background: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #cc9966, #ffcc66);
             border: none;
             border-radius: 8px;
-            color: #fff;
-            font-weight: 600;
+            color: #1a0033;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
+        }
+
+        .details-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+            z-index: 500;
+            overflow-y: auto;
+            padding-bottom: 70px;
+        }
+
+        .details-page.active {
+            display: block;
+        }
+
+        .referral-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .referral-email {
+            font-size: 14px;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .referral-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #ccc;
+            margin-bottom: 4px;
         }
 
         .bottom-nav {
@@ -226,110 +454,209 @@
         .nav-item.active .nav-label {
             color: #00ffff;
         }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #00ffff;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ff6666;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .date-picker {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px;
+            color: #fff;
+            font-size: 13px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
+    <div id="emailModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-title">Verify Your Account</div>
+            <div class="modal-text">
+                Welcome to the referral program! Earn rewards by inviting friends. Get up to 12% commission on Level 1, 8% on Level 2, and 5% on Level 3 referrals.
+            </div>
+            <div class="email-input-container">
+                <input type="email" id="userEmail" class="email-input" placeholder="Enter your email" readonly>
+                <svg class="edit-icon" id="editEmailBtn" viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+            </div>
+            <label class="referral-code-label">
+                Referral Code <span class="optional-text">(Optional)</span>
+            </label>
+            <div class="email-input-container">
+                <input type="text" id="referralCodeInput" class="email-input" placeholder="Enter referral code if you have one" maxlength="6">
+                <svg class="edit-icon" id="editCodeBtn" viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                </svg>
+            </div>
+            <div id="codeValidation" class="code-validation hidden"></div>
+            <div class="modal-question">Is this your account email before continuing?</div>
+            <button class="modal-btn" id="verifyEmailBtn">Visit My Referral Account</button>
+        </div>
+    </div>
+
     <div class="header">
         <div class="header-title">My Team</div>
     </div>
 
-    <div class="container">
+    <div id="mainContent" class="container hidden">
         <div class="invitation-card">
-            <div class="invitation-title">Invitation Details</div>
+            <div class="invitation-title">Invitation code:</div>
             <div class="code-display">
-                <span class="code-text">LXE2025</span>
+                <span class="code-text" id="referralCode">------</span>
                 <button class="copy-btn" onclick="copyCode()">Copy</button>
             </div>
+            <div class="share-subtitle">Share your referral link and start earning</div>
             <div class="code-display">
-                <span style="font-size: 12px; color: #00ffff;">https://luxeearn.com/#/register?code=LXE2025</span>
+                <span class="link-text" id="referralLink">Loading...</span>
                 <button class="copy-btn" onclick="copyLink()">Copy</button>
             </div>
             <div class="social-share">
-                <div class="social-btn twitter">
+                <div class="social-btn twitter" onclick="shareOnTwitter()">
                     <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </div>
-                <div class="social-btn facebook">
+                <div class="social-btn facebook" onclick="shareOnFacebook()">
                     <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </div>
-                <div class="social-btn telegram">
+                <div class="social-btn telegram" onclick="shareOnTelegram()">
                     <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                 </div>
-                <div class="social-btn whatsapp">
+                <div class="social-btn linkedin" onclick="shareOnLinkedIn()">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </div>
+                <div class="social-btn whatsapp" onclick="shareOnWhatsApp()">
                     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                 </div>
+                <div class="social-btn instagram" onclick="shareOnInstagram()">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <div class="social-btn tiktok" onclick="shareOnTikTok()">
+                    <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                </div>
+            </div>
+            <div class="calendar-section" onclick="toggleDatePicker()">
+                <svg class="calendar-icon" viewBox="0 0 24 24">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                </svg>
+                <span class="calendar-text" id="dateRangeText">Selection period</span>
+            </div>
+            <div id="datePickers" class="hidden" style="margin-top: 10px;">
+                <input type="date" id="startDate" class="date-picker">
+                <input type="date" id="endDate" class="date-picker">
             </div>
         </div>
 
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-label">Team Size</div>
-                <div class="stat-value">0</div>
+                <div class="stat-value" id="teamSize">0</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">Team Recharge</div>
-                <div class="stat-value">0.00 USDT</div>
+                <div class="stat-value" id="teamRecharge">$0.00</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">Team Withdrawal</div>
-                <div class="stat-value">0.00 USDT</div>
+                <div class="stat-value" id="teamWithdrawal">$0.00</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">New Members</div>
-                <div class="stat-value">0</div>
+                <div class="stat-label">New Team</div>
+                <div class="stat-value" id="newTeam">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">First Time Recharge</div>
+                <div class="stat-value" id="firstRecharge">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">First Withdrawal</div>
+                <div class="stat-value" id="firstWithdrawal">0</div>
             </div>
         </div>
 
         <div class="level-cards">
             <div class="level-card level-1">
+                <img src="badge.png" alt="Badge" class="badge-img" onerror="this.style.display='none'">
                 <div class="level-header">LEVEL 1</div>
                 <div class="level-stat-row">
                     <span>Register/Valid:</span>
-                    <span>0/0</span>
+                    <span id="level1Count">0/0</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Commission:</span>
-                    <span>12%</span>
+                    <span id="level1Commission">12%</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Total Income:</span>
-                    <span>0 USDT</span>
+                    <span id="level1Income">$0.00</span>
                 </div>
-                <button class="details-btn">View Details</button>
+                <button class="details-btn" onclick="showLevelDetails(1)">Details</button>
             </div>
 
             <div class="level-card level-2">
+                <img src="badge.png" alt="Badge" class="badge-img" onerror="this.style.display='none'">
                 <div class="level-header">LEVEL 2</div>
                 <div class="level-stat-row">
                     <span>Register/Valid:</span>
-                    <span>0/0</span>
+                    <span id="level2Count">0/0</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Commission:</span>
-                    <span>8%</span>
+                    <span id="level2Commission">8%</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Total Income:</span>
-                    <span>0 USDT</span>
+                    <span id="level2Income">$0.00</span>
                 </div>
-                <button class="details-btn">View Details</button>
+                <button class="details-btn" onclick="showLevelDetails(2)">Details</button>
             </div>
 
             <div class="level-card level-3">
+                <img src="badge.png" alt="Badge" class="badge-img" onerror="this.style.display='none'">
                 <div class="level-header">LEVEL 3</div>
                 <div class="level-stat-row">
                     <span>Register/Valid:</span>
-                    <span>0/0</span>
+                    <span id="level3Count">0/0</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Commission:</span>
-                    <span>5%</span>
+                    <span id="level3Commission">5%</span>
                 </div>
                 <div class="level-stat-row">
                     <span>Total Income:</span>
-                    <span>0 USDT</span>
+                    <span id="level3Income">$0.00</span>
                 </div>
-                <button class="details-btn">View Details</button>
+                <button class="details-btn" onclick="showLevelDetails(3)">Details</button>
             </div>
+        </div>
+    </div>
+
+    <div id="detailsPage" class="details-page">
+        <div class="header">
+            <svg class="back-arrow" onclick="closeDetails()" viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            <div class="header-title" id="detailsTitle">Level Details</div>
+        </div>
+        <div class="container">
+            <div id="detailsContent"></div>
         </div>
     </div>
 
@@ -346,7 +673,7 @@
             </svg>
             <div class="nav-label">Tasks</div>
         </div>
-        <div class="nav-item active" onclick="window.location.href='team.html'">
+        <div class="nav-item active">
             <svg viewBox="0 0 24 24">
                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
             </svg>
@@ -367,19 +694,344 @@
     </div>
 
     <script>
+        const API_BASE_URL = 'https://referralbackend-tn6h.onrender.com';
+        let userData = null;
+        let referralData = [];
+        let rewardsData = [];
+        let validatedReferralCode = null;
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const storedEmail = localStorage.getItem('userEmail');
+            const emailInput = document.getElementById('userEmail');
+            const codeInput = document.getElementById('referralCodeInput');
+            
+            if (storedEmail) {
+                emailInput.value = storedEmail;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const refFromUrl = urlParams.get('ref') || urlParams.get('code');
+            const storedCode = localStorage.getItem('referralCode');
+            
+            if (refFromUrl) {
+                codeInput.value = refFromUrl;
+                validateReferralCode(refFromUrl);
+            } else if (storedCode) {
+                codeInput.value = storedCode;
+                validateReferralCode(storedCode);
+            }
+
+            document.getElementById('editEmailBtn').addEventListener('click', function() {
+                emailInput.readOnly = false;
+                emailInput.focus();
+            });
+
+            emailInput.addEventListener('blur', function() {
+                emailInput.readOnly = true;
+            });
+
+            document.getElementById('editCodeBtn').addEventListener('click', function() {
+                codeInput.readOnly = false;
+                codeInput.focus();
+            });
+
+            codeInput.addEventListener('input', function() {
+                const code = this.value.trim();
+                if (code.length === 6) {
+                    validateReferralCode(code);
+                } else if (code.length === 0) {
+                    document.getElementById('codeValidation').classList.add('hidden');
+                    validatedReferralCode = null;
+                } else {
+                    document.getElementById('codeValidation').classList.add('hidden');
+                }
+            });
+
+            codeInput.addEventListener('blur', function() {
+                codeInput.readOnly = true;
+            });
+
+            document.getElementById('verifyEmailBtn').addEventListener('click', verifyAndLoadData);
+        });
+
+        async function validateReferralCode(code) {
+            if (!code || code.length !== 6) {
+                return;
+            }
+
+            const validation = document.getElementById('codeValidation');
+            validation.textContent = 'Validating code...';
+            validation.className = 'code-validation';
+            validation.classList.remove('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/validate-code/${code}`);
+                
+                if (response.ok) {
+                    validation.textContent = '✓ Valid referral code';
+                    validation.classList.add('code-valid');
+                    validatedReferralCode = code;
+                    localStorage.setItem('referralCode', code);
+                } else {
+                    const testResponse = await fetch(`${API_BASE_URL}/api/stats`);
+                    if (testResponse.ok) {
+                        validation.textContent = '✗ Invalid referral code';
+                        validation.classList.add('code-invalid');
+                        validatedReferralCode = null;
+                    } else {
+                        validation.classList.add('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Validation error:', error);
+                validation.classList.add('hidden');
+            }
+        }
+
+        async function verifyAndLoadData() {
+            const email = document.getElementById('userEmail').value.trim();
+            const referralCode = document.getElementById('referralCodeInput').value.trim();
+            const btn = document.getElementById('verifyEmailBtn');
+            
+            if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                showToast('Please enter a valid email address');
+                return;
+            }
+
+            if (referralCode && referralCode.length !== 6) {
+                showToast('Referral code must be 6 digits');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+
+            try {
+                let response = await fetch(`${API_BASE_URL}/api/user/${encodeURIComponent(email)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    userData = data.user;
+                    referralData = data.referrals || [];
+                    rewardsData = data.rewards || [];
+
+                    localStorage.setItem('userEmail', email);
+                    
+                    document.getElementById('emailModal').style.display = 'none';
+                    document.getElementById('mainContent').classList.remove('hidden');
+                    
+                    updateUI();
+                } else if (response.status === 404) {
+                    const registerResponse = await fetch(`${API_BASE_URL}/api/register`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            referralCode: referralCode || null
+                        })
+                    });
+
+                    if (!registerResponse.ok) {
+                        const errorData = await registerResponse.json();
+                        showToast(errorData.error || 'Registration failed');
+                        btn.disabled = false;
+                        btn.textContent = 'Visit My Referral Account';
+                        return;
+                    }
+
+                    const registerData = await registerResponse.json();
+                    
+                    const userResponse = await fetch(`${API_BASE_URL}/api/user/${encodeURIComponent(email)}`);
+                    if (userResponse.ok) {
+                        const data = await userResponse.json();
+                        userData = data.user;
+                        referralData = data.referrals || [];
+                        rewardsData = data.rewards || [];
+
+                        localStorage.setItem('userEmail', email);
+                        if (referralCode) {
+                            localStorage.removeItem('referralCode');
+                        }
+                        
+                        document.getElementById('emailModal').style.display = 'none';
+                        document.getElementById('mainContent').classList.remove('hidden');
+                        
+                        showToast('Account created successfully!');
+                        updateUI();
+                    }
+                } else {
+                    showToast('Failed to load user data');
+                    btn.disabled = false;
+                    btn.textContent = 'Visit My Referral Account';
+                    return;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Network error. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Visit My Referral Account';
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('referralCode').textContent = userData.referralCode || '------';
+            document.getElementById('referralLink').textContent = userData.referralLink || '';
+
+            const level1Referrals = referralData.filter(r => r.level === 1);
+            const level2Referrals = referralData.filter(r => r.level === 2);
+            const level3Referrals = referralData.filter(r => r.level === 3);
+
+            document.getElementById('teamSize').textContent = referralData.length;
+            document.getElementById('teamRecharge').textContent = `$${parseFloat(userData.totalDeposits || 0).toFixed(2)}`;
+            document.getElementById('teamWithdrawal').textContent = `$${parseFloat(userData.totalEarnings || 0).toFixed(2)}`;
+            
+            const today = new Date().toISOString().split('T')[0];
+            const newToday = referralData.filter(r => r.created_at && r.created_at.split('T')[0] === today);
+            document.getElementById('newTeam').textContent = newToday.length;
+            
+            const firstRechargeCount = referralData.filter(r => parseFloat(r.total_deposits || 0) > 0).length;
+            document.getElementById('firstRecharge').textContent = firstRechargeCount;
+            document.getElementById('firstWithdrawal').textContent = '0';
+
+            const level1Income = rewardsData.filter(r => r.level === 1).reduce((sum, r) => {
+                const amount = typeof r.reward_amount === 'string' ? parseFloat(r.reward_amount.replace('$', '')) : r.reward_amount;
+                return sum + (amount || 0);
+            }, 0);
+            const level2Income = rewardsData.filter(r => r.level === 2).reduce((sum, r) => {
+                const amount = typeof r.reward_amount === 'string' ? parseFloat(r.reward_amount.replace('$', '')) : r.reward_amount;
+                return sum + (amount || 0);
+            }, 0);
+            const level3Income = rewardsData.filter(r => r.level === 3).reduce((sum, r) => {
+                const amount = typeof r.reward_amount === 'string' ? parseFloat(r.reward_amount.replace('$', '')) : r.reward_amount;
+                return sum + (amount || 0);
+            }, 0);
+
+            document.getElementById('level1Count').textContent = `${level1Referrals.length}/${level1Referrals.length}`;
+            document.getElementById('level1Income').textContent = `$${level1Income.toFixed(2)}`;
+
+            document.getElementById('level2Count').textContent = `${level2Referrals.length}/${level2Referrals.length}`;
+            document.getElementById('level2Income').textContent = `$${level2Income.toFixed(2)}`;
+
+            document.getElementById('level3Count').textContent = `${level3Referrals.length}/${level3Referrals.length}`;
+            document.getElementById('level3Income').textContent = `$${level3Income.toFixed(2)}`;
+        }
+
+        function showLevelDetails(level) {
+            const levelReferrals = referralData.filter(r => r.level === level);
+            const levelRewards = rewardsData.filter(r => r.level === level);
+            
+            document.getElementById('detailsTitle').textContent = `LEVEL ${level} Details`;
+            
+            let content = `<div style="margin-bottom: 20px;">
+                <div style="font-size: 16px; color: #00ffff; margin-bottom: 10px;">Total Referrals: ${levelReferrals.length}</div>
+            </div>`;
+            
+            if (levelReferrals.length === 0) {
+                content += '<div style="text-align: center; padding: 40px; color: #888;">No referrals yet</div>';
+            } else {
+                levelReferrals.forEach(ref => {
+                    const reward = levelRewards.find(r => r.from_email === ref.referred_email);
+                    const rewardAmount = reward ? (typeof reward.reward_amount === 'string' ? reward.reward_amount : `$${reward.reward_amount}`) : '$0.00';
+                    
+                    content += `
+                        <div class="referral-item">
+                            <div class="referral-email">${ref.referred_email}</div>
+                            <div class="referral-info">
+                                <span>Joined:</span>
+                                <span>${new Date(ref.created_at).toLocaleDateString()}</span>
+                            </div>
+                            <div class="referral-info">
+                                <span>Total Deposits:</span>
+                                <span>$${parseFloat(ref.total_deposits || 0).toFixed(2)}</span>
+                            </div>
+                            <div class="referral-info">
+                                <span>Your Earnings:</span>
+                                <span>${rewardAmount}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            document.getElementById('detailsContent').innerHTML = content;
+            document.getElementById('detailsPage').classList.add('active');
+        }
+
+        function closeDetails() {
+            document.getElementById('detailsPage').classList.remove('active');
+        }
+
         function copyCode() {
-            navigator.clipboard.writeText('LXE2025');
+            const code = document.getElementById('referralCode').textContent;
+            navigator.clipboard.writeText(code);
             showToast('Code copied!');
         }
 
         function copyLink() {
-            navigator.clipboard.writeText('https://luxeearn.com/#/register?code=LXE2025');
+            const link = document.getElementById('referralLink').textContent;
+            navigator.clipboard.writeText(link);
             showToast('Link copied!');
+        }
+
+        function shareOnTwitter() {
+            const link = userData.referralLink;
+            const text = `Join me on LuxeEarn and start earning! Use my referral link:`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
+        }
+
+        function shareOnFacebook() {
+            const link = userData.referralLink;
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank');
+        }
+
+        function shareOnTelegram() {
+            const link = userData.referralLink;
+            const text = `Join me on LuxeEarn and start earning!`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const link = userData.referralLink;
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`, '_blank');
+        }
+
+        function shareOnWhatsApp() {
+            const link = userData.referralLink;
+            const text = `Join me on LuxeEarn and start earning! ${link}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareOnInstagram() {
+            showToast('Copy the link and share it on Instagram!');
+            copyLink();
+        }
+
+        function shareOnTikTok() {
+            showToast('Copy the link and share it on TikTok!');
+            copyLink();
+        }
+
+        function toggleDatePicker() {
+            const pickers = document.getElementById('datePickers');
+            pickers.classList.toggle('hidden');
+        }
+
+        document.getElementById('startDate')?.addEventListener('change', updateDateRange);
+        document.getElementById('endDate')?.addEventListener('change', updateDateRange);
+
+        function updateDateRange() {
+            const start = document.getElementById('startDate').value;
+            const end = document.getElementById('endDate').value;
+            if (start && end) {
+                document.getElementById('dateRangeText').textContent = `${start} to ${end}`;
+            }
         }
 
         function showToast(message) {
             const toast = document.createElement('div');
-            toast.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 255, 255, 0.9); color: #1a0033; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 1000;';
+            toast.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 255, 255, 0.9); color: #1a0033; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 10000;';
             toast.textContent = message;
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 2000);
