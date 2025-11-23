@@ -280,8 +280,8 @@
 
         <div class="balance-card">
             <div class="balance-label">Total Balance</div>
-            <div class="balance-amount">0.00 USDT</div>
-            <div class="recharge-amount">Recharge Amount: 0.00 USDT</div>
+            <div class="balance-amount" id="totalBalance">0.00 USDT</div>
+            <div class="recharge-amount">Recharge Amount: <span id="rechargeBalance">0.00</span> USDT</div>
         </div>
 
         <div class="action-buttons">
@@ -409,6 +409,16 @@
     </div>
 
     <script>
+        function updateBalance() {
+            const userBalance = localStorage.getItem('userBalance') || '0';
+            const rechargeAmount = localStorage.getItem('rechargeAmount') || '0';
+            const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
+            
+            document.getElementById('totalBalance').textContent = parseFloat(userBalance).toFixed(2) + ' USDT';
+            document.getElementById('rechargeBalance').textContent = parseFloat(rechargeAmount).toFixed(2);
+            document.getElementById('displayEmail').textContent = userEmail;
+        }
+
         function logout() {
             if (confirm('Are you sure you want to sign out?')) {
                 localStorage.removeItem('luxeEarnUser');
@@ -424,8 +434,26 @@
             }
             if (user.email) {
                 document.getElementById('displayEmail').textContent = user.email;
+                localStorage.setItem('userEmail', user.email);
             }
+            
+            if (!localStorage.getItem('userBalance')) {
+                localStorage.setItem('userBalance', '0');
+            }
+            if (!localStorage.getItem('rechargeAmount')) {
+                localStorage.setItem('rechargeAmount', '0');
+            }
+            
+            updateBalance();
         };
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'userBalance' || e.key === 'rechargeAmount') {
+                updateBalance();
+            }
+        });
+
+        setInterval(updateBalance, 1000);
     </script>
 </body>
 </html>
