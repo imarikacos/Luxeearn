@@ -107,6 +107,15 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .method-btn img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
         }
 
         .method-btn.active {
@@ -126,6 +135,7 @@
         }
 
         input[type="text"],
+        input[type="email"],
         input[type="password"],
         input[type="number"] {
             width: 100%;
@@ -137,10 +147,30 @@
             font-size: 15px;
         }
 
+        input::placeholder {
+            color: #888;
+        }
+
         input:focus {
             outline: none;
             border-color: #00ffff;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 18px;
         }
 
         .quick-amounts {
@@ -184,6 +214,18 @@
             font-weight: 600;
         }
 
+        .fee-strikethrough {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .free-text {
+            font-size: 11px;
+            color: #00ff88;
+            margin-top: 3px;
+            text-align: right;
+        }
+
         .submit-btn {
             width: 100%;
             padding: 16px;
@@ -203,6 +245,59 @@
             box-shadow: 0 6px 20px rgba(0, 255, 136, 0.6);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-dots {
+            text-align: center;
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
         .notice {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid rgba(255, 107, 53, 0.3);
@@ -213,52 +308,92 @@
             margin-top: 20px;
         }
 
-        .bottom-nav {
+        .modal {
+            display: none;
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 0, 51, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
             align-items: center;
-            cursor: pointer;
-            flex: 1;
+            justify-content: center;
         }
 
-        .nav-item svg {
-            width: 24px;
-            height: 24px;
-            fill: #888;
-            margin-bottom: 5px;
+        .modal.active {
+            display: flex;
         }
 
-        .nav-item.active svg {
-            fill: #00ffff;
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
         }
 
-        .nav-label {
-            font-size: 11px;
+        .modal-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #00ffff;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .receipt-details {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .receipt-label {
             color: #888;
         }
 
-        .nav-item.active .nav-label {
-            color: #00ffff;
+        .receipt-value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .modal-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a0033;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <button class="back-btn" onclick="history.back()">
+        <button class="back-btn" onclick="window.location.href='me.html'">
             <svg viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
             </svg>
@@ -269,28 +404,69 @@
     <div class="container">
         <div class="balance-display">
             <div class="balance-label">Available Balance</div>
-            <div class="balance-amount">0.00 USDT</div>
+            <div class="balance-amount" id="balanceAmount">0.00 <span id="currencyType">USDT</span></div>
         </div>
 
         <div class="method-selector">
             <div class="selector-label">Withdrawal Method</div>
             <div class="method-buttons">
-                <button class="method-btn active">TRX</button>
-                <button class="method-btn">BEP20-USDT</button>
-                <button class="method-btn">TRC20-USDT</button>
-                <button class="method-btn">POLYGON-USDC</button>
+                <button class="method-btn active" data-method="BEP20-USDT" data-currency="USDT" type="button">
+                    <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BEP20">
+                    BEP20-USDT
+                </button>
+                <button class="method-btn" data-method="BEP20-USDC" data-currency="USDC" type="button">
+                    <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC">
+                    BEP20-USDC
+                </button>
+                <button class="method-btn" data-method="ETH-USDT" data-currency="USDT" type="button">
+                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+                    ETH-USDT
+                </button>
+                <button class="method-btn" data-method="ETH-USDC" data-currency="USDC" type="button">
+                    <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+                    ETH-USDC
+                </button>
+                <button class="method-btn" data-method="TRC20-USDT" data-currency="USDT" type="button">
+                    <img src="https://cryptologos.cc/logos/tron-trx-logo.png" alt="TRC20">
+                    TRC20-USDT
+                </button>
+                <button class="method-btn" data-method="POLYGON-USDT" data-currency="USDT" type="button">
+                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="POLYGON">
+                    POLYGON-USDT
+                </button>
+                <button class="method-btn" data-method="POLYGON-USDC" data-currency="USDC" type="button">
+                    <img src="https://cryptologos.cc/logos/polygon-matic-logo.png" alt="POLYGON">
+                    POLYGON-USDC
+                </button>
+                <button class="method-btn" data-method="TRX" data-currency="TRX" type="button">
+                    <img src="https://cryptologos.cc/logos/tron-trx-logo.png" alt="TRX">
+                    TRX
+                </button>
             </div>
         </div>
 
-        <form onsubmit="handleWithdraw(event)">
+        <form id="withdrawalForm">
             <div class="input-group">
                 <label class="input-label">Withdrawal Address</label>
                 <input type="text" id="withdrawAddress" placeholder="Enter your wallet address" required>
             </div>
 
             <div class="input-group">
+                <label class="input-label">Email Address</label>
+                <input type="email" id="userEmail" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Security Password (6 characters)</label>
+                <div class="password-wrapper">
+                    <input type="password" id="securityPassword" placeholder="Enter security password" maxlength="6" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+                </div>
+            </div>
+
+            <div class="input-group">
                 <label class="input-label">Withdrawal Amount</label>
-                <input type="number" id="withdrawAmount" placeholder="Enter amount" step="0.01" min="15" required>
+                <input type="number" id="withdrawAmount" placeholder="Enter amount" step="0.01" min="1" required>
                 <div class="quick-amounts">
                     <button type="button" class="quick-btn" onclick="setAmount(100)">100</button>
                     <button type="button" class="quick-btn" onclick="setAmount(500)">500</button>
@@ -299,111 +475,280 @@
                 </div>
             </div>
 
-            <div class="input-group">
-                <label class="input-label">Password</label>
-                <input type="password" id="withdrawPassword" placeholder="Enter your password" required>
-            </div>
-
             <div class="fee-info">
                 <div class="fee-row">
                     <span class="fee-label">Quota Range:</span>
-                    <span class="fee-value">15.000 - 1,000,000 USDT</span>
+                    <span class="fee-value">1.000 - 1,000,000 <span id="quotaCurrency">USDT</span></span>
                 </div>
                 <div class="fee-row">
-                    <span class="fee-label">Fees:</span>
-                    <span class="fee-value">0 TRX</span>
+                    <div class="fee-label">Handling Fee:</div>
+                    <div style="text-align: right;">
+                        <div class="fee-strikethrough">0 <span id="feeCurrency">USDT</span></div>
+                        <div class="free-text">Free times-1</div>
+                    </div>
                 </div>
                 <div class="fee-row">
-                    <span class="fee-label">Fee-free Times:</span>
-                    <span class="fee-value">999</span>
-                </div>
-                <div class="fee-row">
-                    <span class="fee-label">Actually Received:</span>
-                    <span class="fee-value" id="actuallyReceived">0.00 USDT</span>
+                    <span class="fee-label">Receipt:</span>
+                    <span class="fee-value" id="receiptAmount">0.00 <span id="receiptCurrency">USDT</span></span>
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn">Confirm Withdrawal</button>
+            <button type="submit" class="submit-btn" id="confirmBtn">Confirm Withdrawal</button>
         </form>
 
         <div class="notice">
             <strong>Withdrawal Notice:</strong><br>
-            • Processing time: Up to 24 hours<br>
-            • Minimum withdrawal: 15 USDT<br>
-            • Maximum withdrawal: 1,000,000 USDT per transaction<br>
+            • Processing time: 1-3 minutes<br>
+            • Minimum withdrawal: 1 USDT<br>
+            • Maximum withdrawal: 1,000,000 per transaction<br>
             • Please ensure the address is correct
         </div>
     </div>
 
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="modal" id="receiptModal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">⏳</div>
+            <div class="modal-title" id="modalTitle">Withdrawal Receipt</div>
+            <div class="modal-message" id="modalMessage"></div>
+            <div class="receipt-details" id="receiptDetails" style="display: none;"></div>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtx-D3nbl1lKOhCzEixDZRgRDM4NbtOBE",
+            authDomain: "swiftauth-5fcb5.firebaseapp.com",
+            projectId: "swiftauth-5fcb5",
+            storageBucket: "swiftauth-5fcb5.firebasestorage.app",
+            messagingSenderId: "990160652137",
+            appId: "1:990160652137:web:abac238567edfdb5671ff8",
+            measurementId: "G-5C1DS28B5S"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.firebaseAuth = auth;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+
+        loadUserData();
+    </script>
+
     <script>
+        let selectedMethod = 'BEP20-USDT';
+        let currentCurrency = 'USDT';
+        let userBalance = 0;
+
+        function loadUserData() {
+            const storedBalance = localStorage.getItem('userBalance');
+            if (storedBalance) {
+                userBalance = parseFloat(storedBalance);
+                updateBalanceDisplay();
+            }
+
+            const storedEmail = localStorage.getItem('userEmail');
+            if (storedEmail) {
+                document.getElementById('userEmail').value = storedEmail;
+            }
+        }
+
+        function updateBalanceDisplay() {
+            document.getElementById('balanceAmount').innerHTML = userBalance.toFixed(2) + ' <span id="currencyType">' + currentCurrency + '</span>';
+        }
+
+        function updateCurrency(currency) {
+            currentCurrency = currency;
+            document.getElementById('currencyType').textContent = currency;
+            document.getElementById('quotaCurrency').textContent = currency;
+            document.getElementById('feeCurrency').textContent = currency;
+            document.getElementById('receiptCurrency').textContent = currency;
+            updateReceived();
+        }
+
+        const methodButtons = document.querySelectorAll('.method-btn');
+        methodButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                loadingOverlay.classList.add('active');
+
+                setTimeout(() => {
+                    methodButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedMethod = this.dataset.method;
+                    const currency = this.dataset.currency;
+                    updateCurrency(currency);
+                    loadingOverlay.classList.remove('active');
+                }, 500);
+            });
+        });
+
         function setAmount(amount) {
             document.getElementById('withdrawAmount').value = amount;
             updateReceived();
         }
 
         function setAll() {
-            document.getElementById('withdrawAmount').value = 0;
+            document.getElementById('withdrawAmount').value = userBalance;
             updateReceived();
         }
 
         function updateReceived() {
             const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
-            document.getElementById('actuallyReceived').textContent = amount.toFixed(2) + ' USDT';
+            document.getElementById('receiptAmount').innerHTML = amount.toFixed(2) + ' <span id="receiptCurrency">' + currentCurrency + '</span>';
         }
 
         document.getElementById('withdrawAmount').addEventListener('input', updateReceived);
 
-        function handleWithdraw(e) {
-            e.preventDefault();
-            const address = document.getElementById('withdrawAddress').value;
-            const amount = document.getElementById('withdrawAmount').value;
-            
-            if (confirm(`Confirm withdrawal of ${amount} USDT to ${address}?`)) {
-                alert('Withdrawal request submitted successfully! Processing time: up to 24 hours.');
-                window.location.href = 'records.html';
+        function togglePassword() {
+            const passwordInput = document.getElementById('securityPassword');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
             }
         }
 
-        const methodButtons = document.querySelectorAll('.method-btn');
-        methodButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                methodButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
+        document.getElementById('withdrawalForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-    <div class="bottom-nav">
-        <div class="nav-item" onclick="window.location.href='index.html'">
-            <svg viewBox="0 0 24 24">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-            </svg>
-            <div class="nav-label">Home</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='tasks.html'">
-            <svg viewBox="0 0 24 24">
-                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
-            </svg>
-            <div class="nav-label">Tasks</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='team.html'">
-            <svg viewBox="0 0 24 24">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-            </svg>
-            <div class="nav-label">Team</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='vip.html'">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
-            </svg>
-            <div class="nav-label">VIP</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='me.html'">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
-            <div class="nav-label">Me</div>
-        </div>
-    </div>
+            const address = document.getElementById('withdrawAddress').value.trim();
+            const email = document.getElementById('userEmail').value.trim();
+            const password = document.getElementById('securityPassword').value.trim();
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+
+            if (!address || !email || !password || !amount) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (password.length !== 6) {
+                alert('Security password must be exactly 6 characters');
+                return;
+            }
+
+            if (amount < 1) {
+                alert('Minimum withdrawal amount is 1 ' + currentCurrency);
+                return;
+            }
+
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+
+            try {
+                await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('active');
+
+                    if (amount > userBalance) {
+                        showModal('error', 'Withdrawal Failed', 
+                            `Insufficient Balance<br><br>Your balance: ${userBalance.toFixed(2)} ${currentCurrency}<br>Requested: ${amount.toFixed(2)} ${currentCurrency}`);
+                    } else {
+                        const creditTime = new Date();
+                        creditTime.setMinutes(creditTime.getMinutes() + Math.floor(Math.random() * 3) + 1);
+                        
+                        showModal('pending', 'Withdrawal Pending', '', {
+                            method: selectedMethod,
+                            address: address,
+                            amount: amount.toFixed(2) + ' ' + currentCurrency,
+                            fee: '0 ' + currentCurrency,
+                            receipt: amount.toFixed(2) + ' ' + currentCurrency,
+                            creditTime: creditTime.toLocaleString()
+                        });
+
+                        userBalance -= amount;
+                        localStorage.setItem('userBalance', userBalance);
+                        updateBalanceDisplay();
+                        document.getElementById('withdrawalForm').reset();
+                        loadUserData();
+                    }
+                }, 1500);
+
+            } catch (error) {
+                loadingOverlay.classList.remove('active');
+
+                let errorMessage = 'Authentication Failed';
+                if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'User not found';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorMessage = 'Incorrect security password';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Invalid email address';
+                } else if (error.code === 'auth/invalid-credential') {
+                    errorMessage = 'Invalid email or password';
+                }
+
+                showModal('error', 'Withdrawal Failed', errorMessage);
+            }
+        });
+
+        function showModal(type, title, message, receiptData = null) {
+            const modal = document.getElementById('receiptModal');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const receiptDetails = document.getElementById('receiptDetails');
+
+            modalTitle.textContent = title;
+            modalMessage.innerHTML = message;
+
+            if (type === 'error') {
+                modalIcon.textContent = '❌';
+                receiptDetails.style.display = 'none';
+            } else if (type === 'pending') {
+                modalIcon.textContent = '⏳';
+                receiptDetails.style.display = 'block';
+                receiptDetails.innerHTML = `
+                    <div class="receipt-row">
+                        <span class="receipt-label">Method:</span>
+                        <span class="receipt-value">${receiptData.method}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Address:</span>
+                        <span class="receipt-value" style="font-size: 11px; word-break: break-all;">${receiptData.address}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Amount:</span>
+                        <span class="receipt-value">${receiptData.amount}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Handling Fee:</span>
+                        <span class="receipt-value">${receiptData.fee}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Receipt:</span>
+                        <span class="receipt-value" style="color: #00ff88;">${receiptData.receipt}</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Credit Time:</span>
+                        <span class="receipt-value">${receiptData.creditTime}</span>
+                    </div>
+                `;
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('receiptModal').classList.remove('active');
+        }
+
+        window.togglePassword = togglePassword;
+        window.setAmount = setAmount;
+        window.setAll = setAll;
+        window.closeModal = closeModal;
+    </script>
 </body>
 </html>
