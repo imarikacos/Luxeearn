@@ -16,7 +16,6 @@
             background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
             min-height: 100vh;
             padding-bottom: 70px;
-            padding-bottom: 70px;
             color: #fff;
         }
 
@@ -230,11 +229,22 @@
         .nav-item.active .nav-label {
             color: #00ffff;
         }
+
+        .success-message {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <button class="back-btn" onclick="history.back()">
+        <button class="back-btn" onclick="window.location.href='me.html'">
             <svg viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
             </svg>
@@ -245,24 +255,23 @@
     <div class="container">
         <div class="profile-section">
             <div class="avatar-edit">
-                <div class="avatar">U</div>
-                <div class="edit-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                    </svg>
-                </div>
+                <div class="avatar" id="avatarLetter">U</div>
             </div>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            Changes saved successfully!
         </div>
 
         <form onsubmit="saveAccount(event)">
             <div class="input-group">
                 <label class="input-label">Username</label>
-                <input type="text" id="username" value="User123" readonly disabled>
+                <input type="text" id="username" placeholder="Enter username">
             </div>
 
             <div class="input-group">
                 <label class="input-label">Email</label>
-                <input type="email" id="email" value="user@example.com" readonly disabled>
+                <input type="email" id="email" placeholder="Enter email" readonly disabled>
             </div>
 
             <div class="input-group">
@@ -273,11 +282,11 @@
             <div class="info-box">
                 <div class="info-row">
                     <span class="info-label">Account ID:</span>
-                    <span class="info-value">LXE2025001</span>
+                    <span class="info-value" id="accountId">LXE2025001</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Registration Date:</span>
-                    <span class="info-value">2025-11-17</span>
+                    <span class="info-value" id="regDate">2025-11-17</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">VIP Level:</span>
@@ -294,11 +303,49 @@
     </div>
 
     <script>
+        function loadAccountData() {
+            const user = JSON.parse(localStorage.getItem('luxeEarnUser') || '{}');
+            const username = localStorage.getItem('username') || '';
+            const phone = localStorage.getItem('phone') || '';
+            const accountId = localStorage.getItem('accountId') || 'LXE2025001';
+            const regDate = localStorage.getItem('regDate') || '2025-11-17';
+            
+            if (user.email) {
+                document.getElementById('email').value = user.email;
+                localStorage.setItem('userEmail', user.email);
+                
+                const firstLetter = user.email.charAt(0).toUpperCase();
+                document.getElementById('avatarLetter').textContent = firstLetter;
+            }
+            
+            document.getElementById('username').value = username;
+            document.getElementById('phone').value = phone;
+            document.getElementById('accountId').textContent = accountId;
+            document.getElementById('regDate').textContent = regDate;
+        }
+
         function saveAccount(e) {
             e.preventDefault();
-            const phone = document.getElementById('phone').value;
-            alert('Account settings saved successfully!');
+            
+            const username = document.getElementById('username').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            localStorage.setItem('username', username);
+            localStorage.setItem('phone', phone);
+            
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+            
+            window.dispatchEvent(new Event('storage'));
         }
+
+        window.onload = loadAccountData;
+
+        window.addEventListener('storage', loadAccountData);
     </script>
 
     <div class="bottom-nav">
