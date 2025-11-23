@@ -11,7 +11,6 @@
             background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
             min-height: 100vh;
             padding-bottom: 70px;
-            padding-bottom: 70px;
             color: #fff;
         }
         .header {
@@ -66,6 +65,11 @@
             margin-bottom: 12px;
             border: 1px solid rgba(0, 255, 255, 0.1);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .notification-item:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 255, 255, 0.08);
         }
         .notification-item.unread {
             border-color: #00ffff;
@@ -96,8 +100,8 @@
         .notif-icon.activity {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
         }
-        .notif-icon.personal {
-            background: linear-gradient(135deg, #00ffff, #0099ff);
+        .notif-icon.bonus {
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
         }
         .notif-title {
             font-size: 15px;
@@ -107,10 +111,141 @@
             font-size: 13px;
             color: #888;
             margin-bottom: 8px;
+            line-height: 1.5;
         }
         .notif-date {
             font-size: 11px;
             color: #666;
+        }
+        .see-more {
+            color: #00ffff;
+            font-size: 12px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-text {
+            color: #00ffff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .loading-dots {
+            text-align: center;
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0033, #330066);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00ffff;
+        }
+
+        .modal-close {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .modal-date {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
         }
 
         .bottom-nav {
@@ -168,43 +303,29 @@
         </div>
         <div class="mark-read" onclick="markAllRead()">Mark all read</div>
     </div>
-    <div class="container">
-        <div class="notification-item unread">
-            <div class="notif-header">
-                <div class="notif-icon system">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                    </svg>
-                </div>
-                <div>
-                    <div class="notif-title">System Announcement</div>
-                    <div class="notif-date">2025-11-17 10:30</div>
-                </div>
-            </div>
-            <div class="notif-preview">Welcome to LuxeEarn Platform! Start earning today.</div>
-        </div>
-        <div class="notification-item">
-            <div class="notif-header">
-                <div class="notif-icon activity">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
-                    </svg>
-                </div>
-                <div>
-                    <div class="notif-title">Special Promotion</div>
-                    <div class="notif-date">2025-11-16 14:20</div>
-                </div>
-            </div>
-            <div class="notif-preview">VIP upgrade special offer - Limited time only!</div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-text">Loading notifications please wait</div>
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
-    <script>
-        function markAllRead() {
-            document.querySelectorAll('.notification-item').forEach(item => {
-                item.classList.remove('unread');
-            });
-        }
-    </script>
+
+    <div class="container" id="notificationContainer">
+    </div>
+
+    <div class="modal" id="notificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle"></div>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-date" id="modalDate"></div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
 
     <div class="bottom-nav">
         <div class="nav-item" onclick="window.location.href='index.html'">
@@ -238,5 +359,163 @@
             <div class="nav-label">Me</div>
         </div>
     </div>
+
+    <script>
+        const notifications = [
+            {
+                id: 1,
+                type: 'bonus',
+                title: 'Get Bonus',
+                preview: 'Congratulations! You have a special bonus waiting for you.',
+                fullMessage: 'Congratulations! You have been selected for a special bonus reward. Click here to claim your bonus and boost your earnings today. This is a limited time offer exclusively for our valued members. Don\'t miss out on this amazing opportunity to increase your balance!',
+                date: new Date(),
+                unread: true,
+                link: 'recharge.html?bonus=true'
+            },
+            {
+                id: 2,
+                type: 'system',
+                title: 'System Announcement',
+                preview: 'Welcome to LuxeEarn Platform! Start earning today.',
+                fullMessage: 'Welcome to LuxeEarn Platform! We are excited to have you on board. Our platform offers various ways to earn and grow your income. Start exploring our features including tasks, VIP benefits, team rewards, and much more. If you have any questions, our support team is here to help you 24/7.',
+                date: new Date(Date.now() - 86400000),
+                unread: true,
+                link: null
+            },
+            {
+                id: 3,
+                type: 'activity',
+                title: 'Special Promotion',
+                preview: 'VIP upgrade special offer - Limited time only!',
+                fullMessage: 'Exclusive VIP Upgrade Promotion! For a limited time only, upgrade to VIP status and enjoy premium benefits including higher earning rates, priority withdrawals, exclusive tasks, and dedicated customer support. This special offer won\'t last long, so take advantage of it today and maximize your earning potential with LuxeEarn!',
+                date: new Date(Date.now() - 172800000),
+                unread: false,
+                link: null
+            }
+        ];
+
+        function formatNairobiTime(date) {
+            const options = {
+                timeZone: 'Africa/Nairobi',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            
+            const formatter = new Intl.DateTimeFormat('en-GB', options);
+            const parts = formatter.formatToParts(date);
+            
+            const year = parts.find(p => p.type === 'year').value;
+            const month = parts.find(p => p.type === 'month').value;
+            const day = parts.find(p => p.type === 'day').value;
+            const hour = parts.find(p => p.type === 'hour').value;
+            const minute = parts.find(p => p.type === 'minute').value;
+            
+            return `${year}-${month}-${day} ${hour}:${minute}`;
+        }
+
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diff = now - date;
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (hours < 1) return 'Just now';
+            if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            if (days === 1) return 'Yesterday';
+            if (days < 7) return `${days} days ago`;
+            return formatNairobiTime(date);
+        }
+
+        function getIconSVG(type) {
+            if (type === 'system') {
+                return '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+            } else if (type === 'activity') {
+                return '<svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg>';
+            } else if (type === 'bonus') {
+                return '<svg viewBox="0 0 24 24"><path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/></svg>';
+            }
+        }
+
+        function renderNotifications() {
+            const container = document.getElementById('notificationContainer');
+            container.innerHTML = '';
+
+            notifications.forEach(notif => {
+                const item = document.createElement('div');
+                item.className = `notification-item ${notif.unread ? 'unread' : ''}`;
+                item.innerHTML = `
+                    <div class="notif-header">
+                        <div class="notif-icon ${notif.type}">
+                            ${getIconSVG(notif.type)}
+                        </div>
+                        <div>
+                            <div class="notif-title">${notif.title}</div>
+                            <div class="notif-date" data-date="${notif.date.toISOString()}">${getRelativeTime(notif.date)}</div>
+                        </div>
+                    </div>
+                    <div class="notif-preview">${notif.preview}</div>
+                    <div class="see-more">See more →</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    if (notif.link) {
+                        localStorage.setItem('showConfetti', 'true');
+                        window.location.href = notif.link;
+                    } else {
+                        showModal(notif);
+                    }
+                });
+                
+                container.appendChild(item);
+            });
+        }
+
+        function showModal(notif) {
+            document.getElementById('modalTitle').textContent = notif.title;
+            document.getElementById('modalDate').textContent = formatNairobiTime(notif.date);
+            document.getElementById('modalBody').textContent = notif.fullMessage;
+            document.getElementById('notificationModal').classList.add('active');
+            
+            const notification = notifications.find(n => n.id === notif.id);
+            if (notification) {
+                notification.unread = false;
+            }
+            renderNotifications();
+        }
+
+        function closeModal() {
+            document.getElementById('notificationModal').classList.remove('active');
+        }
+
+        function markAllRead() {
+            notifications.forEach(notif => {
+                notif.unread = false;
+            });
+            renderNotifications();
+        }
+
+        function updateTimes() {
+            document.querySelectorAll('.notif-date').forEach(el => {
+                const date = new Date(el.dataset.date);
+                el.textContent = getRelativeTime(date);
+            });
+        }
+
+        window.onload = function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('active');
+
+            setTimeout(() => {
+                loadingOverlay.classList.remove('active');
+                renderNotifications();
+            }, 1500);
+
+            setInterval(updateTimes, 60000);
+        };
+    </script>
 </body>
 </html>
