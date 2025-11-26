@@ -1020,15 +1020,17 @@
 
         .vip-cards-container {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             overflow-x: auto;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             margin-bottom: 25px;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
         }
 
         .vip-cards-container::-webkit-scrollbar {
-            height: 5px;
+            height: 4px;
         }
 
         .vip-cards-container::-webkit-scrollbar-track {
@@ -1042,35 +1044,37 @@
         }
 
         .vip-level-card {
-            min-width: 280px;
+            min-width: 220px;
+            max-width: 220px;
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 150, 255, 0.1));
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             border: 1px solid rgba(0, 255, 255, 0.2);
             transition: all 0.3s ease;
+            scroll-snap-align: start;
+            flex-shrink: 0;
         }
 
         .vip-level-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.3);
         }
 
         .level-header {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: #00ffff;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-align: left;
         }
 
         .vip-image {
             width: 100%;
-            height: 120px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
-            border-radius: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
@@ -1081,7 +1085,188 @@
         }
 
         .level-stats {
+            margin-bottom: 8px;
+        }
+
+        /* Social Tasks Section */
+        .social-tasks-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .social-tasks-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-task-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
             margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .social-task-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .social-task-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .social-task-icon.telegram {
+            background: linear-gradient(135deg, #0088cc, #00aced);
+        }
+
+        .social-task-icon.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+
+        .social-task-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .social-task-info p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .social-task-reward {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .social-task-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .social-task-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-task-btn.join {
+            background: linear-gradient(135deg, #00ffff, #0099ff);
+            color: #fff;
+        }
+
+        .social-task-btn.countdown {
+            background: rgba(255, 255, 255, 0.1);
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .social-task-btn.claim {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            animation: claimPulse 1s ease-in-out infinite;
+        }
+
+        .social-task-btn.claimed {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            cursor: not-allowed;
+        }
+
+        @keyframes claimPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Corner Popup */
+        .corner-popup {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            padding: 12px 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+            z-index: 998;
+            cursor: pointer;
+            animation: cornerBounce 2s ease-in-out infinite;
+            display: none;
+        }
+
+        .corner-popup.show {
+            display: block;
+        }
+
+        .corner-popup-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .corner-popup-icon {
+            font-size: 20px;
+        }
+
+        .corner-popup-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .corner-popup-close {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: #ff0066;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        @keyframes cornerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .level-stats {
+            margin-bottom: 8px;
         }
 
         .level-stat-row {
@@ -1718,6 +1903,15 @@
 <body>
     <div id="notification" class="notification"></div>
 
+    <!-- Corner Popup for Claim Bonus -->
+    <div class="corner-popup" id="cornerPopup" onclick="scrollToTasks()">
+        <div class="corner-popup-close" onclick="closeCornerPopup(event)">x</div>
+        <div class="corner-popup-content">
+            <span class="corner-popup-icon">🎁</span>
+            <span class="corner-popup-text">Claim Bonus!</span>
+        </div>
+    </div>
+
     <div class="popup-announcement" id="popupAnnouncement">
         <div class="popup-content">
             <div class="popup-header">🎉 Welcome to LuxeEarn!</div>
@@ -2063,6 +2257,51 @@
             <button class="logout-btn" onclick="handleLogout()">Logout</button>
         </div>
 
+        <!-- Social Tasks Section -->
+        <div class="social-tasks-section" id="socialTasksSection">
+            <div class="social-tasks-header">
+                <span>Earn USDT</span>
+                <span style="font-size: 12px; color: #22c55e;">Complete tasks to earn!</span>
+            </div>
+
+            <!-- Telegram Task -->
+            <div class="social-task-card" id="telegramTask">
+                <div class="social-task-left">
+                    <div class="social-task-icon telegram">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.66-.52.36-1.0.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.07-.78 4.19-1.82 6.99-3.03 8.38-3.61 3.99-1.66 4.83-1.95 5.37-1.96.12 0 .38.03.55.18.14.12.18.28.2.45-.02.07-.02.19-.05.3z"/>
+                        </svg>
+                    </div>
+                    <div class="social-task-info">
+                        <h4>Join Telegram Channel</h4>
+                        <p>Follow our updates</p>
+                    </div>
+                </div>
+                <div class="social-task-right">
+                    <div class="social-task-reward">+0.05 USDT</div>
+                    <button class="social-task-btn join" id="telegramBtn" onclick="startTask('telegram')">Join</button>
+                </div>
+            </div>
+
+            <!-- WhatsApp Task -->
+            <div class="social-task-card" id="whatsappTask">
+                <div class="social-task-left">
+                    <div class="social-task-icon whatsapp">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div class="social-task-info">
+                        <h4>Join WhatsApp Channel</h4>
+                        <p>Get exclusive tips</p>
+                    </div>
+                </div>
+                <div class="social-task-right">
+                    <div class="social-task-reward">+0.05 USDT</div>
+                    <button class="social-task-btn join" id="whatsappBtn" onclick="startTask('whatsapp')">Join</button>
+                </div>
+            </div>
+        </div>
 
         <div class="section-title">
             VIP Levels
@@ -3158,6 +3397,195 @@ function shrinkVideo() {
     }
     vs.style.transition = "0.3s ease";
 }
+
+// ==================== VIP AUTO-SCROLL ====================
+function initVipAutoScroll() {
+    const container = document.querySelector('.vip-cards-container');
+    if (!container) return;
+    
+    const cards = container.querySelectorAll('.vip-level-card');
+    if (cards.length < 2) return;
+    
+    let isUserScrolling = false;
+    let scrollTimeout;
+    
+    // Get current index from scroll position
+    function getCurrentIndex() {
+        const cardWidth = cards[0].offsetWidth + 12; // card width + gap
+        return Math.round(container.scrollLeft / cardWidth);
+    }
+    
+    // Detect user scroll
+    container.addEventListener('scroll', () => {
+        isUserScrolling = true;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+        }, 5000); // Resume auto-scroll after 5s of inactivity
+    });
+    
+    // Auto-scroll every 3 seconds
+    setInterval(() => {
+        if (isUserScrolling) return;
+        
+        let currentIndex = getCurrentIndex();
+        currentIndex++;
+        
+        if (currentIndex >= cards.length) {
+            currentIndex = 0;
+            container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            const cardWidth = cards[0].offsetWidth + 12; // card width + gap
+            container.scrollTo({ left: cardWidth * currentIndex, behavior: 'smooth' });
+        }
+    }, 3000);
+}
+
+// ==================== SOCIAL TASKS ====================
+const TASK_LINKS = {
+    telegram: 'https://t.me/YOUR_TELEGRAM_CHANNEL_HERE',  // PLACEHOLDER - Replace with your Telegram link
+    whatsapp: 'https://chat.whatsapp.com/YOUR_WHATSAPP_GROUP_HERE'  // PLACEHOLDER - Replace with your WhatsApp link
+};
+
+const TASK_REWARD = 0.05;
+
+function getWalletBalance() {
+    return parseFloat(localStorage.getItem('LUXE_WALLET_BALANCE') || '0');
+}
+
+function setWalletBalance(amount) {
+    localStorage.setItem('LUXE_WALLET_BALANCE', amount.toFixed(2));
+}
+
+function getTaskState(taskId) {
+    const state = localStorage.getItem(`luxe_task_${taskId}`);
+    return state ? JSON.parse(state) : { started: false, claimed: false };
+}
+
+function setTaskState(taskId, state) {
+    localStorage.setItem(`luxe_task_${taskId}`, JSON.stringify(state));
+}
+
+function updateTaskButton(taskId, state) {
+    const btn = document.getElementById(`${taskId}Btn`);
+    if (!btn) return;
+    
+    if (state.claimed) {
+        btn.className = 'social-task-btn claimed';
+        btn.textContent = 'Claimed';
+        btn.disabled = true;
+    } else if (state.countdown) {
+        btn.className = 'social-task-btn countdown';
+        btn.textContent = `${state.countdown}s`;
+        btn.disabled = true;
+    } else if (state.started) {
+        btn.className = 'social-task-btn claim';
+        btn.textContent = 'Claim';
+        btn.disabled = false;
+        btn.onclick = () => claimTask(taskId);
+    } else {
+        btn.className = 'social-task-btn join';
+        btn.textContent = 'Join';
+        btn.disabled = false;
+        btn.onclick = () => startTask(taskId);
+    }
+}
+
+function startTask(taskId) {
+    const state = getTaskState(taskId);
+    if (state.claimed) return;
+    
+    // Open the link
+    window.open(TASK_LINKS[taskId], '_blank');
+    
+    // Start 5 second countdown
+    let countdown = 5;
+    state.started = true;
+    state.countdown = countdown;
+    setTaskState(taskId, state);
+    updateTaskButton(taskId, state);
+    
+    const interval = setInterval(() => {
+        countdown--;
+        if (countdown <= 0) {
+            clearInterval(interval);
+            state.countdown = null;
+            setTaskState(taskId, state);
+            updateTaskButton(taskId, state);
+        } else {
+            state.countdown = countdown;
+            setTaskState(taskId, state);
+            updateTaskButton(taskId, state);
+        }
+    }, 1000);
+}
+
+function claimTask(taskId) {
+    const state = getTaskState(taskId);
+    if (state.claimed || !state.started) return;
+    
+    // Add reward to wallet
+    const currentBalance = getWalletBalance();
+    setWalletBalance(currentBalance + TASK_REWARD);
+    
+    // Mark as claimed
+    state.claimed = true;
+    setTaskState(taskId, state);
+    updateTaskButton(taskId, state);
+    
+    // Show notification
+    showNotification('Reward Claimed!', `+${TASK_REWARD} USDT added to your wallet!`);
+}
+
+function initSocialTasks() {
+    // Restore task states on page load
+    ['telegram', 'whatsapp'].forEach(taskId => {
+        const state = getTaskState(taskId);
+        if (state.countdown) {
+            // If page was reloaded during countdown, reset to claim state
+            state.countdown = null;
+            setTaskState(taskId, state);
+        }
+        updateTaskButton(taskId, state);
+    });
+}
+
+// ==================== CORNER POPUP ====================
+function showCornerPopup() {
+    const popupSeen = localStorage.getItem('luxe_corner_popup_seen');
+    if (popupSeen) return;
+    
+    const popup = document.getElementById('cornerPopup');
+    if (popup) {
+        setTimeout(() => {
+            popup.classList.add('show');
+        }, 2000); // Show after 2 seconds
+    }
+}
+
+function closeCornerPopup(event) {
+    event.stopPropagation();
+    const popup = document.getElementById('cornerPopup');
+    if (popup) {
+        popup.classList.remove('show');
+        localStorage.setItem('luxe_corner_popup_seen', 'true');
+    }
+}
+
+function scrollToTasks() {
+    const tasksSection = document.getElementById('socialTasksSection');
+    if (tasksSection) {
+        tasksSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    closeCornerPopup({ stopPropagation: () => {} });
+}
+
+// ==================== INITIALIZE ====================
+document.addEventListener('DOMContentLoaded', () => {
+    initVipAutoScroll();
+    initSocialTasks();
+    showCornerPopup();
+});
 </script>
 </body>
 </html>
