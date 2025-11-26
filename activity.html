@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LuxeEarn - Activities</title>
+    <link rel="icon" type="image/png" href="lexearn.png">
+    <link rel="apple-touch-icon" href="lexearn.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
             min-height: 100vh;
-            padding-bottom: 70px;
             padding-bottom: 70px;
             color: #fff;
         }
@@ -48,7 +49,141 @@
         }
         .container {
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+        
+        .status-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 150, 255, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .status-label {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .status-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        
+        .status-active {
+            background: #22c55e;
+            color: #fff;
+        }
+        
+        .status-inactive {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .section-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid #00ffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-left {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .activity-detail {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+
+        .activity-time {
+            font-size: 11px;
+            color: #00ffff;
+        }
+
+        .activity-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #22c55e;
+        }
+
+        .activity-pending {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .claim-now-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ccff00, #00ff88);
+            border: none;
+            border-radius: 8px;
+            color: #1a0033;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .claim-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(204, 255, 0, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+        }
+
         .reward-card {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 170, 0, 0.1));
             border-radius: 20px;
@@ -56,38 +191,45 @@
             margin-bottom: 25px;
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
+        
         .reward-title {
             font-size: 18px;
             font-weight: 700;
             color: #ffd700;
             margin-bottom: 15px;
         }
+        
         .reward-amount {
             font-size: 32px;
             font-weight: 800;
             color: #ccff00;
             margin-bottom: 15px;
         }
+        
         .progress-container {
             margin-bottom: 15px;
         }
+        
         .progress-label {
             font-size: 13px;
             color: #888;
             margin-bottom: 8px;
         }
+        
         .progress-bar {
             height: 8px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
             overflow: hidden;
         }
+        
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #ffd700, #ffaa00);
             width: 0%;
             transition: width 0.3s ease;
         }
+        
         .claim-btn {
             width: 100%;
             padding: 12px;
@@ -99,6 +241,7 @@
             cursor: pointer;
             opacity: 0.5;
         }
+        
         .claim-btn.active {
             opacity: 1;
         }
@@ -123,6 +266,7 @@
             align-items: center;
             cursor: pointer;
             flex: 1;
+            text-decoration: none;
         }
 
         .nav-item svg {
@@ -144,62 +288,288 @@
         .nav-item.active .nav-label {
             color: #00ffff;
         }
+
+        .claimed-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .pending-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 170, 0, 0.2);
+            border: 1px solid #ffaa00;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #ffaa00;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <button class="back-btn" onclick="history.back()">
+        <button class="back-btn" onclick="window.location.href='index.html'">
             <svg viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
             </svg>
         </button>
         <div class="header-title">Activities & Rewards</div>
     </div>
+    
     <div class="container">
+        <div class="status-card">
+            <div class="status-info">
+                <div class="status-label">Account Status</div>
+                <div class="status-value" id="userStatus">Active User</div>
+            </div>
+            <div class="status-badge" id="statusBadge">Active</div>
+        </div>
+
+        <div class="section-header">
+            📋 Recent Activities
+        </div>
+
+        <div id="activitiesList"></div>
+
         <div class="reward-card">
             <div class="reward-title">Team Leader Reward</div>
             <div class="reward-amount">+3,999.00 USDT</div>
             <div class="progress-container">
-                <div class="progress-label">Progress: 0/20 Team Members</div>
+                <div class="progress-label" id="teamProgress">Progress: 0/20 Team Members</div>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 0%"></div>
+                    <div class="progress-fill" id="teamProgressBar" style="width: 0%"></div>
                 </div>
             </div>
-            <button class="claim-btn">Claim Reward (0/20)</button>
+            <button class="claim-btn" id="teamRewardBtn">Claim Reward (0/20)</button>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item" onclick="window.location.href='index.html'">
+        <a href="index.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
             <div class="nav-label">Home</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='tasks.html'">
+        </a>
+        <a href="tasks.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
             </svg>
             <div class="nav-label">Tasks</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='team.html'">
+        </a>
+        <a href="team.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
             </svg>
             <div class="nav-label">Team</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='vip.html'">
+        </a>
+        <a href="vip.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M12 2l-2 6H2l5 4-2 6 7-5 7 5-2-6 5-4h-8z"/>
             </svg>
             <div class="nav-label">VIP</div>
-        </div>
-        <div class="nav-item" onclick="window.location.href='me.html'">
+        </a>
+        <a href="me.html" class="nav-item">
             <svg viewBox="0 0 24 24">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
             <div class="nav-label">Me</div>
-        </div>
+        </a>
     </div>
+
+    <script>
+        function getTaskState(taskId) {
+            const state = localStorage.getItem(`task_${taskId}`);
+            return state ? JSON.parse(state) : { claimed: false, started: false, countdown: null };
+        }
+
+        function getUserActivity() {
+            const lastActive = localStorage.getItem('lastActive');
+            if (!lastActive) {
+                localStorage.setItem('lastActive', new Date().toISOString());
+                return true;
+            }
+            
+            const lastActiveDate = new Date(lastActive);
+            const now = new Date();
+            const daysSinceActive = Math.floor((now - lastActiveDate) / (1000 * 60 * 60 * 24));
+            
+            return daysSinceActive < 7;
+        }
+
+        function formatDateTime(dateString) {
+            const date = new Date(dateString);
+            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            return {
+                date: date.toLocaleDateString('en-US', dateOptions),
+                time: date.toLocaleTimeString('en-US', timeOptions)
+            };
+        }
+
+        function loadActivities() {
+            const activitiesList = document.getElementById('activitiesList');
+            const telegramTask = getTaskState('telegram');
+            const whatsappTask = getTaskState('whatsapp');
+            
+            let activities = [];
+
+            if (telegramTask.claimed) {
+                const claimTime = telegramTask.claimedAt || new Date().toISOString();
+                const dt = formatDateTime(claimTime);
+                activities.push({
+                    title: 'Telegram Channel Bonus',
+                    detail: 'Joined Telegram channel and claimed reward',
+                    amount: '+0.25 USDT',
+                    time: claimTime,
+                    dateStr: dt.date,
+                    timeStr: dt.time,
+                    status: 'claimed'
+                });
+            } else {
+                activities.push({
+                    title: 'Telegram Channel Bonus',
+                    detail: 'Join our Telegram channel to earn 0.25 USDT',
+                    amount: '0.25 USDT',
+                    time: null,
+                    status: 'pending'
+                });
+            }
+
+            if (whatsappTask.claimed) {
+                const claimTime = whatsappTask.claimedAt || new Date().toISOString();
+                const dt = formatDateTime(claimTime);
+                activities.push({
+                    title: 'WhatsApp Channel Bonus',
+                    detail: 'Joined WhatsApp channel and claimed reward',
+                    amount: '+0.25 USDT',
+                    time: claimTime,
+                    dateStr: dt.date,
+                    timeStr: dt.time,
+                    status: 'claimed'
+                });
+            } else {
+                activities.push({
+                    title: 'WhatsApp Channel Bonus',
+                    detail: 'Join our WhatsApp channel to earn 0.25 USDT',
+                    amount: '0.25 USDT',
+                    time: null,
+                    status: 'pending'
+                });
+            }
+
+            const walletHistory = JSON.parse(localStorage.getItem('walletHistory') || '[]');
+            walletHistory.slice(-5).forEach(item => {
+                const dt = formatDateTime(item.timestamp);
+                activities.push({
+                    title: item.type === 'deposit' ? 'Deposit' : item.type === 'withdrawal' ? 'Withdrawal' : 'Reward Earned',
+                    detail: item.description || 'Transaction completed',
+                    amount: item.amount > 0 ? `+${item.amount} USDT` : `${item.amount} USDT`,
+                    time: item.timestamp,
+                    dateStr: dt.date,
+                    timeStr: dt.time,
+                    status: 'claimed'
+                });
+            });
+
+            activities.sort((a, b) => {
+                if (!a.time && !b.time) return 0;
+                if (!a.time) return 1;
+                if (!b.time) return -1;
+                return new Date(b.time) - new Date(a.time);
+            });
+
+            let html = '';
+            activities.forEach(activity => {
+                if (activity.status === 'claimed') {
+                    html += `
+                        <div class="activity-card">
+                            <div class="activity-left">
+                                <div class="activity-title">${activity.title} <span class="claimed-badge">✓ Claimed</span></div>
+                                <div class="activity-detail">${activity.detail}</div>
+                                <div class="activity-time">📅 ${activity.dateStr} at ${activity.timeStr}</div>
+                            </div>
+                            <div class="activity-amount">${activity.amount}</div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="activity-card">
+                            <div class="activity-left">
+                                <div class="activity-title">${activity.title} <span class="pending-badge">Pending</span></div>
+                                <div class="activity-detail">${activity.detail}</div>
+                            </div>
+                            <div class="activity-pending">
+                                <div class="activity-amount">${activity.amount}</div>
+                                <button class="claim-now-btn" onclick="goToClaim()">Go Claim Now</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (activities.length === 0) {
+                html = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">No activities yet. Start earning by completing tasks!</div>
+                    </div>
+                `;
+            }
+
+            activitiesList.innerHTML = html;
+        }
+
+        function updateUserStatus() {
+            const isActive = getUserActivity();
+            const statusBadge = document.getElementById('statusBadge');
+            const userStatus = document.getElementById('userStatus');
+
+            if (isActive) {
+                statusBadge.className = 'status-badge status-active';
+                statusBadge.textContent = 'Active';
+                userStatus.textContent = 'Active User';
+            } else {
+                statusBadge.className = 'status-badge status-inactive';
+                statusBadge.textContent = 'Inactive';
+                userStatus.textContent = 'Inactive User';
+            }
+        }
+
+        function goToClaim() {
+            window.location.href = 'index.html#socialTasksSection';
+        }
+
+        function updateTeamProgress() {
+            const teamSize = parseInt(localStorage.getItem('teamSize') || '0');
+            const progress = Math.min((teamSize / 20) * 100, 100);
+            
+            document.getElementById('teamProgress').textContent = `Progress: ${teamSize}/20 Team Members`;
+            document.getElementById('teamProgressBar').style.width = `${progress}%`;
+            document.getElementById('teamRewardBtn').textContent = `Claim Reward (${teamSize}/20)`;
+            
+            if (teamSize >= 20) {
+                document.getElementById('teamRewardBtn').classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserStatus();
+            loadActivities();
+            updateTeamProgress();
+            
+            localStorage.setItem('lastActive', new Date().toISOString());
+        });
+
+        setInterval(function() {
+            localStorage.setItem('lastActive', new Date().toISOString());
+        }, 60000);
+    </script>
 </body>
 </html>
