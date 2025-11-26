@@ -314,13 +314,19 @@
     </div>
 
     <script>
+        function getTotalBalance() {
+            const userBalance = parseFloat(localStorage.getItem('userBalance') || '0');
+            const taskRewards = parseFloat(localStorage.getItem('LUXE_WALLET_BALANCE') || '0');
+            return userBalance + taskRewards;
+        }
+
         function updateBalance() {
-            const userBalance = localStorage.getItem('userBalance') || '0';
+            const totalBalance = getTotalBalance();
             const rechargeAmount = localStorage.getItem('rechargeAmount') || '0';
             const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
             const username = localStorage.getItem('username') || '';
             
-            document.getElementById('totalBalance').textContent = parseFloat(userBalance).toFixed(0);
+            document.getElementById('totalBalance').textContent = totalBalance.toFixed(2);
             document.getElementById('rechargeBalance').textContent = parseFloat(rechargeAmount).toFixed(2);
             document.getElementById('displayEmail').textContent = userEmail;
             document.getElementById('displayUsername').textContent = username;
@@ -356,7 +362,7 @@
         };
 
         window.addEventListener('storage', function(e) {
-            if (e.key === 'userBalance' || e.key === 'rechargeAmount' || e.key === 'username') {
+            if (e.key === 'userBalance' || e.key === 'rechargeAmount' || e.key === 'username' || e.key === 'LUXE_WALLET_BALANCE') {
                 updateBalance();
             }
         });
