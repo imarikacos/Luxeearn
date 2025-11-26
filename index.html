@@ -1505,7 +1505,120 @@
             color: #ff00ff;
         }
 
+        /* VIP Card Animations */
+        @keyframes vipFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes vipGlow {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        @keyframes vipPulse {
+            0%, 100% {
+                border-color: rgba(0, 255, 255, 0.2);
+            }
+            50% {
+                border-color: rgba(0, 255, 255, 0.6);
+            }
+        }
+
+        .vip-level-card {
+            animation: vipFloat 3s ease-in-out infinite, vipGlow 3s ease-in-out infinite, vipPulse 3s ease-in-out infinite;
+        }
+
+        .vip-level-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .vip-level-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .vip-level-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .vip-level-card:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
+        .vip-level-card:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+
+        .vip-level-card:nth-child(6) {
+            animation-delay: 1.5s;
+        }
+
+        .vip-level-card:nth-child(7) {
+            animation-delay: 1.8s;
+        }
+
+        .vip-level-card:nth-child(8) {
+            animation-delay: 2.1s;
+        }
+
         @media (max-width: 768px) {
+            /* Make cards touch phone edges */
+            .container {
+                padding: 0;
+            }
+            
+            /* Add minimal padding only to specific sections that need breathing room */
+            .image-carousel,
+            .nav-grid,
+            .crypto-prices,
+            .withdrawal-logs,
+            .referral-earnings {
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 0;
+            }
+            
+            /* Keep VIP cards full width */
+            .vip-cards-container {
+                padding-left: 0;
+                padding-right: 0;
+                gap: 0;
+            }
+            
+            .vip-level-card {
+                min-width: 100%;
+                border-radius: 0;
+                margin-bottom: 2px;
+            }
+            
+            /* Action cards full width */
+            .action-cards {
+                margin-left: 0;
+                margin-right: 0;
+                gap: 0;
+            }
+            
+            .action-card {
+                border-radius: 0;
+            }
+            
+            /* Top coins full width */
+            .top-coins-container {
+                gap: 0;
+            }
+            
+            .top-coin-card {
+                border-radius: 0;
+            }
+            
             .stats-grid {
                 grid-template-columns: 1fr;
             }
