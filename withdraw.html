@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LuxeEarn - Withdraw</title>
+    <link rel="icon" type="image/png" href="lexearn.png">
     <style>
         * {
             margin: 0;
@@ -466,7 +467,7 @@
 
             <div class="input-group">
                 <label class="input-label">Withdrawal Amount</label>
-                <input type="number" id="withdrawAmount" placeholder="Enter amount" step="0.01" min="1" required>
+                <input type="number" id="withdrawAmount" placeholder="Enter amount" step="0.01" min="2" required>
                 <div class="quick-amounts">
                     <button type="button" class="quick-btn" onclick="setAmount(100)">100</button>
                     <button type="button" class="quick-btn" onclick="setAmount(500)">500</button>
@@ -478,7 +479,7 @@
             <div class="fee-info">
                 <div class="fee-row">
                     <span class="fee-label">Quota Range:</span>
-                    <span class="fee-value">1.000 - 1,000,000 <span id="quotaCurrency">USDT</span></span>
+                    <span class="fee-value">2.000 - 1,000,000 <span id="quotaCurrency">USDT</span></span>
                 </div>
                 <div class="fee-row">
                     <div class="fee-label">Handling Fee:</div>
@@ -499,7 +500,7 @@
         <div class="notice">
             <strong>Withdrawal Notice:</strong><br>
             • Processing time: 1-3 minutes<br>
-            • Minimum withdrawal: 1 USDT<br>
+            • Minimum withdrawal: 2 USDT/USDC<br>
             • Maximum withdrawal: 1,000,000 per transaction<br>
             • Please ensure the address is correct
         </div>
@@ -551,12 +552,15 @@
         let currentCurrency = 'USDT';
         let userBalance = 0;
 
+        function getTotalBalance() {
+            const userBalance = parseFloat(localStorage.getItem('userBalance') || '0');
+            const taskRewards = parseFloat(localStorage.getItem('LUXE_WALLET_BALANCE') || '0');
+            return userBalance + taskRewards;
+        }
+
         function loadUserData() {
-            const storedBalance = localStorage.getItem('userBalance');
-            if (storedBalance) {
-                userBalance = parseFloat(storedBalance);
-                updateBalanceDisplay();
-            }
+            userBalance = getTotalBalance();
+            updateBalanceDisplay();
 
             const storedEmail = localStorage.getItem('userEmail');
             if (storedEmail) {
@@ -638,8 +642,9 @@ if (password.length < 6) {
     return;
 }
 
-            if (amount < 1) {
-                alert('Minimum withdrawal amount is 1 ' + currentCurrency);
+            const minAmount = (currentCurrency === 'USDT' || currentCurrency === 'USDC') ? 2 : 1;
+            if (amount < minAmount) {
+                alert('Minimum withdrawal amount is ' + minAmount + ' ' + currentCurrency);
                 return;
             }
 
@@ -669,28 +674,25 @@ if (password.length < 6) {
                         });
 
                         userBalance -= amount;
-                        localStorage.setItem('userBalance', userBalance);
+                        const storedUserBalance = parseFloat(localStorage.getItem('userBalance') || '0');
+                        const taskRewards = parseFloat(localStorage.getItem('LUXE_WALLET_BALANCE') || '0');
+                        
+                        if (storedUserBalance >= amount) {
+                            localStorage.setItem('userBalance', (storedUserBalance - amount).toString());
+                        } else {
+                            const remaining = amount - storedUserBalance;
+                            localStorage.setItem('userBalance', '0');
+                            localStorage.setItem('LUXE_WALLET_BALANCE', (taskRewards - remaining).toString());
+                        }
+                        
                         updateBalanceDisplay();
                         document.getElementById('withdrawalForm').reset();
                         loadUserData();
                     }
                 }, 1500);
-
             } catch (error) {
                 loadingOverlay.classList.remove('active');
-
-                let errorMessage = 'Authentication Failed';
-                if (error.code === 'auth/user-not-found') {
-                    errorMessage = 'User not found';
-                } else if (error.code === 'auth/wrong-password') {
-                    errorMessage = 'Incorrect security password';
-                } else if (error.code === 'auth/invalid-email') {
-                    errorMessage = 'Invalid email address';
-                } else if (error.code === 'auth/invalid-credential') {
-                    errorMessage = 'Invalid email or password';
-                }
-
-                showModal('error', 'Withdrawal Failed', errorMessage);
+                showModal('error', 'Authentication Failed', 'Invalid email or password. Please try again.');
             }
         });
 
@@ -701,14 +703,18 @@ if (password.length < 6) {
             const modalMessage = document.getElementById('modalMessage');
             const receiptDetails = document.getElementById('receiptDetails');
 
+            if (type === 'error') {
+                modalIcon.textContent = '❌';
+            } else if (type === 'pending') {
+                modalIcon.textContent = '⏳';
+            } else if (type === 'success') {
+                modalIcon.textContent = '✅';
+            }
+
             modalTitle.textContent = title;
             modalMessage.innerHTML = message;
 
-            if (type === 'error') {
-                modalIcon.textContent = '❌';
-                receiptDetails.style.display = 'none';
-            } else if (type === 'pending') {
-                modalIcon.textContent = '⏳';
+            if (receiptData) {
                 receiptDetails.style.display = 'block';
                 receiptDetails.innerHTML = `
                     <div class="receipt-row">
@@ -717,25 +723,27 @@ if (password.length < 6) {
                     </div>
                     <div class="receipt-row">
                         <span class="receipt-label">Address:</span>
-                        <span class="receipt-value" style="font-size: 11px; word-break: break-all;">${receiptData.address}</span>
+                        <span class="receipt-value">${receiptData.address.substring(0, 10)}...${receiptData.address.substring(receiptData.address.length - 10)}</span>
                     </div>
                     <div class="receipt-row">
                         <span class="receipt-label">Amount:</span>
                         <span class="receipt-value">${receiptData.amount}</span>
                     </div>
                     <div class="receipt-row">
-                        <span class="receipt-label">Handling Fee:</span>
+                        <span class="receipt-label">Fee:</span>
                         <span class="receipt-value">${receiptData.fee}</span>
                     </div>
                     <div class="receipt-row">
                         <span class="receipt-label">Receipt:</span>
-                        <span class="receipt-value" style="color: #00ff88;">${receiptData.receipt}</span>
+                        <span class="receipt-value">${receiptData.receipt}</span>
                     </div>
                     <div class="receipt-row">
-                        <span class="receipt-label">Credit Time:</span>
+                        <span class="receipt-label">Est. Credit:</span>
                         <span class="receipt-value">${receiptData.creditTime}</span>
                     </div>
                 `;
+            } else {
+                receiptDetails.style.display = 'none';
             }
 
             modal.classList.add('active');
@@ -745,17 +753,13 @@ if (password.length < 6) {
             document.getElementById('receiptModal').classList.remove('active');
         }
 
-        window.togglePassword = togglePassword;
-        window.setAmount = setAmount;
-        window.setAll = setAll;
-        window.closeModal = closeModal;
-   document.getElementById('securityPassword').addEventListener('input', function() {
-    if (this.value.length < 6) {
-        this.setCustomValidity('Password must be at least 6 characters');
-    } else {
-        this.setCustomValidity('');
-    }
-});
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'userBalance' || e.key === 'LUXE_WALLET_BALANCE') {
+                loadUserData();
+            }
+        });
+
+        setInterval(loadUserData, 1000);
     </script>
 </body>
 </html>
