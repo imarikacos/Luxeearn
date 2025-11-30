@@ -13,7 +13,7 @@
     <meta property="og:title" content="LuxeEarn - Earn Money Online with Crypto Trading">
     <meta property="og:description" content="Join LuxeEarn and start earning through our intelligent quantitative trading platform. Get VIP benefits and team rewards!">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://luxeearn.com">
+    <meta property="og:url" content="https://luxearn.site">
     <meta property="og:image" content="lexearn.png">
     <meta property="og:site_name" content="LuxeEarn">
     
@@ -1827,6 +1827,164 @@
             font-size: 10px;
             color: #888;
         }
+
+        .language-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 0, 51, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 10001;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .language-modal.active {
+            display: block;
+        }
+
+        .language-modal-header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 0, 51, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            z-index: 10002;
+        }
+
+        .language-back-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .language-back-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #00ffff;
+        }
+
+        .language-modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .language-list {
+            padding: 10px 0;
+        }
+
+        .language-item {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .language-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .language-item.active {
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .language-name {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .language-checkmark {
+            width: 24px;
+            height: 24px;
+            display: none;
+        }
+
+        .language-item.active .language-checkmark {
+            display: block;
+        }
+
+        .language-checkmark svg {
+            width: 100%;
+            height: 100%;
+            fill: #00ffff;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 10003;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .loading-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: loadingDot 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes loadingDot {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 500;
+        }
+
           .exchange-logos-section {
     margin-top: 40px;
     text-align: center;
@@ -2167,7 +2325,7 @@
                 </div>
                 <div class="announcement-item" data-index="3">
                     <div class="announcement-text">
-                        1. Please pay attention to the official website of the platform (https://luxeearn.com) and do not leak your account password to avoid loss of funds.<br><br>
+                        1. Please pay attention to the official website of the platform (https://luxearn.site) and do not leak your account password to avoid loss of funds.<br><br>
                         2. Register a member account (please fill in a real and valid email address and a real and valid mobile phone number).
                     </div>
                 </div>
@@ -2200,7 +2358,7 @@
                 </div>
                 <div class="announcement-item" data-index="7">
                     <div class="announcement-text">
-                        1. Please remember the official website of the platform (www.luxeearn.com) and do not leak your account password to avoid loss of funds.<br><br>
+                        1. Please remember the official website of the platform (www.luxearn.site) and do not leak your account password to avoid loss of funds.<br><br>
                         LuxeEarn 24-hour online customer service: @LuxeEarn_Support<br><br>
                         Register a membership account. (Please fill in a real and valid email address and a real and valid mobile phone number).
                     </div>
@@ -2394,11 +2552,218 @@
                 </svg>
                 <span>My Profile</span>
             </a>
+            
+            <div class="sidebar-menu-item" onclick="openLanguageModal()" style="cursor: pointer;">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                </svg>
+                <span data-i18n="language">Language</span>
+            </div>
         </div>
         
         <div class="sidebar-footer">
             <div class="sidebar-footer-text">LuxeEarn Platform</div>
             <div class="sidebar-footer-copyright">© 2025 All Rights Reserved</div>
+        </div>
+    </div>
+
+    <div class="language-modal" id="languageModal">
+        <div class="language-modal-header">
+            <div class="language-back-btn" onclick="closeLanguageModal()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </div>
+            <div class="language-modal-title">Language</div>
+        </div>
+        <div class="language-list">
+            <div class="language-item active" data-lang="en" onclick="changeLanguage('en')">
+                <span class="language-name">English</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ar" onclick="changeLanguage('ar')">
+                <span class="language-name">عربي</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="fr" onclick="changeLanguage('fr')">
+                <span class="language-name">Français</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="it" onclick="changeLanguage('it')">
+                <span class="language-name">italiano</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ja" onclick="changeLanguage('ja')">
+                <span class="language-name">日本</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ko" onclick="changeLanguage('ko')">
+                <span class="language-name">한국어</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="de" onclick="changeLanguage('de')">
+                <span class="language-name">Deutsch</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ru" onclick="changeLanguage('ru')">
+                <span class="language-name">Русский</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="vi" onclick="changeLanguage('vi')">
+                <span class="language-name">Tiếng Việt</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="pt" onclick="changeLanguage('pt')">
+                <span class="language-name">Português (Portugal, Brasil)</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="tr" onclick="changeLanguage('tr')">
+                <span class="language-name">Türkçe</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="es" onclick="changeLanguage('es')">
+                <span class="language-name">español</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="fa" onclick="changeLanguage('fa')">
+                <span class="language-name">فارسی</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="id" onclick="changeLanguage('id')">
+                <span class="language-name">bahasa Indonesia</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="el" onclick="changeLanguage('el')">
+                <span class="language-name">Ελληνικά</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ms" onclick="changeLanguage('ms')">
+                <span class="language-name">Melayu</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="th" onclick="changeLanguage('th')">
+                <span class="language-name">แบบไทย</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="la" onclick="changeLanguage('la')">
+                <span class="language-name">Latinus</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="hi" onclick="changeLanguage('hi')">
+                <span class="language-name">हिंदी</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="bn" onclick="changeLanguage('bn')">
+                <span class="language-name">বাংলা</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="ur" onclick="changeLanguage('ur')">
+                <span class="language-name">اردو</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="language-item" data-lang="zh" onclick="changeLanguage('zh')">
+                <span class="language-name">中文（繁體）</span>
+                <div class="language-checkmark">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-dots">
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+                <div class="loading-dot"></div>
+            </div>
+            <div class="loading-text" data-i18n="loading">Loading...</div>
         </div>
     </div>
 
@@ -3788,11 +4153,358 @@ function scrollToTasks() {
     closeCornerPopup({ stopPropagation: () => {} });
 }
 
+// ==================== LANGUAGE TRANSLATION ====================
+const translations = {
+    en: {
+        language: "Language",
+        loading: "Loading...",
+        home: "Home",
+        recharge: "Recharge",
+        withdraw: "Withdraw",
+        tasks: "Tasks",
+        team: "Team",
+        activity: "Activity",
+        help: "Help & Support",
+        vip: "VIP Levels",
+        profile: "My Profile"
+    },
+    ar: {
+        language: "لغة",
+        loading: "جار التحميل...",
+        home: "الرئيسية",
+        recharge: "إعادة الشحن",
+        withdraw: "سحب",
+        tasks: "المهام",
+        team: "الفريق",
+        activity: "النشاط",
+        help: "المساعدة والدعم",
+        vip: "مستويات VIP",
+        profile: "ملفي"
+    },
+    fr: {
+        language: "Langue",
+        loading: "Chargement...",
+        home: "Accueil",
+        recharge: "Recharger",
+        withdraw: "Retirer",
+        tasks: "Tâches",
+        team: "Équipe",
+        activity: "Activité",
+        help: "Aide et Support",
+        vip: "Niveaux VIP",
+        profile: "Mon Profil"
+    },
+    it: {
+        language: "Lingua",
+        loading: "Caricamento...",
+        home: "Home",
+        recharge: "Ricarica",
+        withdraw: "Preleva",
+        tasks: "Compiti",
+        team: "Squadra",
+        activity: "Attività",
+        help: "Aiuto e Supporto",
+        vip: "Livelli VIP",
+        profile: "Il Mio Profilo"
+    },
+    ja: {
+        language: "言語",
+        loading: "読み込み中...",
+        home: "ホーム",
+        recharge: "リチャージ",
+        withdraw: "引き出し",
+        tasks: "タスク",
+        team: "チーム",
+        activity: "アクティビティ",
+        help: "ヘルプとサポート",
+        vip: "VIPレベル",
+        profile: "マイプロフィール"
+    },
+    ko: {
+        language: "언어",
+        loading: "로딩 중...",
+        home: "홈",
+        recharge: "충전",
+        withdraw: "인출",
+        tasks: "작업",
+        team: "팀",
+        activity: "활동",
+        help: "도움말 및 지원",
+        vip: "VIP 레벨",
+        profile: "내 프로필"
+    },
+    de: {
+        language: "Sprache",
+        loading: "Laden...",
+        home: "Startseite",
+        recharge: "Aufladen",
+        withdraw: "Abheben",
+        tasks: "Aufgaben",
+        team: "Team",
+        activity: "Aktivität",
+        help: "Hilfe & Support",
+        vip: "VIP-Stufen",
+        profile: "Mein Profil"
+    },
+    ru: {
+        language: "Язык",
+        loading: "Загрузка...",
+        home: "Главная",
+        recharge: "Пополнить",
+        withdraw: "Вывести",
+        tasks: "Задачи",
+        team: "Команда",
+        activity: "Активность",
+        help: "Помощь и Поддержка",
+        vip: "VIP Уровни",
+        profile: "Мой Профиль"
+    },
+    vi: {
+        language: "Ngôn ngữ",
+        loading: "Đang tải...",
+        home: "Trang chủ",
+        recharge: "Nạp tiền",
+        withdraw: "Rút tiền",
+        tasks: "Nhiệm vụ",
+        team: "Đội nhóm",
+        activity: "Hoạt động",
+        help: "Trợ giúp & Hỗ trợ",
+        vip: "Cấp độ VIP",
+        profile: "Hồ sơ của tôi"
+    },
+    pt: {
+        language: "Idioma",
+        loading: "Carregando...",
+        home: "Início",
+        recharge: "Recarregar",
+        withdraw: "Sacar",
+        tasks: "Tarefas",
+        team: "Equipe",
+        activity: "Atividade",
+        help: "Ajuda & Suporte",
+        vip: "Níveis VIP",
+        profile: "Meu Perfil"
+    },
+    tr: {
+        language: "Dil",
+        loading: "Yükleniyor...",
+        home: "Ana Sayfa",
+        recharge: "Yeniden Yükle",
+        withdraw: "Çek",
+        tasks: "Görevler",
+        team: "Takım",
+        activity: "Etkinlik",
+        help: "Yardım ve Destek",
+        vip: "VIP Seviyeleri",
+        profile: "Profilim"
+    },
+    es: {
+        language: "Idioma",
+        loading: "Cargando...",
+        home: "Inicio",
+        recharge: "Recargar",
+        withdraw: "Retirar",
+        tasks: "Tareas",
+        team: "Equipo",
+        activity: "Actividad",
+        help: "Ayuda y Soporte",
+        vip: "Niveles VIP",
+        profile: "Mi Perfil"
+    },
+    fa: {
+        language: "زبان",
+        loading: "در حال بارگذاری...",
+        home: "خانه",
+        recharge: "شارژ مجدد",
+        withdraw: "برداشت",
+        tasks: "وظایف",
+        team: "تیم",
+        activity: "فعالیت",
+        help: "کمک و پشتیبانی",
+        vip: "سطوح VIP",
+        profile: "پروفایل من"
+    },
+    id: {
+        language: "Bahasa",
+        loading: "Memuat...",
+        home: "Beranda",
+        recharge: "Isi Ulang",
+        withdraw: "Tarik",
+        tasks: "Tugas",
+        team: "Tim",
+        activity: "Aktivitas",
+        help: "Bantuan & Dukungan",
+        vip: "Level VIP",
+        profile: "Profil Saya"
+    },
+    el: {
+        language: "Γλώσσα",
+        loading: "Φόρτωση...",
+        home: "Αρχική",
+        recharge: "Επαναφόρτιση",
+        withdraw: "Ανάληψη",
+        tasks: "Εργασίες",
+        team: "Ομάδα",
+        activity: "Δραστηριότητα",
+        help: "Βοήθεια & Υποστήριξη",
+        vip: "Επίπεδα VIP",
+        profile: "Το Προφίλ μου"
+    },
+    ms: {
+        language: "Bahasa",
+        loading: "Memuatkan...",
+        home: "Laman Utama",
+        recharge: "Tambah Nilai",
+        withdraw: "Keluarkan",
+        tasks: "Tugas",
+        team: "Pasukan",
+        activity: "Aktiviti",
+        help: "Bantuan & Sokongan",
+        vip: "Tahap VIP",
+        profile: "Profil Saya"
+    },
+    th: {
+        language: "ภาษา",
+        loading: "กำลังโหลด...",
+        home: "หน้าแรก",
+        recharge: "เติมเงิน",
+        withdraw: "ถอน",
+        tasks: "งาน",
+        team: "ทีม",
+        activity: "กิจกรรม",
+        help: "ความช่วยเหลือและการสนับสนุน",
+        vip: "ระดับ VIP",
+        profile: "โปรไฟล์ของฉัน"
+    },
+    la: {
+        language: "Lingua",
+        loading: "Onerans...",
+        home: "Domus",
+        recharge: "Replenire",
+        withdraw: "Extrahere",
+        tasks: "Munera",
+        team: "Factio",
+        activity: "Actio",
+        help: "Auxilium & Supportum",
+        vip: "Gradus VIP",
+        profile: "Meum Profil"
+    },
+    hi: {
+        language: "भाषा",
+        loading: "लोड हो रहा है...",
+        home: "होम",
+        recharge: "रिचार्ज",
+        withdraw: "निकालें",
+        tasks: "कार्य",
+        team: "टीम",
+        activity: "गतिविधि",
+        help: "सहायता और समर्थन",
+        vip: "VIP स्तर",
+        profile: "मेरी प्रोफ़ाइल"
+    },
+    bn: {
+        language: "ভাষা",
+        loading: "লোড হচ্ছে...",
+        home: "হোম",
+        recharge: "রিচার্জ",
+        withdraw: "উত্তোলন",
+        tasks: "কাজ",
+        team: "দল",
+        activity: "কার্যকলাপ",
+        help: "সাহায্য ও সমর্থন",
+        vip: "VIP স্তর",
+        profile: "আমার প্রোফাইল"
+    },
+    ur: {
+        language: "زبان",
+        loading: "لوڈ ہو رہا ہے...",
+        home: "ہوم",
+        recharge: "ریچارج",
+        withdraw: "نکالیں",
+        tasks: "کام",
+        team: "ٹیم",
+        activity: "سرگرمی",
+        help: "مدد اور سپورٹ",
+        vip: "VIP سطحیں",
+        profile: "میری پروفائل"
+    },
+    zh: {
+        language: "語言",
+        loading: "載入中...",
+        home: "首頁",
+        recharge: "充值",
+        withdraw: "提款",
+        tasks: "任務",
+        team: "團隊",
+        activity: "活動",
+        help: "幫助與支援",
+        vip: "VIP等級",
+        profile: "我的個人資料"
+    }
+};
+
+let currentLanguage = localStorage.getItem('luxearn_language') || 'en';
+
+function openLanguageModal() {
+    document.getElementById('languageModal').classList.add('active');
+    closeSidebar();
+}
+
+function closeLanguageModal() {
+    document.getElementById('languageModal').classList.remove('active');
+}
+
+function changeLanguage(lang) {
+    document.getElementById('loadingOverlay').classList.add('active');
+    
+    document.querySelectorAll('.language-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+    
+    setTimeout(() => {
+        currentLanguage = lang;
+        localStorage.setItem('luxearn_language', lang);
+        
+        applyTranslations();
+        
+        setTimeout(() => {
+            document.getElementById('loadingOverlay').classList.remove('active');
+            closeLanguageModal();
+        }, 500);
+    }, 800);
+}
+
+function applyTranslations() {
+    const trans = translations[currentLanguage];
+    if (!trans) return;
+    
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (trans[key]) {
+            element.textContent = trans[key];
+        }
+    });
+}
+
+function initLanguage() {
+    applyTranslations();
+    const savedLang = localStorage.getItem('luxearn_language') || 'en';
+    document.querySelectorAll('.language-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    const activeLang = document.querySelector(`[data-lang="${savedLang}"]`);
+    if (activeLang) {
+        activeLang.classList.add('active');
+    }
+}
+
 // ==================== INITIALIZE ====================
 document.addEventListener('DOMContentLoaded', () => {
     initVipAutoScroll();
     initSocialTasks();
     showCornerPopup();
+    initLanguage();
 });
 </script>
 </body>
