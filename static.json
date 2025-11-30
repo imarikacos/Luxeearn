@@ -1,0 +1,17 @@
+{
+  "routes": [
+    { "src": "/login", "dest": "/login.html" },
+    { "src": "/team", "dest": "/team.html" },
+    { "src": "/withdraw", "dest": "/withdraw.html" },
+    { "src": "/recharge", "dest": "/recharge.html" },
+    { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/me", "dest": "/me.html" },
+    { "src": "/tasks", "dest": "/tasks.html" },
+    { "src": "/activity", "dest": "/activity.html" },
+    { "src": "/agent", "dest": "/agent.html" },
+    { "src": "/vip", "dest": "/vip.html" },
+    { "src": "/notifications", "dest": "/notifications.html" },
+
+    { "src": "/.*", "dest": "/index.html" }
+  ]
+}
