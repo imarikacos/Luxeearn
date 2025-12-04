@@ -414,11 +414,132 @@
             width: 20px;
             height: 20px;
         }
+
+        /* Phone-style notification styles */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .phone-notification {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transition: top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: #333;
+        }
+
+        .phone-notification.show {
+            top: 20px;
+            animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .notification-app-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .notification-app-info {
+            flex: 1;
+        }
+
+        .notification-app-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a0033;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .notification-body {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .notification-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 8px;
+            font-size: 13px;
+            color: #FF6B35;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .notification-timer svg {
+            width: 16px;
+            height: 16px;
+            fill: #FF6B35;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .notification-action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .notification-action-btn.primary {
+            background: #330066;
+            color: white;
+        }
+
+        .notification-action-btn.secondary {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .notification-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <button class="back-btn" onclick="history.back()">
+        <button class="back-btn" onclick="handleBackButton()">
             <svg viewBox="0 0 24 24">
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
             </svg>
@@ -569,7 +690,7 @@
                 <div class="address-label">Deposit Address</div>
                 <div class="address-text" id="depositAddress"></div>
                 <button class="copy-address-btn" onclick="copyAddress()">Copy Address</button>
-                <button class="recharge-complete-btn" onclick="showNotification()">RECHARGE COMPLETE</button>
+                <button class="recharge-complete-btn" onclick="showRechargeCompleteNotification()">RECHARGE COMPLETE</button>
             </div>
 
             <div class="notice-box">
@@ -602,21 +723,34 @@
         <span id="toastMessage">Copied!</span>
     </div>
 
+    <!-- Phone-style notification -->
+    <div class="phone-notification" id="phoneNotification">
+        <div class="notification-header">
+            <img class="notification-app-icon" src="luxearn.png" alt="LuxeEarn" onerror="this.style.background='#330066';this.style.padding='8px';">
+            <div class="notification-app-info">
+                <div class="notification-app-name">LuxeEarn</div>
+                <div class="notification-time">now</div>
+            </div>
+        </div>
+        <div class="notification-body" id="notificationBody"></div>
+        <div id="notificationActions"></div>
+    </div>
+
     <div class="bottom-nav">
-        <div class="nav-item" onclick="window.location.href='index.html'">
+        <div class="nav-item" onclick="window.location.href='/index'">
             <svg viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
             <div class="nav-label">Home</div>
         </div>
-        <div class="nav-item" onclick="window.location.href='tasks.html'">
+        <div class="nav-item" onclick="window.location.href='/tasks'">
             <svg viewBox="0 0 24 24">
                 <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
             </svg>
             <div class="nav-label">Tasks</div>
         </div>
     
-        <div class="nav-item" onclick="window.location.href='me.html'">
+        <div class="nav-item" onclick="window.location.href='/me'">
             <svg viewBox="0 0 24 24">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
@@ -624,7 +758,12 @@
         </div>
     </div>
 
+    <script src="notification-sounds.js"></script>
     <script>
+        let currentCoin = null;
+        let rechargeTimer = null;
+        let notificationTimeout = null;
+
         const cryptoData = {
             'BEP20-USDT': {
                 address: '0x283702d20a2577d8e0e6625069d924a6747d2a3a',
@@ -676,7 +815,87 @@
             }
         };
 
+        function playNotificationSound(type = 'message') {
+            if (window.NotificationSounds) {
+                if (type === 'success') {
+                    NotificationSounds.playSuccess();
+                } else if (type === 'cancel') {
+                    NotificationSounds.playCancel();
+                } else {
+                    NotificationSounds.playMessage();
+                }
+            }
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+        }
+
+        function showPhoneNotification(message, type = 'info', actions = null, duration = null) {
+            const notification = document.getElementById('phoneNotification');
+            const notificationBody = document.getElementById('notificationBody');
+            const notificationActions = document.getElementById('notificationActions');
+            
+            notificationBody.innerHTML = message;
+            notificationActions.innerHTML = '';
+            
+            if (actions) {
+                notificationActions.innerHTML = actions;
+            }
+            
+            notification.classList.add('show');
+            
+            if (duration) {
+                if (notificationTimeout) {
+                    clearTimeout(notificationTimeout);
+                }
+                notificationTimeout = setTimeout(() => {
+                    hidePhoneNotification();
+                }, duration);
+            }
+        }
+
+        function hidePhoneNotification() {
+            const notification = document.getElementById('phoneNotification');
+            notification.classList.remove('show');
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+                notificationTimeout = null;
+            }
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startRechargeTimer(coin) {
+            let timeLeft = 25 * 60;
+            
+            const updateTimer = () => {
+                const timerElement = document.getElementById('rechargeTimer');
+                if (timerElement) {
+                    timerElement.textContent = formatTime(timeLeft);
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(rechargeTimer);
+                        hidePhoneNotification();
+                    } else {
+                        timeLeft--;
+                    }
+                }
+            };
+            
+            if (rechargeTimer) {
+                clearInterval(rechargeTimer);
+            }
+            
+            rechargeTimer = setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
         function showDeposit(crypto, displayName) {
+            currentCoin = crypto;
             const modal = document.getElementById('depositModal');
             const modalTitle = document.getElementById('modalCryptoName');
             const depositAddress = document.getElementById('depositAddress');
@@ -690,6 +909,21 @@
                 
                 modal.classList.add('show');
                 document.body.style.overflow = 'hidden';
+                
+                playNotificationSound('message');
+                
+                const message = `
+                    <strong>Detected system recharge using ${crypto}</strong>
+                    <div class="notification-timer">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                        <span>Time before expires: <span id="rechargeTimer">25:00</span></span>
+                    </div>
+                `;
+                
+                showPhoneNotification(message, 'info', null, 25 * 60 * 1000);
+                startRechargeTimer(crypto);
             }
         }
 
@@ -697,6 +931,101 @@
             const modal = document.getElementById('depositModal');
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
+            currentCoin = null;
+            
+            if (rechargeTimer) {
+                clearInterval(rechargeTimer);
+                rechargeTimer = null;
+            }
+            
+            hidePhoneNotification();
+        }
+
+        function handleBackButton() {
+            if (currentCoin) {
+                playNotificationSound('cancel');
+                
+                if (rechargeTimer) {
+                    clearInterval(rechargeTimer);
+                    rechargeTimer = null;
+                }
+                if (notificationTimeout) {
+                    clearTimeout(notificationTimeout);
+                    notificationTimeout = null;
+                }
+                
+                const modal = document.getElementById('depositModal');
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+                
+                const message = `
+                    <strong>Recharge request canceled by user 📣</strong>
+                    <p style="margin-top: 8px; font-size: 13px; color: #666;">Your recharge request has been cancelled.</p>
+                `;
+                
+                const actions = `
+                    <div class="notification-actions">
+                        <button class="notification-action-btn primary" onclick="returnToRecharge()">Return to Recharge</button>
+                        <button class="notification-action-btn secondary" onclick="dismissCancelNotification()">Cancel</button>
+                    </div>
+                `;
+                
+                showPhoneNotification(message, 'cancel', actions, null);
+            } else {
+                history.back();
+            }
+        }
+
+        function returnToRecharge() {
+            hidePhoneNotification();
+            currentCoin = null;
+        }
+
+        function dismissCancelNotification() {
+            hidePhoneNotification();
+            currentCoin = null;
+            history.back();
+        }
+
+        function showRechargeCompleteNotification() {
+            if (!currentCoin) return;
+            
+            playNotificationSound('success');
+            
+            const coinName = currentCoin;
+            
+            if (rechargeTimer) {
+                clearInterval(rechargeTimer);
+                rechargeTimer = null;
+            }
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+                notificationTimeout = null;
+            }
+            
+            const modal = document.getElementById('depositModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            
+            const message = `
+                <strong style="color: #10b981;">✓ Recharge Complete</strong>
+                <p style="margin-top: 8px; font-size: 13px; line-height: 1.5;">
+                    Your recharge complete request of <strong>${coinName}</strong> has been received. You'll receive your deposited USDT to your account in the next 2-3 minutes.
+                </p>
+                <p style="margin-top: 8px; font-size: 12px; color: #666;">
+                    <strong>Note:</strong> Your deposit will automatically reflect to your account.
+                </p>
+            `;
+            
+            const actions = `
+                <div class="notification-actions">
+                    <button class="notification-action-btn primary" onclick="goToMe()">View Account</button>
+                    <button class="notification-action-btn secondary" onclick="hidePhoneNotification(); currentCoin = null;">OK</button>
+                </div>
+            `;
+            
+            showPhoneNotification(message, 'success', actions, null);
+            currentCoin = null;
         }
 
         function copyAddress() {
@@ -755,7 +1084,9 @@
         }
 
         function goToMe() {
-            window.location.href = 'me.html';
+            hidePhoneNotification();
+            currentCoin = null;
+            window.location.href = '/me';
         }
 
         document.getElementById('depositModal').addEventListener('click', function(e) {
@@ -767,6 +1098,21 @@
         document.getElementById('notificationPopup').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('show');
+            }
+        });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => console.log('Service Worker registered'))
+                .catch(error => console.log('Service Worker registration failed:', error));
+        }
+
+        window.addEventListener('beforeunload', function() {
+            if (rechargeTimer) {
+                clearInterval(rechargeTimer);
+            }
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
             }
         });
     </script>
