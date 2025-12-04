@@ -4148,87 +4148,20 @@ window.addEventListener('appinstalled', function() {
     </script>
 
     <script>
-        // --- Notification Logic ---
-        function requestNotificationPermission() {
-            if (!('Notification' in window)) {
-                console.log('This browser does not support desktop notification');
-                return;
-            }
-
-            Notification.requestPermission().then(function(permission) {
-                if (permission === 'granted') {
-                    showWelcomeNotification();
-                }
-            });
-        }
-
-        function showWelcomeNotification() {
-            const title = 'Welcome to LuxeEarn!';
-            const options = {
-                body: 'Start earning with crypto trading today. Tap to open app.',
-                icon: 'lexearn.png',
-                vibrate: [200, 100, 200],
-                tag: 'welcome-notification',
-                badge: 'lexearn.png'
-            };
-
-            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-                navigator.serviceWorker.ready.then(function(registration) {
-                    registration.showNotification(title, options);
-                });
-            } else {
-                // Fallback for non-SW contexts or if SW not ready
-                new Notification(title, options);
-            }
-            
-            // Play a sound if possible (user interaction usually required)
-            try {
-                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                audio.play().catch(e => console.log('Audio play failed (interaction needed):', e));
-            } catch (e) {
-                console.log('Audio error:', e);
-            }
-        }
-
-        // Try to request permission on critical interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add listener to install button or other main interactions
-            const installBtn = document.getElementById('installPwaBtn');
-            if (installBtn) {
-                installBtn.addEventListener('click', requestNotificationPermission);
-            }
-            
-            const downloadBtn = document.getElementById('downloadAppBtn');
-            if (downloadBtn) {
-                downloadBtn.addEventListener('click', requestNotificationPermission);
-            }
-            
-            // Also try on any click on the page if not granted yet (aggressive but effective for demos)
-            document.body.addEventListener('click', function() {
-                if (Notification.permission === 'default') {
-                    requestNotificationPermission();
-                }
-            }, { once: true });
-        });
-    </script>
-
-    <script>
-        // --- Advanced PWA Notification Logic ---
+        // --- LuxeEarn PWA Notification System ---
+        // Notifications appear like normal phone messages with action buttons
         
-        // Function to check permission and trigger appropriate flow
         function initNotificationSystem() {
             if (!('Notification' in window)) {
-                console.log('This browser does not support desktop notification');
+                console.log('This browser does not support notifications');
                 return;
             }
 
             if (Notification.permission === 'granted') {
                 runNotificationSchedule();
             } else if (Notification.permission !== 'denied') {
-                // Request permission on interaction
                 Notification.requestPermission().then(function(permission) {
                     if (permission === 'granted') {
-                        // If just granted, it's likely a first time user (or re-enabled)
                         showWelcomeNotification();
                         localStorage.setItem('luxe_has_visited', 'true');
                     }
@@ -4240,42 +4173,50 @@ window.addEventListener('appinstalled', function() {
             const hasVisited = localStorage.getItem('luxe_has_visited');
             
             if (!hasVisited) {
-                // First time user logic
                 showWelcomeNotification();
                 localStorage.setItem('luxe_has_visited', 'true');
             } else {
-                // Returning user logic - Show Bonus Notification after delay
-                // Delay of 10 seconds for demo purposes (in real app might be longer)
                 setTimeout(() => {
                     showBonusNotification();
-                }, 10000); 
+                }, 10000);
             }
         }
 
         function showWelcomeNotification() {
             const title = 'Welcome to LuxeEarn!';
             const options = {
-                body: 'Start earning with crypto trading today. Tap to open app.',
+                body: 'Start earning with crypto trading today. Tap to get started!',
                 icon: 'lexearn.png',
                 badge: 'lexearn.png',
                 vibrate: [200, 100, 200],
                 tag: 'welcome-notification',
-                data: { url: 'index_1764841373935.html' } // Open home
+                renotify: true,
+                requireInteraction: true,
+                data: { url: '/notifications.html' },
+                actions: [
+                    { action: 'visit', title: 'Visit' },
+                    { action: 'mark-read', title: 'Mark as read' }
+                ]
             };
             
             sendNotification(title, options);
         }
 
         function showBonusNotification() {
-            const title = '🎁 100% Deposit Bonus!';
+            const title = '100% Deposit Bonus!';
             const options = {
                 body: 'Get bonus of up to 500 USDT when you deposit now! Click to claim.',
                 icon: 'lexearn.png',
                 badge: 'lexearn.png',
                 vibrate: [500, 200, 500],
-                requireInteraction: true, // Keeps it visible until clicked
                 tag: 'bonus-notification',
-                data: { url: 'recharge.html' } // Opens recharge page
+                renotify: true,
+                requireInteraction: true,
+                data: { url: '/recharge.html' },
+                actions: [
+                    { action: 'get-bonus', title: 'Get Bonus' },
+                    { action: 'mark-read', title: 'Mark as read' }
+                ]
             };
 
             sendNotification(title, options);
@@ -4290,20 +4231,21 @@ window.addEventListener('appinstalled', function() {
                 const n = new Notification(title, options);
                 n.onclick = function(event) {
                     event.preventDefault();
-                    window.location.href = options.data.url;
+                    window.focus();
+                    if (options.data && options.data.url) {
+                        window.location.href = options.data.url;
+                    }
+                    n.close();
                 };
             }
             
-            // Sound effect
             try {
                 const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                audio.play().catch(e => {}); // Ignore autoplay errors
+                audio.play().catch(e => {});
             } catch (e) {}
         }
 
-        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add listeners to critical buttons to trigger permission prompt if needed
             const btns = document.querySelectorAll('button, a, .action-card');
             btns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -4313,9 +4255,26 @@ window.addEventListener('appinstalled', function() {
                 }, { once: true });
             });
 
-            // Run logic if already granted
             if (Notification.permission === 'granted') {
                 runNotificationSchedule();
+            }
+            
+            const installBtn = document.getElementById('installPwaBtn');
+            if (installBtn) {
+                installBtn.addEventListener('click', function() {
+                    if (Notification.permission === 'default') {
+                        initNotificationSystem();
+                    }
+                });
+            }
+            
+            const downloadBtn = document.getElementById('downloadAppBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    if (Notification.permission === 'default') {
+                        initNotificationSystem();
+                    }
+                });
             }
         });
     </script>
