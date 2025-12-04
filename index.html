@@ -2130,7 +2130,155 @@
     margin-top: 3px;
 }
         }
-    </style>
+    
+        /* Telegram Floating Button and Popup */
+        .floating-telegram {
+            position: fixed;
+            bottom: 170px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #29a9eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(41, 169, 235, 0.4);
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-telegram:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-telegram svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .telegram-popup-content {
+            background: #fff;
+            color: #333;
+            border-radius: 20px;
+            padding: 25px;
+            width: 90%;
+            max-width: 350px;
+            position: relative;
+            animation: popupSlideUp 0.3s ease-out;
+        }
+
+        @keyframes popupSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .popup-header h3 {
+            color: #000;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .popup-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .telegram-option {
+            display: flex;
+            align-items: center;
+            background: #f5f7fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .telegram-option:hover {
+            background: #eef2f6;
+        }
+
+        .telegram-icon-large {
+            width: 40px;
+            height: 40px;
+            background: #29a9eb;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .telegram-icon-large svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .telegram-text {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .telegram-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .telegram-arrow {
+            font-size: 20px;
+            color: #999;
+        }
+
+        .close-popup-btn {
+            color: #333;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+</style>
 </head>
 <body>
     <div id="notification" class="notification"></div>
@@ -3942,5 +4090,234 @@ window.addEventListener('appinstalled', function() {
     deferredPrompt = null;
 });
 </script>
+
+    <!-- Telegram Floating Button -->
+    <div class="floating-telegram" onclick="openTelegramPopup()">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.751-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.119.098.152.228.166.319.014.096.015.193.015.296z" fill="#fff"/>
+        </svg>
+    </div>
+
+    <!-- Telegram Popup -->
+    <div id="telegramPopup" class="popup-overlay" style="display: none;" onclick="if(event.target === this) closeTelegramPopup()">
+        <div class="popup-content telegram-popup-content">
+            <div class="popup-header">
+                <h3>Online Service</h3>
+                <button class="close-popup-btn" onclick="closeTelegramPopup()">&times;</button>
+            </div>
+            <div class="popup-body">
+                <p class="popup-desc">Choose your preferred online customer service contact method</p>
+                
+                <div class="telegram-option" onclick="window.open('https://t.me/lux0f', '_blank')">
+                    <div class="telegram-icon-large">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.751-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.119.098.152.228.166.319.014.096.015.193.015.296z" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="telegram-text">
+                        <span class="telegram-title">Official Customer Service</span>
+                        <span class="telegram-arrow">&rsaquo;</span>
+                    </div>
+                </div>
+
+                <div class="telegram-option" onclick="window.open('https://t.me/+wzwx1sKfVoE4NDg0', '_blank')">
+                    <div class="telegram-icon-large">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.751-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.119.098.152.228.166.319.014.096.015.193.015.296z" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="telegram-text">
+                        <span class="telegram-title">Official Channel</span>
+                        <span class="telegram-arrow">&rsaquo;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openTelegramPopup() {
+            const popup = document.getElementById('telegramPopup');
+            popup.style.display = 'flex';
+        }
+
+        function closeTelegramPopup() {
+            const popup = document.getElementById('telegramPopup');
+            popup.style.display = 'none';
+        }
+    </script>
+
+    <script>
+        // --- Notification Logic ---
+        function requestNotificationPermission() {
+            if (!('Notification' in window)) {
+                console.log('This browser does not support desktop notification');
+                return;
+            }
+
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    showWelcomeNotification();
+                }
+            });
+        }
+
+        function showWelcomeNotification() {
+            const title = 'Welcome to LuxeEarn!';
+            const options = {
+                body: 'Start earning with crypto trading today. Tap to open app.',
+                icon: 'lexearn.png',
+                vibrate: [200, 100, 200],
+                tag: 'welcome-notification',
+                badge: 'lexearn.png'
+            };
+
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    registration.showNotification(title, options);
+                });
+            } else {
+                // Fallback for non-SW contexts or if SW not ready
+                new Notification(title, options);
+            }
+            
+            // Play a sound if possible (user interaction usually required)
+            try {
+                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                audio.play().catch(e => console.log('Audio play failed (interaction needed):', e));
+            } catch (e) {
+                console.log('Audio error:', e);
+            }
+        }
+
+        // Try to request permission on critical interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add listener to install button or other main interactions
+            const installBtn = document.getElementById('installPwaBtn');
+            if (installBtn) {
+                installBtn.addEventListener('click', requestNotificationPermission);
+            }
+            
+            const downloadBtn = document.getElementById('downloadAppBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', requestNotificationPermission);
+            }
+            
+            // Also try on any click on the page if not granted yet (aggressive but effective for demos)
+            document.body.addEventListener('click', function() {
+                if (Notification.permission === 'default') {
+                    requestNotificationPermission();
+                }
+            }, { once: true });
+        });
+    </script>
+
+    <script>
+        // --- Advanced PWA Notification Logic ---
+        
+        // Function to check permission and trigger appropriate flow
+        function initNotificationSystem() {
+            if (!('Notification' in window)) {
+                console.log('This browser does not support desktop notification');
+                return;
+            }
+
+            if (Notification.permission === 'granted') {
+                runNotificationSchedule();
+            } else if (Notification.permission !== 'denied') {
+                // Request permission on interaction
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        // If just granted, it's likely a first time user (or re-enabled)
+                        showWelcomeNotification();
+                        localStorage.setItem('luxe_has_visited', 'true');
+                    }
+                });
+            }
+        }
+
+        function runNotificationSchedule() {
+            const hasVisited = localStorage.getItem('luxe_has_visited');
+            
+            if (!hasVisited) {
+                // First time user logic
+                showWelcomeNotification();
+                localStorage.setItem('luxe_has_visited', 'true');
+            } else {
+                // Returning user logic - Show Bonus Notification after delay
+                // Delay of 10 seconds for demo purposes (in real app might be longer)
+                setTimeout(() => {
+                    showBonusNotification();
+                }, 10000); 
+            }
+        }
+
+        function showWelcomeNotification() {
+            const title = 'Welcome to LuxeEarn!';
+            const options = {
+                body: 'Start earning with crypto trading today. Tap to open app.',
+                icon: 'lexearn.png',
+                badge: 'lexearn.png',
+                vibrate: [200, 100, 200],
+                tag: 'welcome-notification',
+                data: { url: 'index_1764841373935.html' } // Open home
+            };
+            
+            sendNotification(title, options);
+        }
+
+        function showBonusNotification() {
+            const title = '🎁 100% Deposit Bonus!';
+            const options = {
+                body: 'Get bonus of up to 500 USDT when you deposit now! Click to claim.',
+                icon: 'lexearn.png',
+                badge: 'lexearn.png',
+                vibrate: [500, 200, 500],
+                requireInteraction: true, // Keeps it visible until clicked
+                tag: 'bonus-notification',
+                data: { url: 'recharge.html' } // Opens recharge page
+            };
+
+            sendNotification(title, options);
+        }
+
+        function sendNotification(title, options) {
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    registration.showNotification(title, options);
+                });
+            } else {
+                const n = new Notification(title, options);
+                n.onclick = function(event) {
+                    event.preventDefault();
+                    window.location.href = options.data.url;
+                };
+            }
+            
+            // Sound effect
+            try {
+                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                audio.play().catch(e => {}); // Ignore autoplay errors
+            } catch (e) {}
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add listeners to critical buttons to trigger permission prompt if needed
+            const btns = document.querySelectorAll('button, a, .action-card');
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (Notification.permission === 'default') {
+                        initNotificationSystem();
+                    }
+                }, { once: true });
+            });
+
+            // Run logic if already granted
+            if (Notification.permission === 'granted') {
+                runNotificationSchedule();
+            }
+        });
+    </script>
 </body>
 </html>
