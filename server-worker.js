@@ -4,7 +4,8 @@ const urlsToCache = [
   '/index.html',
   '/manifest.json',
   '/lexearn.png',
-  '/recharge.html'
+  '/recharge.html',
+  '/notifications.html'
 ];
 
 self.addEventListener('install', function(event) {
@@ -41,25 +42,40 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-// Handle Notification Clicks
+// Handle Notification Clicks and Action Buttons
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
   
-  // Get the URL to open from notification data, default to root
-  const targetUrl = event.notification.data && event.notification.data.url ? event.notification.data.url : '/';
+  const action = event.action;
+  const notificationData = event.notification.data || {};
+  let targetUrl = '/';
+
+  // Handle different actions
+  if (action === 'dismiss' || action === 'mark-read') {
+    // Just close the notification, don't navigate
+    return;
+  } else if (action === 'visit') {
+    // Welcome notification - Visit button
+    targetUrl = notificationData.url || '/notifications.html';
+  } else if (action === 'get-bonus') {
+    // Bonus notification - Get Bonus button
+    targetUrl = notificationData.url || '/recharge.html';
+  } else {
+    // Clicked on notification body (not a button)
+    targetUrl = notificationData.url || '/';
+  }
 
   event.waitUntil(
-    clients.matchAll({type: 'window'}).then(function(clientList) {
+    clients.matchAll({type: 'window', includeUncontrolled: true}).then(function(clientList) {
       // If a window is already open, focus it and navigate
       for (var i = 0; i < clientList.length; i++) {
         var client = clientList[i];
         if ('focus' in client) {
-          client.focus();
-          // If it's the right URL, just focus, otherwise navigate
-          if (client.url.includes(targetUrl)) {
-             return client;
-          }
-          return client.navigate(targetUrl);
+          return client.focus().then(function() {
+            if ('navigate' in client) {
+              return client.navigate(targetUrl);
+            }
+          });
         }
       }
       // Otherwise open a new window
@@ -68,4 +84,10 @@ self.addEventListener('notificationclick', function(event) {
       }
     })
   );
+});
+
+// Handle notification close (for mark as read functionality)
+self.addEventListener('notificationclose', function(event) {
+  // Notification was dismissed/closed
+  console.log('Notification closed:', event.notification.tag);
 });
