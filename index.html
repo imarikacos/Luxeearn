@@ -25,9 +25,9 @@
     <link rel="icon" type="image/png" href="lexearn.png">
     <link rel="apple-touch-icon" href="lexearn.png">
     
-    <link rel="manifest" href="/manifest.json">
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#330066">
-    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="LuxeEarn">
@@ -1853,8 +1853,9 @@
 }
 
 .exchange-item img {
-    width: 90px;
-    height: auto;
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
     opacity: 0.9;
     filter: brightness(1.2);
 }
@@ -2423,6 +2424,12 @@
                 </svg>
                 <span class="badge">2</span>
             </div>
+            <!-- PWA Install Button -->
+            <div class="icon-btn" id="installPwaBtn" style="display: none;" title="Install App">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/>
+                </svg>
+            </div>
                <div class="icon-btn" onclick="openPage('/me')">
     <svg viewBox="0 0 24 24">
         <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94s-0.02-0.63-0.06-0.94l2.03-1.58
@@ -2435,11 +2442,6 @@
         M12,15.6c-1.99,0-3.6-1.61-3.6-3.6S10.01,8.4,12,8.4c1.99,0,3.6,1.61,3.6,3.6S13.99,15.6,12,15.6z"/>
     </svg>
 </div>
-            <div class="icon-btn" id="installButton" style="display: none;">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/>
-                </svg>
-            </div>
             <div class="icon-btn" onclick="toggleSidebar()">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
@@ -2508,14 +2510,14 @@
                 <span>Team</span>
             </a>
 
-            <a href="https://tinyurl.com/Swift-support" target="_blank" class="nav-grid-item">
+            <div id="downloadAppBtn" class="nav-grid-item" style="cursor: pointer;">
                 <div class="nav-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="#818cf8">
-                        <path d="M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H6c-1.1,0-2,0.9-2,2v10c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V10 C20,8.9,19.1,8,18,8z M12,17c-1.1,0-2-0.9-2-2s0.9-2,2-2s2,0.9,2,2S13.1,17,12,17z M15.1,8H8.9V6c0-1.71,1.39-3.1,3.1-3.1 s3.1,1.39,3.1,3.1V8z"/>
+                        <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"/>
                     </svg>
                 </div>
                 <span>Download APP</span>
-            </a>
+            </div>
 
             <a href="/activity" class="nav-grid-item">
                 <div class="nav-icon-wrapper">
@@ -3005,7 +3007,7 @@
                 <img src="lexearn.png" alt="LuxeEarn" onerror="this.style.display='none'">
             </div>
             <div class="footer-text">
-                LuxeEarn is a semiconductor and radio communications technology research and development company located in San Diego, California, USA. It was founded in 1985 by professors Irvin Marc Jacobs and Andrew Viterbi of the University of California, San Diego. The two previously co-founded Linkabit. The company name "LuxeEarn" comes from "Quality Communications", which means "high-quality communications". LuxeEarn is a publicly traded company and one of the 30 constituent companies of the Dow Jones Industrial Average. We have 19 research institutions in more than a dozen countries; we currently serve internationally renowned cryptocurrency exchanges, such as BINANCE, COINBASE, HUOBI, OKX, BYBIT, COINCHECK, BITSTAMP, MEXC, LBANK, PHEMEX, KUCOIN and other internationally renowned cryptocurrency exchanges.
+                LuxeEarn is an artificial intelligence enterprise founded in the Netherlands on June 28, 2019, focusing on developing vector database technology that supports native applications of artificial intelligence. Its core product, LuxeEarn vector database, is positioned as the core infrastructure of the emerging artificial intelligence ecosystem, which can simplify developers' vector data management processes and support application scenarios such as customized search, recommendation systems and ChatGPT plug-ins. As of April 2023, the company has completed three rounds of financing, of which US$50 million was led by Index Ventures, with a total cumulative financing of US$67.6 million.
             </div>
             <div class="footer-links">
                 <a href="/about" class="footer-link">About Us</a>
@@ -3891,65 +3893,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ==================== PWA INSTALLATION ====================
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => {
+    navigator.serviceWorker.register('service-worker.js')
+        .then(function(registration) {
             console.log('Service Worker registered:', registration);
         })
-        .catch(error => {
-            console.error('Service Worker registration failed:', error);
+        .catch(function(error) {
+            console.log('Service Worker registration failed:', error);
         });
 }
 
 let deferredPrompt;
-const installButton = document.getElementById('installButton');
+const installBtn = document.getElementById('installPwaBtn');
+const downloadAppBtn = document.getElementById('downloadAppBtn');
 
-window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-    
-    if (installButton) {
-        installButton.style.display = 'flex';
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+        installBtn.style.display = 'flex';
     }
-    
-    console.log('PWA install prompt is available');
 });
 
-if (installButton) {
-    installButton.addEventListener('click', async () => {
-        if (!deferredPrompt) {
-            alert('App is already installed or not available for installation');
-            return;
-        }
-        
-        deferredPrompt.prompt();
-        
-        const choiceResult = await deferredPrompt.userChoice;
-        
-        if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-            installButton.style.display = 'none';
-        } else {
-            console.log('User dismissed the install prompt');
-        }
-        
-        deferredPrompt = null;
-    });
+async function triggerPwaInstall() {
+    if (!deferredPrompt) {
+        alert('To install: Use your browser menu and select "Add to Home Screen" or "Install App"');
+        return;
+    }
+    deferredPrompt.prompt();
+    const result = await deferredPrompt.userChoice;
+    if (result.outcome === 'accepted') {
+        if (installBtn) installBtn.style.display = 'none';
+    }
+    deferredPrompt = null;
 }
 
-window.addEventListener('appinstalled', () => {
-    console.log('PWA successfully installed');
-    if (installButton) {
-        installButton.style.display = 'none';
+if (installBtn) {
+    installBtn.addEventListener('click', triggerPwaInstall);
+}
+
+if (downloadAppBtn) {
+    downloadAppBtn.addEventListener('click', triggerPwaInstall);
+}
+
+window.addEventListener('appinstalled', function() {
+    if (installBtn) {
+        installBtn.style.display = 'none';
     }
     deferredPrompt = null;
 });
-
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
-
-if (isIOS && !isInStandaloneMode) {
-    console.log('iOS detected - Show manual install instructions');
-}
 </script>
 </body>
 </html>
